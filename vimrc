@@ -18,6 +18,7 @@ hi CursorColumn cterm=NONE ctermbg=8 ctermfg=NONE
 hi CursorLine cterm=NONE ctermbg=8 ctermfg=NONE
 
 " code folding
+set foldmethod=indent
 nnoremap <space> za
 vnoremap <space> zf
 
