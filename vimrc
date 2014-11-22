@@ -16,3 +16,10 @@ set cursorcolumn
 set cursorline
 hi CursorColumn cterm=NONE ctermbg=8 ctermfg=NONE
 hi CursorLine cterm=NONE ctermbg=8 ctermfg=NONE
+
+" code folding
+nnoremap <space> za
+vnoremap <space> zf
+
+" match extra whitespace as an error
+match ErrorMsg '\s\+$'
