@@ -13,3 +13,6 @@ PS1='[\u@\h \W]\$ '
 
 XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CONFIG_HOME
+
+# Automatic X login on TTY1
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
