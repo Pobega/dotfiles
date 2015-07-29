@@ -3,7 +3,7 @@
 #
 
 # xterm transparency
-[ -n "$XTERM_VERSION" ] && transset-df -a 0.95 >/dev/null
+[ -n "$XTERM_VERSION" ] && transset-df -a 0.90 >/dev/null
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return

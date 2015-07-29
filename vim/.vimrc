@@ -13,14 +13,16 @@ set softtabstop=4
 set smartindent
 set expandtab
 
+" Python specific configuration
+au BufNewFile,BufRead *.py set autoindent foldmethod=indent
+
 " black highlighting
 set cursorcolumn
 set cursorline
 hi CursorColumn cterm=NONE ctermbg=16 ctermfg=NONE
 hi CursorLine cterm=NONE ctermbg=16 ctermfg=NONE
 
-" code folding
-set foldmethod=indent
+" code folding hotkeys
 nnoremap <space> za
 vnoremap <space> zf
 
