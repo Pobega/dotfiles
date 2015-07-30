@@ -38,6 +38,7 @@ grub
 gst-libav
 gst-plugins-base
 gst-plugins-good
+gstreamer-vaapi
 gtk-chtheme
 gucharmap
 gzip
@@ -51,8 +52,10 @@ iputils
 irssi
 jfsutils
 less
+lib32-mesa-libgl
+libnotify
 libtool
-libva-intel-driver
+libva-mesa-driver
 licenses
 linux
 livestreamer
@@ -65,6 +68,7 @@ make
 man-db
 man-pages
 mdadm
+mesa-demos
 mpv
 nano
 netctl
@@ -89,6 +93,7 @@ scrot
 sed
 shadow
 smartmontools
+steam
 stow
 strace
 sudo

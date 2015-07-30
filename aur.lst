@@ -1,5 +1,6 @@
 compton
 cower
+dunst-git
 elementary-dark
 gtk-engine-unico-bzr
 gtk-theme-flatstudio
@@ -7,6 +8,8 @@ hangups-git
 imgur
 lastpass-cli
 lemonbar-xft-git
+libva-intel-driver-g45-h264
+pacaur
 python-aiohttp
 python-purplex
 python-pyalsaaudio-git
@@ -21,5 +24,6 @@ stlarch_font
 ttf-font-awesome
 ttf-font-icons
 vim-colors-gruvbox-git
+wmutils-git
 xcalib
 youtube-viewer-git
