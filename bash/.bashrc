@@ -2,6 +2,8 @@
 # ~/.bashrc
 #
 
+source ~/.bash_aliases
+
 # xterm transparency
 [ -n "$XTERM_VERSION" ] && transset-df -a 0.90 >/dev/null
 
