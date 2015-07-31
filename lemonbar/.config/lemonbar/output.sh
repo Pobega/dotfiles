@@ -4,6 +4,9 @@ COLOR="%{Fgrey}"
 
 BatteryOne() {
     BATC=$(cat /sys/class/power_supply/BAT0/capacity)
+    if [ $BATC -le 7 ]; then
+        dunstify -p -r "100" -h int:value:$BATC -u critical "Battery dangerously low"
+    fi
     BATS=/sys/class/power_supply/BAT0/status
     test "`cat $BATS`" = "Charging" && echo -n "${COLOR}%{F-}" || echo -n "${COLOR}%{F-}"
     echo " $BATC%"
@@ -54,6 +57,24 @@ Network() {
     fi
 }
 
+CheckWifiState() {
+    if [ -f /tmp/pobega_wifi.fifo ]; then
+        STATE=$(cat /tmp/pobega_wifi.fifo)
+        rm /tmp/pobega_wifi.fifo
+    else
+        STATE=""
+    fi
+
+    case $STATE in
+    on)
+        notify-send "WiFi connection established!"
+        ;;
+    off)
+        notify-send -u critical -t 10000 "WiFi connection lost..."
+        ;;
+    esac
+}
+
 while true; do
     buf=""
     buf="${buf}  "
@@ -75,5 +96,6 @@ while true; do
     buf="${buf} ${COLOR}%{F-} $(date +'%l:%M %p')"
     buf="${buf}  "
     echo $buf
-    sleep 3;
+    CheckWifiState
+    sleep 15;
 done
