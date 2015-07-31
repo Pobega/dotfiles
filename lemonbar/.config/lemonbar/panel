@@ -143,7 +143,8 @@ class MyRenderer(object):
         icons = {0: '\uf0ac',
                  1: '\uf120',
                  2: '\uf198',
-                 3: '\uf1b6',}
+                 3: '\uf1b6',
+                 4: '\uf1e8',}
         current = os.popen('xprop -root _NET_CURRENT_DESKTOP | cut -d" " -f 3').read().rstrip()
         with self.renderer.temporary():
             if num == int(current):
@@ -259,7 +260,7 @@ class MyRenderer(object):
             self.print_logout()
             self.renderer.set_background_color(background_color1)
             self.renderer.set_font_color(font_color1)
-            for i in range(0,4):
+            for i in range(0,5):
                 self.renderer.print_space(1)
                 self.print_workspaces(i)
             self.print_left_switch(background_color1, font_color1)
