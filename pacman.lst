@@ -17,6 +17,7 @@ diffutils
 dmenu
 e2fsprogs
 ethtool
+evtest
 fakeroot
 feh
 file
@@ -28,8 +29,6 @@ firefox-noscript
 flex
 fprintd
 gawk
-gcc
-gcc-libs
 gettext
 git
 glibc
@@ -38,7 +37,6 @@ grub
 gst-libav
 gst-plugins-base
 gst-plugins-good
-gstreamer-vaapi
 gtk-chtheme
 gucharmap
 gzip
@@ -115,6 +113,7 @@ ttf-liberation
 unzip
 usbutils
 util-linux
+uzbl-browser
 vi
 vim
 which
@@ -131,5 +130,6 @@ xorg-server-utils
 xorg-xfontsel
 xorg-xinit
 xorg-xkill
+xorg-xprop
 xterm
 youtube-dl

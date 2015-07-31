@@ -6,10 +6,12 @@ gtk-engine-unico-bzr
 gtk-theme-flatstudio
 hangups-git
 imgur
+joyutils
 lastpass-cli
 lemonbar-xft-git
+lib32-libva
+lib32-libva-intel-driver
 libva-intel-driver-g45-h264
-pacaur
 python-aiohttp
 python-purplex
 python-pyalsaaudio-git
@@ -19,10 +21,9 @@ python-robobrowser
 python-urwid-git
 python2-pyalsaaudio-git
 rofi-git
-siji-git
-stlarch_font
+scudcloud
 ttf-font-awesome
-ttf-font-icons
+ttf-input
 vim-colors-gruvbox-git
 wmutils-git
 xcalib
