@@ -11,7 +11,7 @@ import os
 import iwlib
 
 font1 = 'Input Mono Light-12'
-font2 = 'Literation Mono-9'
+font2 = 'Roboto-11'
 font3 = 'Font Awesome-11'
 background_color1 =  '#689cba'
 background_color2 =  '#70b0d0'
@@ -143,8 +143,10 @@ class MyRenderer(object):
         icons = {0: '\uf0ac',
                  1: '\uf120',
                  2: '\uf198',
-                 3: '\uf1b6',
-                 4: '\uf1e8',}
+                 3: '\uf1b3',
+                 4: '\uf1b6',
+                 5: '\uf1a1',
+                 6: '\uf1e8',}
         current = os.popen('xprop -root _NET_CURRENT_DESKTOP | cut -d" " -f 3').read().rstrip()
         with self.renderer.temporary():
             if num == int(current):
@@ -162,7 +164,10 @@ class MyRenderer(object):
         self.renderer.print_number('%03.0f' % self.cpu)
 
     def print_volume(self):
-        volume = alsaaudio.Mixer().getvolume()[0]
+        try:
+            volume = alsaaudio.Mixer().getvolume()[0]
+        except alsaaudio.ALSAAudioError as e:
+            volume = "0"
         with self.renderer.temporary():
             self.renderer.set_font_color(icon_color1)
             if int(volume) < 20:
@@ -260,7 +265,7 @@ class MyRenderer(object):
             self.print_logout()
             self.renderer.set_background_color(background_color1)
             self.renderer.set_font_color(font_color1)
-            for i in range(0,5):
+            for i in range(0,7):
                 self.renderer.print_space(1)
                 self.print_workspaces(i)
             self.print_left_switch(background_color1, font_color1)
