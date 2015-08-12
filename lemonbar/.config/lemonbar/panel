@@ -125,11 +125,15 @@ class MyRenderer(object):
         self.cpu = psutil.cpu_percent(interval=1)
         self.time = datetime.now()
 
-    def print_user(self):
+    def print_track(self):
         with self.renderer.temporary():
             self.renderer.set_font_color("#dddddd")
             self.renderer.set_background_color("#262626")
-            self.renderer.print("pobegam@x301")
+#            current_artist = os.popen('mpc current | cut -d"-" -f1 | cut -c 1-14').read().rstrip()
+#            current_track = os.popen('mpc current | cut -d"-" -f2 | cut -c 1-18').read().rstrip()
+#            music_info = "{} -{}".format(current_artist, current_track)
+            music_info = "Coming soon"
+            self.renderer.print(music_info)
 
     def print_logout(self):
         with self.renderer.temporary():
@@ -137,7 +141,7 @@ class MyRenderer(object):
             #self.renderer.print_icon('\uf085')
 #            self.renderer.print_icon('\uf011')
         self.renderer.print('\u2004\uf011')
-        self.print_left_switch(background_color2, font_color2, background_color1)
+        self.print_left_switch(background_color3, font_color3, background_color2)
 
     def print_workspaces(self,num):
         icons = {0: '\uf0ac',
@@ -167,7 +171,7 @@ class MyRenderer(object):
         try:
             volume = alsaaudio.Mixer().getvolume()[0]
         except alsaaudio.ALSAAudioError as e:
-            volume = "0"
+            volume = 0
         with self.renderer.temporary():
             self.renderer.set_font_color(icon_color1)
             if int(volume) < 20:
@@ -191,16 +195,22 @@ class MyRenderer(object):
             self.print_right_switch(background_color2, font_color2)
         capacity_file = "/sys/class/power_supply/BAT{}/capacity".format(num)
         status_file = "/sys/class/power_supply/BAT{}/status".format(num)
-        with open(capacity_file, 'r') as capacity:
-            battery_life = capacity.read().rstrip()
-        with open(status_file, 'r') as status:
-            battery_status = status.read().rstrip()
-            if battery_status == "Charging":
-                status = "+"
-            elif battery_status == "Discharging":
-                status = "-"
-            else:
-                status = ""
+        try:
+            with open(capacity_file, 'r') as capacity:
+                battery_life = capacity.read().rstrip()
+        except FileNotFoundError:
+            battery_life = 0
+        try:
+            with open(status_file, 'r') as status:
+                battery_status = status.read().rstrip()
+        except:
+            battery_status = ""
+        if battery_status == "Charging":
+            status = "+"
+        elif battery_status == "Discharging":
+            status = "-"
+        else:
+            status = ""
         with self.renderer.temporary():
             self.renderer.set_font_color(icon_color2)
             if int(battery_life) < 20:
@@ -217,7 +227,6 @@ class MyRenderer(object):
 
 
     def print_wifi(self):
-        self.print_right_switch(background_color3, font_color3)
         with self.renderer.temporary():
             self.renderer.set_font_color(icon_color3)
             self.renderer.print_icon('\uf1eb')
@@ -227,12 +236,14 @@ class MyRenderer(object):
             self.renderer.print(essid)
         else:
             self.renderer.print("None")
+        self.print_left_switch(background_color2, font_color2, background_color1)
 
     def print_clock(self):
+        self.print_right_switch(background_color3, font_color3)
         with self.renderer.temporary():
             self.renderer.set_font_color(icon_color3)
             self.renderer.print_icon('\uf017')
-        self.renderer.print(datetime.strftime(self.time, '%H:%M'))
+        self.renderer.print(datetime.strftime(self.time, '%I:%M:%S %p'))
 
     def print_right_switch(self, bg_color, fg_color):
         with self.renderer.temporary():
@@ -260,9 +271,12 @@ class MyRenderer(object):
 
             # Left
             self.renderer.align_to_left()
+            self.renderer.set_background_color(background_color3)
+            self.renderer.set_font_color(font_color3)
+            self.print_logout()
             self.renderer.set_background_color(background_color2)
             self.renderer.set_font_color(font_color2)
-            self.print_logout()
+            self.print_wifi()
             self.renderer.set_background_color(background_color1)
             self.renderer.set_font_color(font_color1)
             for i in range(0,7):
@@ -274,7 +288,7 @@ class MyRenderer(object):
             self.renderer.align_to_center()
             self.renderer.set_background_color('#262626')
             self.renderer.set_font_color('#dddddd')
-            self.print_user()
+            self.print_track()
 
             # Right
             self.renderer.align_to_right()
@@ -282,7 +296,6 @@ class MyRenderer(object):
             self.print_volume()
             self.print_battery(0)
             self.print_battery(1)
-            self.print_wifi()
             self.print_clock()
             self.renderer.print_space(2)
             self.renderer.switch_to_next_monitor()
@@ -296,7 +309,7 @@ def main():
         '-f', font1,
         '-o', '2',
         '-f', font2,
-        '-o', '-2',
+        '-o', '-1',
         '-f', font3,
         '-o', '-3',
         '-g', '1280x20+80+12'],
