@@ -28,3 +28,6 @@ vnoremap <space> zf
 
 " match extra whitespace as an error
 match ErrorMsg '\s\+$'
+
+" compatible with transparency
+hi Normal ctermbg=none
