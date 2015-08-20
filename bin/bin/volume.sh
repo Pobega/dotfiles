@@ -40,7 +40,7 @@ fi
 ID=$(cat /home/pobegam/.config/dunst/volume_pid)
 if [ $ID -gt "0" ]
 then
- dunstify -p -r $ID "Volume: $TEXT" >/home/pobegam/.config/dunst/volume_pid
+ dunstify -p -r $ID " Volume: $TEXT" >/home/pobegam/.config/dunst/volume_pid
 else
- dunstify -p "Volume: $TEXT" >/home/pobegam/.config/dunst/volume_pid
+ dunstify -p " Volume: $TEXT" >/home/pobegam/.config/dunst/volume_pid
 fi
