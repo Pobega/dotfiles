@@ -94,7 +94,7 @@ super + r
 #
 
 super + Return
-	xterm
+	termite
 
 super + z
     xdotool mousemove 0 0
@@ -123,3 +123,18 @@ XF86AudioMute
 
 XF86MonBrightness{Down,Up}
     ~/bin/brightness.sh
+
+XF86AudioNext
+    mpc next
+
+XF86AudioPrev
+    mpc prev
+
+XF86AudioPause
+    mpc pause
+XF86AudioStop
+    mpc pause
+
+XF86AudioPlay
+    mpc play
+
