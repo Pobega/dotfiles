@@ -1,0 +1,179 @@
+sw_volume: 100
+audio_device_state:1:My ALSA Device
+audio_device_state:1:my_fifo
+state: pause
+current: 1
+time: 23.719000
+random: 0
+repeat: 0
+single: 0
+consume: 0
+crossfade: 0
+mixrampdb: 0.000000
+mixrampdelay: -1.000000
+playlist_begin
+song_begin: http://192.168.0.102:9999/get_song?id=Tndyp6lsna76txp233cyioaznsq
+Artist: Elliott Smith
+AlbumArtist: Elliott Smith
+Title: Bye
+Album: Figure 8
+Track: 16
+Genre: (17)Rock
+Disc: 01
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tmalmz5q74k7t3lwo4zyi6nrbty
+Artist: Cat Power
+AlbumArtist: Cat Power
+Title: Maybe Not
+Album: You Are Free
+Track: 10
+Genre: (131)Indie
+Disc: 01
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tmar2si73hry2brie7uwqfmgsfe
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tjdlokt345dky5kxrkowabjseuy
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tcpvha4zi3knopdqp4bhskjj6ne
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tg6erp54gszg4ucerdi57jzvpsa
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tvdtcenehtuo3bjsgcydyjpb3bi
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tyk56rs4cxxgfl7p55qrhcuzguq
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tv43vym3ufhy5h764g3hjv2xo3q
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tm7t3oks4r6t36go2ue22yl2mku
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=T4mxqy2nzv3oov45y4vcjnpy3n4
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tv2aezhu4knzpwquztb6o77lany
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Ttu3462gmlvyc5wvodbeexjbjea
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tv6k6cm6x6qua6kbxcvcycipmai
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tfjmiviz77jwfihlxb5nx2uv274
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tovhenglqcu57maod6cqkjytrty
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tsljams4bcby7sy5ueuyn7gxpge
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Te2notnz4k7hhl625yiq56zslli
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tefufrolqf64rj7bfehnrhw3xuq
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tcjulmzjnr2aclep4qukrp5tpd4
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tw6lu2f4d234qzxvftd6gsnhrbe
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=T4ahuopht3a6nnyzimpovooexrq
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Ttyfvkl6ry3ryxbvnldb47yl3wa
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=T57ag5ch6p5f4pzhf36v3tcv2ju
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tcxt2ufqypdhtmjfamuefmtwe2i
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Thrnmnlhcjuuxylo3ycbnfxopqq
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tlixu6p3qrmaglrop5455wcv2rm
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=To6d3sqa2otty6y4qru5w342d2i
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tarw2gx2ibw4mumzn7t6seqaqfu
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Te3rilwvis7fjpszltqvq2q6vi4
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=T6dobu6ugd3whywpta5ncvtk7zy
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=T4n4l2jqgg347sus7dhju4wkrfi
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tpnosfolovstsywr6t4offphodi
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=T5nfj2wzvhiahxge6s7phmvfqyy
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tba2venyjoiqim4bagrm34qnjl4
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tizvnjov4dz6ekexkc7t64kf55i
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=T5xpvfskjiymzwi33pt7o5cftia
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=T3nskle6olymjiwcdrtifztnone
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Twwlz52lrsehir3j4a4yahidi5u
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tdons3jidu3uc4taw4itz4vl46a
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Thvdjlqydpoxw74env3qntloauy
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=T57x7enm7aoj4crqvklpibjtcv4
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Ttxw5ixmrzea7rl7p5tntlby6eq
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Txbys6pqlepwa2dqm774t4um7xy
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=To6cltobt7s6s4pakgbxrofj5mu
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=T7u3z6ikchrzg57gcca5rcgmekq
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tfa6b7jw6z7tnb7s4v3g27arhei
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=T5sdhfvdfyylnc7knflucrejoaq
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tzsa35mhtubtxigrn6zmcpdojoi
+mtime: 0
+song_end
+song_begin: http://192.168.0.102:9999/get_song?id=Tdlqpht3gra2xtebdore3pb4czy
+mtime: 0
+song_end
+playlist_end
