@@ -5,15 +5,16 @@ colorscheme gruvbox
 set background=dark
 syntax on
 
-
-" 4 space tabs
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+" kernel dev
+" standard 8 space tabs
+set tabstop=8
+set shiftwidth=8
+set softtabstop=8
 set smartindent
 set expandtab
 
 " Python specific configuration
+" enable code folding by default
 au BufNewFile,BufRead *.py set autoindent foldmethod=indent
 
 " C specific configuration
