@@ -16,6 +16,10 @@ set expandtab
 " Python specific configuration
 au BufNewFile,BufRead *.py set autoindent foldmethod=indent
 
+" C specific configuration
+au BufNewFile,BufRead *.c set tabstop=8
+au BufNewFile,BufRead *.h set tabstop=8
+
 " black highlighting
 set cursorcolumn
 set cursorline
