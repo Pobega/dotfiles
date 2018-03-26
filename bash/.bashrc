@@ -81,7 +81,15 @@ function timer_stop {
   unset start_time
 }
 
+function get_cwd {
+  if [ "${PWD}" == "${HOME}" ]; then
+    echo "~"
+  else
+    echo ${PWD/*\//}
+  fi
+}
+
 trap 'timer_start' DEBUG
 PROMPT_COMMAND=timer_stop
 
-PS1='[\u@\h:\w]$(parse_git_branch)[${timer_show}ms][${?}]$ '
+PS1='[\u:$(get_cwd)]$(parse_git_branch)[${timer_show}ms][${?}]$ '
