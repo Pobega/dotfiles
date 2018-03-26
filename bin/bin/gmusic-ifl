@@ -1,5 +1,0 @@
-#!/bin/sh
-
-mpc clear
-curl -s 'http://localhost:9999/get_ifl_station' | grep -v ^# | while read url; do mpc add "$url"; done
-mpc play
