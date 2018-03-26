@@ -3,6 +3,7 @@
 	name = Michael Pobega
 [color]
 	ui = auto
-
+[core]
+	editor = vi
 [includeIf "gitdir:~/Work/"]
 	path = ~/Work/.gitconfig
