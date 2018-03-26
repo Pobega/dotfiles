@@ -1,0 +1,8 @@
+[user]
+	email = pobega@gmail.com
+	name = Michael Pobega
+[color]
+	ui = auto
+
+[includeIf "gitdir:~/Work/"]
+	path = ~/Work/.gitconfig
