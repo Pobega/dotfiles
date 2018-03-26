@@ -4,6 +4,9 @@
 
 source ~/.bash_aliases
 
+# Local bashrc for contextual settings (work, home, etc)
+[[ -f ~/.bashrc_local ]] && . ~/.bashrc_local
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
