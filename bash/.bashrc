@@ -96,7 +96,7 @@ function get_cwd {
   if [ "${PWD}" == "${HOME}" ]; then
     echo "~"
   else
-    echo ${PWD/*\//}
+    echo ${PWD/*\//}/
   fi
 }
 
