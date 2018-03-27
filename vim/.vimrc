@@ -58,6 +58,10 @@ hi CursorLine cterm=NONE ctermbg=8 ctermfg=NONE
 nnoremap <space> za
 vnoremap <space> zf
 
+" xclip hotkeys. Y to yank to clipboard, P to paste from clipboard
+map Y :w !xclip -selection clipboard<CR><CR>
+map P :r!xclip -o -selection clipboard<CR>
+
 " match extra whitespace as an error
 match ErrorMsg '\s\+$'
 
