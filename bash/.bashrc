@@ -68,16 +68,27 @@ function parse_git_dirty {
 	fi
 }
 
+# Unix epoch time in nanoseconds
 function epoch_ms {
   date +%s%3N
 }
 
+# Record our start time
 function timer_start {
   start_time=${start_time:-$(epoch_ms)}
 }
 
 function timer_stop {
-  timer_show=$(($(epoch_ms) - $start_time))
+  local ms=$(($(epoch_ms) - $start_time))
+  local s=$(((ms / 1000) % 60))
+  local m=$(((ms / 60000) % 60))
+  local h=$((ms / 3600000))
+  if ((h > 0)); then timer_show=${h}h${m}m
+  elif ((m > 0)); then timer_show=${m}m${s}s
+  elif ((s > 10)); then local us=$((${ms} % 10000)); timer_show=${s}.$(printf %03d $us)s
+  elif ((s > 0)); then local us=$((${ms} % 1000)); timer_show=${s}.$(printf %03d $us)s
+  else timer_show=${ms}ms
+  fi
   unset start_time
 }
 
@@ -92,4 +103,4 @@ function get_cwd {
 trap 'timer_start' DEBUG
 PROMPT_COMMAND=timer_stop
 
-PS1='[\u:$(get_cwd)]$(parse_git_branch)[${timer_show}ms][${?}]$ '
+PS1='[\u:$(get_cwd)]$(parse_git_branch)[${timer_show}][${?}]$ '
