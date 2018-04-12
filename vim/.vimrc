@@ -6,8 +6,11 @@ set background=dark
 syntax on
 
 " Plugins
+" https://github.com/tpope/vim-fugitive
 set runtimepath^=~/.vim/bundle/vim-fugitive
+" https://github.com/airblade/vim-gitgutter
 set runtimepath^=~/.vim/bundle/vim-gitgutter
+" https://github.com/tpope/vim-sleuth
 set runtimepath^=~/.vim/bundle/vim-sleuth
 
 " Python specific configuration
