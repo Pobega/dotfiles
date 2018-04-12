@@ -5,6 +5,11 @@ set t_Co=256
 set background=dark
 syntax on
 
+" Plugins
+set runtimepath^=~/.vim/bundle/vim-fugitive
+set runtimepath^=~/.vim/bundle/vim-gitgutter
+set runtimepath^=~/.vim/bundle/vim-sleuth
+
 " Python specific configuration
 " enable code folding by default
 au BufNewFile,BufRead *.py set autoindent foldmethod=indent
