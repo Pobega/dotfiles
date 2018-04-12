@@ -15,11 +15,11 @@ alias ls='ls --color=auto'
 XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CONFIG_HOME
 
-export BROWSER=google-chrome-stable
+export BROWSER=firefox
 export EDITOR=vim
-export TERM=xterm
+export TERM=xterm-256color
 
-export PATH=~/bin:$PATH
+export PATH=~/bin:$HOME/.local/bin:$PATH
 
 # get current branch in git repo
 function parse_git_branch() {
