@@ -1,5 +1,5 @@
 [options]
-font = Terminus (TTF) 9
+font = Inconsolata 14
 
 [colors]
 foreground = #ffffff
