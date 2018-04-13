@@ -34,6 +34,10 @@ map P :r!xclip -o -selection clipboard<CR>
 " match extra whitespace as an error
 match ErrorMsg '\s\+$'
 
+" disable mouse
+set mouse=
+set ttymouse=
+
 " compatible with transparency
 hi Normal ctermbg=none
 
