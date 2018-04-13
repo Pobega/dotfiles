@@ -12,6 +12,15 @@ source ~/.bash_aliases
 
 alias ls='ls --color=auto'
 
+function print_256_colors {
+  for i in {0..255} ; do
+    printf "\x1b[38;5;${i}m%3d " "${i}"
+    if (( $i == 15 )) || (( $i > 15 )) && (( ($i-15) % 12 == 0 )); then
+        echo;
+    fi
+   done
+}
+
 XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CONFIG_HOME
 
