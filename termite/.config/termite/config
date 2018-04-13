@@ -3,7 +3,4 @@ font = Inconsolata 14
 
 [colors]
 foreground = #ffffff
-background  = #262626
-
-[colors]
-background = rgba(63, 63, 63, 0.95)
+background = #080808
