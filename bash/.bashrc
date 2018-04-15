@@ -35,12 +35,12 @@ function parse_git_branch() {
   if [ ! "${BRANCH}" == "" ]; then
     STAT=`parse_git_dirty`
     if [ ! "${STAT}" == "" ]; then
-      echo -e "\e[48;5;88m\e[38;5;254m ${BRANCH}${STAT} \e[0m\e[38;5;88m"
+      echo -e "\001\e[48;5;88m\002\001\e[38;5;254m\002 ${BRANCH}${STAT} \001\e[0m\002\001\e[38;5;88m\002"
     else
-      echo -e "\e[48;5;28m\e[38;5;254m ${BRANCH} \e[0m\e[38;5;28m"
+      echo -e "\001\e[48;5;28m\002\001\e[38;5;254m\002 ${BRANCH} \001\e[0m\002\001\e[38;5;28m\002"
     fi
   else
-    echo -e "\e[0m\e[38;5;238m\e[0m "
+    echo -e "\001\e[0m\002\001\e[38;5;238m\002\001\e[0m\002"
   fi
 }
 
