@@ -36,7 +36,7 @@ function parse_git_branch() {
 	if [ ! "${BRANCH}" == "" ]
 	then
 		STAT=`parse_git_dirty`
-		echo "[${BRANCH}${STAT}]"
+		echo "${BRANCH}${STAT}  "
 	else
 		echo ""
 	fi
@@ -112,4 +112,9 @@ function get_cwd {
 trap 'timer_start' DEBUG
 PROMPT_COMMAND=timer_stop
 
-PS1='[\u:$(get_cwd)]$(parse_git_branch)[${timer_show}][${?}]$ '
+## TODO: make a proper/pretty non-256 color version of prompt
+#if [[ "$TERM" =~ 256color ]]; then
+  PS1='\[\e[38;5;254;48;5;26m\] \u \[\e[38;5;26;48;5;236m\]\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]\[\e[38;5;254m\] $(parse_git_branch)${timer_show} \[\e[0m\]\[\e[38;5;238m\]\[\e[0m\] '
+#else
+#  PS1='[\u:$(get_cwd)]$(parse_git_branch)[${timer_show}]$ '
+#fi
