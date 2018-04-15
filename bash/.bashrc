@@ -114,7 +114,7 @@ PROMPT_COMMAND=timer_stop
 
 ## TODO: make a proper/pretty non-256 color version of prompt
 #if [[ "$TERM" =~ 256color ]]; then
-  PS1='\[\e[38;5;254;48;5;26m\] \u \[\e[38;5;26;48;5;236m\]\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]\[\e[38;5;254m\] $(parse_git_branch)${timer_show} \[\e[0m\]\[\e[38;5;238m\]\[\e[0m\] '
+  PS1='\[\e[38;5;254;48;5;26m\] \[\e[1m\]\u \[\e[0m\]\[\e[38;5;26;48;5;236m\]\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]\[\e[38;5;254m\] $(parse_git_branch)${timer_show} \[\e[0m\]\[\e[38;5;238m\]\[\e[0m\] '
 #else
 #  PS1='[\u:$(get_cwd)]$(parse_git_branch)[${timer_show}]$ '
 #fi
