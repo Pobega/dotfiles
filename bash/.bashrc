@@ -21,8 +21,7 @@ function print_256_colors {
    done
 }
 
-XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CONFIG_HOME
+export XDG_CONFIG_HOME="$HOME/.config"
 
 export BROWSER=firefox
 export EDITOR=vim
@@ -32,14 +31,17 @@ export PATH=~/bin:$HOME/.local/bin:$PATH
 
 # get current branch in git repo
 function parse_git_branch() {
-	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-	if [ ! "${BRANCH}" == "" ]
-	then
-		STAT=`parse_git_dirty`
-		echo "${BRANCH}${STAT}  "
-	else
-		echo ""
-	fi
+  BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+  if [ ! "${BRANCH}" == "" ]; then
+    STAT=`parse_git_dirty`
+    if [ ! "${STAT}" == "" ]; then
+      echo -e "\e[48;5;88m\e[38;5;254m ${BRANCH}${STAT} \e[0m\e[38;5;88m"
+    else
+      echo -e "\e[48;5;28m\e[38;5;254m ${BRANCH} \e[0m\e[38;5;28m"
+    fi
+  else
+    echo -e "\e[0m\e[38;5;238m\e[0m "
+  fi
 }
 
 # get current status of git repo
@@ -109,12 +111,16 @@ function get_cwd {
   fi
 }
 
+prompt_command() {
+  PS1='\[\e[38;5;254;48;5;26m\] \u \[\e[38;5;26;48;5;236m\]\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]\[\e[38;5;254m\] ${timer_show} $(parse_git_branch) \[\e[0m\]\[\e[38;5;238m\]\[\e[0m\] '
+}
+
 trap 'timer_start' DEBUG
 PROMPT_COMMAND=timer_stop
 
 ## TODO: make a proper/pretty non-256 color version of prompt
 #if [[ "$TERM" =~ 256color ]]; then
-  PS1='\[\e[38;5;254;48;5;26m\] \[\e[1m\]\u \[\e[0m\]\[\e[38;5;26;48;5;236m\]\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]\[\e[38;5;254m\] $(parse_git_branch)${timer_show} \[\e[0m\]\[\e[38;5;238m\]\[\e[0m\] '
+PS1='\[\e[38;5;254;48;5;26m\] \u \[\e[38;5;26;48;5;236m\]\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]\[\e[38;5;254m\] ${timer_show} \[\e[38;5;238m\]$(parse_git_branch)\[\e[0m\] '
 #else
 #  PS1='[\u:$(get_cwd)]$(parse_git_branch)[${timer_show}]$ '
 #fi
