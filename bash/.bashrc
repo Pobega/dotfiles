@@ -96,7 +96,7 @@ function timer_stop {
   local h=$((ms / 3600000))
   if ((h > 0)); then timer_show=${h}h${m}m
   elif ((m > 0)); then timer_show=${m}m${s}s
-  elif ((s > 10)); then local us=$((${ms} % 10000)); timer_show=${s}.$(printf %03d $us)s
+  elif ((s > 9)); then local us=$(((${ms} % 1000)/ 100)); timer_show=${s}.$(printf $us)s
   elif ((s > 0)); then local us=$((${ms} % 1000)); timer_show=${s}.$(printf %03d $us)s
   else timer_show=${ms}ms
   fi
