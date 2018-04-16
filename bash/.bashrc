@@ -2,7 +2,7 @@
 # ~/.bashrc
 #
 
-source ~/.bash_aliases
+[[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
 
 # Local bashrc for contextual settings (work, home, etc)
 [[ -f ~/.bashrc_local ]] && . ~/.bashrc_local
