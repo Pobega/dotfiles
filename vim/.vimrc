@@ -48,7 +48,7 @@ set laststatus=2
 
 " Git commit message specific configuration
 autocmd FileType gitcommit setlocal spell
-autocmd FileType gitcommit set textwidth=80
+autocmd FileType gitcommit setlocal textwidth=80
 
 " F4 to run code
 "autocmd filetype python nnoremap <F4> :w <bar> exec '!python '.shellescape('%')<CR>
