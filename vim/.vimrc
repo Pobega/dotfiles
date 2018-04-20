@@ -46,6 +46,10 @@ set statusline+=%f\ %=line\,col\:\ %l\,\ %c
 " always show status
 set laststatus=2
 
+" Git commit message specific configuration
+autocmd FileType gitcommit setlocal spell
+autocmd FileType gitcommit set textwidth=80
+
 " F4 to run code
 "autocmd filetype python nnoremap <F4> :w <bar> exec '!python '.shellescape('%')<CR>
 "autocmd filetype c nnoremap <F4> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
