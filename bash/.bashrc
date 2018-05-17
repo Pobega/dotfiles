@@ -2,15 +2,13 @@
 # ~/.bashrc
 #
 
-source ~/.bash_aliases
+[[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
 
 # Local bashrc for contextual settings (work, home, etc)
 [[ -f ~/.bashrc_local ]] && . ~/.bashrc_local
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-
-alias ls='ls --color=auto'
 
 function print_256_colors {
   for i in {0..255} ; do
@@ -118,9 +116,24 @@ prompt_command() {
 trap 'timer_start' DEBUG
 PROMPT_COMMAND=timer_stop
 
+## Different color for different users
+# Home should be blue, work should be purple, other should be orange
+# root should always be red
+MAIN_COLOR=202
+if [ "${HOSTNAME}" == "hotbox" ]; then
+  MAIN_COLOR=92
+else
+  if [ "${HOSTNAME}" == "merlin" ]; then
+    MAIN_COLOR=26
+  fi
+fi
+if [ "${USER}" == "root" ]; then
+  MAIN_COLOR=88
+fi
+
 ## TODO: make a proper/pretty non-256 color version of prompt
 #if [[ "$TERM" =~ 256color ]]; then
-PS1='\[\e[38;5;254;48;5;26m\] \u \[\e[38;5;26;48;5;236m\]\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]\[\e[38;5;254m\] ${timer_show} \[\e[38;5;238m\]$(parse_git_branch)\[\e[0m\] '
+PS1='\[\e[38;5;254;48;5;${MAIN_COLOR}m\] \u \[\e[38;5;${MAIN_COLOR};48;5;236m\]\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]\[\e[38;5;254m\] ${timer_show} \[\e[38;5;238m\]$(parse_git_branch)\[\e[0m\] '
 #else
 #  PS1='[\u:$(get_cwd)]$(parse_git_branch)[${timer_show}]$ '
 #fi
