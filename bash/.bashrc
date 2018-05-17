@@ -105,12 +105,13 @@ function get_cwd {
   if [ "${PWD}" == "${HOME}" ]; then
     echo "~"
   else
-    echo ${PWD/*\//}/
+    if [ "${PWD}" == "/" ]; then
+      echo "/"
+    else
+      directory="${PWD%/*}"
+      echo "${directory##*/}/${PWD##*/}/"
+    fi
   fi
-}
-
-prompt_command() {
-  PS1='\[\e[38;5;254;48;5;26m\] \u \[\e[38;5;26;48;5;236m\]\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]\[\e[38;5;254m\] ${timer_show} $(parse_git_branch) \[\e[0m\]\[\e[38;5;238m\]\[\e[0m\] '
 }
 
 trap 'timer_start' DEBUG
