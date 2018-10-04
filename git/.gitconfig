@@ -5,5 +5,10 @@
 	ui = auto
 [core]
 	editor = vim
+[sendemail]
+  smtpuser = pobega@gmail.com
+  smtpserver = smtp.googlemail.com
+  smtpencryption = tls
+  smtpserverport = 587
 [includeIf "gitdir:~/Work/"]
 	path = ~/Work/.gitconfig
