@@ -5,6 +5,7 @@
 	ui = auto
 [core]
 	editor = vim
+	preloadIndex = true
 [sendemail]
   smtpuser = pobega@gmail.com
   smtpserver = smtp.googlemail.com
