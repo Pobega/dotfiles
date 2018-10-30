@@ -26,6 +26,7 @@ export EDITOR=vim
 export TERM=xterm-256color
 
 export PATH=~/bin:$HOME/.local/bin:$PATH
+export PATH=$PATH:$HOME/Work/depot_tools
 
 # get current branch in git repo
 function parse_git_branch() {
