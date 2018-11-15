@@ -33,12 +33,24 @@ function parse_git_branch() {
   if [ ! "${BRANCH}" == "" ]; then
     STAT=`parse_git_dirty`
     if [ ! "${STAT}" == "" ]; then
-      echo -e "\001\e[48;5;88m\002\001\e[38;5;254m\002 ${BRANCH}${STAT} \001\e[0m\002\001\e[38;5;88m\002"
+      if is_font_installed powerline; then
+	echo -e "\001\e[48;5;88m\002\001\e[38;5;254m\002 ${BRANCH}${STAT} \001\e[0m\002\001\e[38;5;88m\002"
+      else
+	echo -e "\001\e[48;5;88m\002\001\e[38;5;254m\002 ${BRANCH}${STAT} \001\e[0m\002\001\e[38;5;88m\002"
+      fi
     else
-      echo -e "\001\e[48;5;28m\002\001\e[38;5;254m\002 ${BRANCH} \001\e[0m\002\001\e[38;5;28m\002"
+      if is_font_installed powerline; then
+	echo -e "\001\e[48;5;28m\002\001\e[38;5;254m\002 ${BRANCH} \001\e[0m\002\001\e[38;5;28m\002"
+      else
+	echo -e "\001\e[48;5;28m\002\001\e[38;5;254m\002 ${BRANCH} \001\e[0m\002\001\e[38;5;28m\002"
+      fi
     fi
   else
-    echo -e "\001\e[0m\002\001\e[38;5;238m\002\001\e[0m\002"
+    if is_font_installed powerline; then
+      echo -e "\001\e[0m\002\001\e[38;5;238m\002\001\e[0m\002"
+    else
+      echo -e "\001\e[0m\002\001\e[38;5;238m\002\001\e[0m\002"
+    fi
   fi
 }
 
@@ -132,9 +144,19 @@ if [ "${USER}" == "root" ]; then
   MAIN_COLOR=88
 fi
 
+is_font_installed() {
+    fontname=$1
+    fc-list | grep -i "$fontname" >/dev/null
+}
+
 ## TODO: make a proper/pretty non-256 color version of prompt
-#if [[ "$TERM" =~ 256color ]]; then
-PS1='\[\e[38;5;254;48;5;${MAIN_COLOR}m\] \u \[\e[38;5;${MAIN_COLOR};48;5;236m\]\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]\[\e[38;5;254m\] ${timer_show} \[\e[38;5;238m\]$(parse_git_branch)\[\e[0m\] '
-#else
-#  PS1='[\u:$(get_cwd)]$(parse_git_branch)[${timer_show}]$ '
-#fi
+## TODO: check if powerline is installed
+if [[ "$TERM" =~ 256color ]]; then
+  if is_font_installed powerline; then
+    PS1='\[\e[38;5;254;48;5;${MAIN_COLOR}m\] \u \[\e[38;5;${MAIN_COLOR};48;5;236m\]\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]\[\e[38;5;254m\] ${timer_show} \[\e[38;5;238m\]$(parse_git_branch)\[\e[0m\] '
+  else
+    PS1='\[\e[38;5;254;48;5;${MAIN_COLOR}m\] \u \[\e[38;5;${MAIN_COLOR};48;5;236m\]\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]\[\e[38;5;254m\] ${timer_show} \[\e[38;5;238m\]$(parse_git_branch)\[\e[0m\] '
+  fi
+else
+  PS1='[\u@\h $(get_cwd)][${timer_show}]\\$ ' # Default Fedora PS1
+fi
