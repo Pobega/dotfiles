@@ -30,8 +30,8 @@ export EDITOR=vim
 export PATH=~/bin:$HOME/.local/bin:$PATH
 export PATH=$PATH:$HOME/Work/depot_tools
 
-# get current branch in git repo
-function parse_git_branch() {
+# get and print current branch in git repo
+function print_git_branch() {
   BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
   if [ ! "${BRANCH}" == "" ]; then
     STAT=`parse_git_dirty`
@@ -104,6 +104,9 @@ function timer_stop {
   unset start_time
 }
 
+# print out a simpler cwd, only going 1 dir higher.
+# Actual dir: /home/pobega/work/project/
+# Output: work/project/
 function get_cwd {
   if [ "${PWD}" == "${HOME}" ]; then
     echo "~"
@@ -137,7 +140,7 @@ fi
 
 ## TODO: make a proper/pretty non-256 color version of prompt
 if [[ "$TERM" =~ 256color ]]; then
-  PS1='\[\e[38;5;254;48;5;${MAIN_COLOR}m\] \u \[\e[38;5;${MAIN_COLOR};48;5;236m\]${BREAK}\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]${BREAK}\[\e[38;5;254m\] ${timer_show} \[\e[38;5;238m\]$(parse_git_branch)\[\e[0m\] '
+  PS1='\[\e[38;5;254;48;5;${MAIN_COLOR}m\] \u \[\e[38;5;${MAIN_COLOR};48;5;236m\]${BREAK}\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]${BREAK}\[\e[38;5;254m\] ${timer_show} \[\e[38;5;238m\]$(print_git_branch)\[\e[0m\] '
 else
   PS1='[\u@\h $(get_cwd)][${timer_show}]\\$ ' # Default Fedora PS1
 fi
