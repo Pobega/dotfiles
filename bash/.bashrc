@@ -23,7 +23,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 export BROWSER=firefox
 export EDITOR=vim
-export TERM=xterm-256color
 
 export PATH=~/bin:$HOME/.local/bin:$PATH
 export PATH=$PATH:$HOME/Work/depot_tools
