@@ -11,6 +11,7 @@
 [[ $- != *i* ]] && return
 
 # Use powerline separator if powerline is installed
+BREAK=""
 fc-list | grep -i "powerline" >/dev/null && BREAK=""
 
 function print_256_colors {
