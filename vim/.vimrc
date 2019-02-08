@@ -56,7 +56,6 @@ set secure
 " Open buffers in tab
 :set switchbuf+=usetab,newtab
 
-" Ctrl-M to run code
 " Command Make will call make and then cwindow which
 " opens a 3 line error window if any errors are found.
 " If no errors, it closes any open cwindow.
