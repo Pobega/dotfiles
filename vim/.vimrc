@@ -48,6 +48,14 @@ set laststatus=2
 autocmd FileType gitcommit setlocal spell
 autocmd FileType gitcommit setlocal textwidth=80
 
+" Allow local .vimrc files
+set exrc
+" Secure them
+set secure
+
+" Open buffers in tab
+:set switchbuf+=usetab,newtab
+
 " Ctrl-M to run code
 " Command Make will call make and then cwindow which
 " opens a 3 line error window if any errors are found.
