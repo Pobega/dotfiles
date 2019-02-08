@@ -56,18 +56,17 @@ set secure
 " Open buffers in tab
 :set switchbuf+=usetab,newtab
 
-" Command Make will call make and then cwindow which
-" opens a 3 line error window if any errors are found.
-" If no errors, it closes any open cwindow.
+" :Make will call make and put errors in a small cwindow
 command -nargs=* Make make! <args> | cwindow 3
 
 " Ctrl-j to run Make
 map <C-j> :Make<CR>
 
-" Grep command to open results in small cwindow
+" :Grep will run :grep and open results in small cwindow
 command! -nargs=+ Grep execute 'silent grep! <args>' | cwindow 3
-" Use Grep to find all text files containing a TODO
-command Todo execute 'Grep -Ri todo `find . -maxdepth 4 -type f`'
+" :todo - Use Grep to find all text files containing a TODO
+" (cnoreabbrev allows lowercase named for user-defined commands)
+cnoreabbrev todo execute 'Grep -Ri todo `find . -maxdepth 4 -type f`'
 
 " enable code folding by default
 au BufNewFile,BufRead *.py set autoindent foldmethod=indent
