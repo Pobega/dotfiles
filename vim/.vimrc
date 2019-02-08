@@ -13,10 +13,6 @@ set runtimepath^=~/.vim/bundle/vim-gitgutter
 " https://github.com/tpope/vim-sleuth
 set runtimepath^=~/.vim/bundle/vim-sleuth
 
-" Python specific configuration
-" enable code folding by default
-au BufNewFile,BufRead *.py set autoindent foldmethod=indent
-
 " black highlighting
 set cursorcolumn
 set cursorline
@@ -27,8 +23,10 @@ hi CursorLine cterm=NONE ctermbg=8 ctermfg=NONE
 nnoremap <space> za
 vnoremap <space> zf
 
-" xclip hotkeys. Y to yank to clipboard, P to paste from clipboard
+" xclip hotkeys.
+" Y to yank to clipboard
 map Y :w !xclip -selection clipboard<CR><CR>
+" P to paste from clipboard
 map P :r!xclip -o -selection clipboard<CR>
 
 " match extra whitespace as an error
@@ -50,8 +48,16 @@ set laststatus=2
 autocmd FileType gitcommit setlocal spell
 autocmd FileType gitcommit setlocal textwidth=80
 
-" F4 to run code
-"autocmd filetype python nnoremap <F4> :w <bar> exec '!python '.shellescape('%')<CR>
-"autocmd filetype c nnoremap <F4> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
-"autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+" Ctrl-M to run code
+" Command Make will call make and then cwindow which
+" opens a 3 line error window if any errors are found.
+" If no errors, it closes any open cwindow.
+command -nargs=* Make make! <args> | cwindow 3
+
+" Ctrl-j to run Make
+map <C-j> :Make<CR>
+
+" enable code folding by default
+au BufNewFile,BufRead *.py set autoindent foldmethod=indent
+au BufNewFile,BufRead *.lua set autoindent foldmethod=indent
 
