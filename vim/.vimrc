@@ -64,7 +64,9 @@ command -nargs=* Make make! <args> | cwindow 3
 " Ctrl-j to run Make
 map <C-j> :Make<CR>
 
+" Grep command to open results in small cwindow
 command! -nargs=+ Grep execute 'silent grep! <args>' | cwindow 3
+" Use Grep to find all text files containing a TODO
 command Todo execute 'Grep -Rni todo `find . -maxdepth 4 -type f`'
 
 " enable code folding by default
