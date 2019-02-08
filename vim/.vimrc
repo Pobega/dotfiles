@@ -65,7 +65,7 @@ command -nargs=* Make make! <args> | cwindow 3
 map <C-j> :Make<CR>
 
 command! -nargs=+ Grep execute 'silent grep! <args>' | cwindow 3
-command Todo execute 'Grep -Rni todo *'
+command Todo execute 'Grep -Rni todo `find . -maxdepth 4 -type f`'
 
 " enable code folding by default
 au BufNewFile,BufRead *.py set autoindent foldmethod=indent
