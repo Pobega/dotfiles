@@ -57,13 +57,13 @@ set secure
 :set switchbuf+=usetab,newtab
 
 " :Make will call make and put errors in a small cwindow
-command -nargs=* Make make! <args> | cwindow 3
+command -nargs=* Make make! <args> | cwindow 3 | redraw!
 
 " Ctrl-j to run Make
 map <C-j> :Make<CR>
 
 " :Grep will run :grep and open results in small cwindow
-command! -nargs=+ Grep execute 'silent grep! <args>' | cwindow 3
+command! -nargs=+ Grep execute 'silent grep! <args>' | cwindow 3 | redraw!
 " :todo - Use Grep to find all text files containing a TODO
 " (cnoreabbrev allows lowercase named for user-defined commands)
 cnoreabbrev todo execute 'Grep -Ri todo `find . -maxdepth 4 -type f`'
