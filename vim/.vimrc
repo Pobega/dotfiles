@@ -66,7 +66,7 @@ map <C-j> :Make<CR>
 command! -nargs=+ Grep execute 'silent grep! <args>' | cwindow 3 | redraw!
 " :todo - Use Grep to find all text files containing a TODO
 " (cnoreabbrev allows lowercase named for user-defined commands)
-cnoreabbrev todo execute 'Grep -Ri todo `find . -maxdepth 4 -type f`'
+cnoreabbrev todo execute 'Grep -Ri todo `find . -maxdepth 4 -type f \( ! -iname ".*swp" \)`'
 
 " enable code folding by default
 au BufNewFile,BufRead *.py set autoindent foldmethod=indent
