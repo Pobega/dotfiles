@@ -127,7 +127,7 @@ MAIN_COLOR=202
 if [ "${HOSTNAME}" == "hotbox" ]; then
   MAIN_COLOR=92
 else
-  if [ "${HOSTNAME}" == "merlin" ]; then
+  if [ "${HOSTNAME}" == "icebox" ]; then
     MAIN_COLOR=26
   fi
 fi
