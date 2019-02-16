@@ -12,6 +12,8 @@ behind-the-scene * 3p-frame noop
 behind-the-scene * 3p-script noop
 behind-the-scene * image noop
 behind-the-scene * inline-script noop
+discordapp.com discord.gg * noop
+discordapp.com discordapp.com * noop
 github.com * 3p-script noop
 hangouts.google.com * 3p-script noop
 itch.io * 3p-frame noop
@@ -24,3 +26,6 @@ www.grubhub.com * 3p-script noop
 www.messenger.com * 3p-script noop
 www.paypal.com * 3p-frame noop
 www.paypal.com * 3p-script noop
+www.reddit.com reddit.com * noop
+www.reddit.com redditmedia.com * noop
+www.reddit.com redditstatic.com * noop
