@@ -17,6 +17,7 @@ discordapp.com discordapp.com * noop
 github.com github.com * noop
 github.com githubassets.com * noop
 hangouts.google.com * 1p-script noop
+hangouts.google.com googleusercontent.com * noop
 itch.io * 1p-script noop
 itch.io * 3p-frame noop
 itch.io hwcdn.net * noop
