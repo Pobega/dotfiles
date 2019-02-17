@@ -25,8 +25,14 @@ mobile.twitter.com twimg.com * noop
 mobile.twitter.com twitter.com * noop
 neverware.slack.com * 1p-script noop
 neverware.slack.com slack-edge.com * noop
+store.steampowered.com * 1p-script noop
+store.steampowered.com akamaihd.net * noop
 twitter.com * 1p-script noop
 twitter.com twimg.com * noop
+www.amazon.com * 1p-script noop
+www.amazon.com amazonpay.com * noop
+www.amazon.com media-amazon.com * noop
+www.amazon.com ssl-images-amazon.com * noop
 www.facebook.com * 1p-script noop
 www.facebook.com fbcdn.net * noop
 www.grubhub.com * 3p-frame noop
