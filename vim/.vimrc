@@ -22,6 +22,8 @@ set runtimepath^=~/.vim/bundle/vim-sleuth
 set runtimepath^=~/.vim/bundle/vim-gdscript3
 " https://github.com/ervandew/supertab
 set runtimepath^=~/.vim/bundle/supertab
+" https://github.com/davidhalter/jedi-vim
+set runtimepath^=~/.vim/bundle/jedi-vim
 
 " black highlighting
 set cursorcolumn
@@ -85,3 +87,5 @@ au BufNewFile,BufRead *.lua set autoindent foldmethod=indent
 " enable gdscript syntax highlighting
 autocmd BufRead,BufNewFile *.gd set filetype=gdscript3
 
+" Default Supertab to omnicompletion
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
