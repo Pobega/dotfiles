@@ -2,8 +2,14 @@
 set nocompatible
 set t_Co=256
 set background=dark
-colorscheme gruvbox
 syntax on
+
+" colorscheme fallback (if submodule not cloned)
+try
+  colorscheme gruvbox " https://github.com/morhetz/gruvbox
+catch /^Vim\%((\a\+)\)\=:E185/
+  colorscheme desert  " fallback built-in colorscheme
+endtry
 
 " Plugins
 " https://github.com/tpope/vim-fugitive
