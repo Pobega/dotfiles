@@ -1,8 +1,8 @@
 " basic settings
 set nocompatible
-colorscheme desert
 set t_Co=256
 set background=dark
+colorscheme gruvbox
 syntax on
 
 " Plugins
