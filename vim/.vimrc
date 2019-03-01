@@ -87,5 +87,17 @@ au BufNewFile,BufRead *.lua set autoindent foldmethod=indent
 " enable gdscript syntax highlighting
 autocmd BufRead,BufNewFile *.gd set filetype=gdscript3
 
-" Default Supertab to omnicompletion
-let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+" Default Supertab to omnicompletion, fallback to context completion
+let g:SuperTabDefaultCompletionType = 'context'
+autocmd FileType *
+  \ if &omnifunc != '' |
+  \   call SuperTabChain(&omnifunc, "<c-n>") |
+  \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
+  \ endif
+
+" SuperTAB from top->bottom rather than bottom->top
+let g:SuperTabMappingForward  = '<s-tab>'
+let g:SuperTabMappingBackward = '<tab>'
+
+" Disable Docstrings by default in jedi-vim
+autocmd FileType python setlocal completeopt-=preview
