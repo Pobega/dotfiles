@@ -20,6 +20,8 @@ set runtimepath^=~/.vim/bundle/vim-gitgutter
 set runtimepath^=~/.vim/bundle/vim-sleuth
 " https://github.com/calviken/vim-gdscript3
 set runtimepath^=~/.vim/bundle/vim-gdscript3
+" https://github.com/ervandew/supertab
+set runtimepath^=~/.vim/bundle/supertab
 
 " black highlighting
 set cursorcolumn
