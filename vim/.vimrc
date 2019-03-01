@@ -18,6 +18,8 @@ set runtimepath^=~/.vim/bundle/vim-fugitive
 set runtimepath^=~/.vim/bundle/vim-gitgutter
 " https://github.com/tpope/vim-sleuth
 set runtimepath^=~/.vim/bundle/vim-sleuth
+" https://github.com/calviken/vim-gdscript3
+set runtimepath^=~/.vim/bundle/vim-gdscript3
 
 " black highlighting
 set cursorcolumn
@@ -77,4 +79,7 @@ cnoreabbrev todo execute 'Grep -Ri todo `find . -maxdepth 4 -type f \( ! -iname 
 " enable code folding by default
 au BufNewFile,BufRead *.py set autoindent foldmethod=indent
 au BufNewFile,BufRead *.lua set autoindent foldmethod=indent
+
+" enable gdscript syntax highlighting
+autocmd BufRead,BufNewFile *.gd set filetype=gdscript3
 

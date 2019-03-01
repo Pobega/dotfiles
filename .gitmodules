@@ -10,3 +10,6 @@
 [submodule "vim/.vim/bundle/gruvbox"]
 	path = vim/.vim/bundle/gruvbox
 	url = https://github.com/morhetz/gruvbox
+[submodule "vim/.vim/bundle/vim-gdscript3"]
+	path = vim/.vim/bundle/vim-gdscript3
+	url = https://github.com/calviken/vim-gdscript3.git
