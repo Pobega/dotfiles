@@ -24,6 +24,8 @@ set runtimepath^=~/.vim/bundle/vim-gdscript3
 set runtimepath^=~/.vim/bundle/supertab
 " https://github.com/davidhalter/jedi-vim
 set runtimepath^=~/.vim/bundle/jedi-vim
+" https://github.com/Rip-Rip/clang_complete
+set runtimepath^=~/.vim/bundle/clang_complete
 
 " black highlighting
 set cursorcolumn
@@ -87,6 +89,7 @@ au BufNewFile,BufRead *.lua set autoindent foldmethod=indent
 " enable gdscript syntax highlighting
 autocmd BufRead,BufNewFile *.gd set filetype=gdscript3
 
+""" Supertab
 " Default Supertab to omnicompletion, fallback to context completion
 let g:SuperTabDefaultCompletionType = 'context'
 autocmd FileType *
@@ -99,5 +102,12 @@ autocmd FileType *
 let g:SuperTabMappingForward  = '<s-tab>'
 let g:SuperTabMappingBackward = '<tab>'
 
+""" Jedi-Vim
 " Disable Docstrings by default in jedi-vim
 autocmd FileType python setlocal completeopt-=preview
+
+""" Clang_Complete
+" Disable auto popup, use <Tab> to autocomplete
+let g:clang_complete_auto = 0
+" Show clang errors in the quickfix window
+let g:clang_complete_copen = 1
