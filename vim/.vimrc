@@ -4,28 +4,11 @@ set t_Co=256
 set background=dark
 syntax on
 
-" colorscheme fallback (if submodule not cloned)
-try
-  colorscheme gruvbox " https://github.com/morhetz/gruvbox
-catch /^Vim\%((\a\+)\)\=:E185/
-  colorscheme desert  " fallback built-in colorscheme
-endtry
+" Load plugin stuff
+source ~/.vim/plugins.vim
 
-" Plugins
-" https://github.com/tpope/vim-fugitive
-set runtimepath^=~/.vim/bundle/vim-fugitive
-" https://github.com/airblade/vim-gitgutter
-set runtimepath^=~/.vim/bundle/vim-gitgutter
-" https://github.com/tpope/vim-sleuth
-set runtimepath^=~/.vim/bundle/vim-sleuth
-" https://github.com/calviken/vim-gdscript3
-set runtimepath^=~/.vim/bundle/vim-gdscript3
-" https://github.com/ervandew/supertab
-set runtimepath^=~/.vim/bundle/supertab
-" https://github.com/davidhalter/jedi-vim
-set runtimepath^=~/.vim/bundle/jedi-vim
-" https://github.com/Rip-Rip/clang_complete
-set runtimepath^=~/.vim/bundle/clang_complete
+" Load macros
+source ~/.vim/macros.vim
 
 " black highlighting
 set cursorcolumn
@@ -70,44 +53,5 @@ set secure
 " Open buffers in tab
 :set switchbuf+=usetab,newtab
 
-" :Make will call make and put errors in a small cwindow
-command -nargs=* Make make! <args> | cwindow 3 | redraw!
-
-" Ctrl-j to run Make
-map <C-j> :Make<CR>
-
-" :Grep will run :grep and open results in small cwindow
-command! -nargs=+ Grep execute 'silent grep! <args>' | cwindow 3 | redraw!
-" :todo - Use Grep to find all text files containing a TODO
-" (cnoreabbrev allows lowercase named for user-defined commands)
-cnoreabbrev todo execute 'Grep -Ri todo `find . -maxdepth 4 -type f \( ! -iname ".*swp" \)`'
-
 " enable code folding by default
-au BufNewFile,BufRead *.py set autoindent foldmethod=indent
-au BufNewFile,BufRead *.lua set autoindent foldmethod=indent
-
-" enable gdscript syntax highlighting
-autocmd BufRead,BufNewFile *.gd set filetype=gdscript3
-
-""" Supertab
-" Default Supertab to omnicompletion, fallback to context completion
-let g:SuperTabDefaultCompletionType = 'context'
-autocmd FileType *
-  \ if &omnifunc != '' |
-  \   call SuperTabChain(&omnifunc, "<c-n>") |
-  \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
-  \ endif
-
-" SuperTAB from top->bottom rather than bottom->top
-let g:SuperTabMappingForward  = '<s-tab>'
-let g:SuperTabMappingBackward = '<tab>'
-
-""" Jedi-Vim
-" Disable Docstrings by default in jedi-vim
-autocmd FileType python setlocal completeopt-=preview
-
-""" Clang_Complete
-" Disable auto popup, use <Tab> to autocomplete
-let g:clang_complete_auto = 0
-" Show clang errors in the quickfix window
-let g:clang_complete_copen = 1
+au BufNewFile,BufRead *.py,*.lua,*.gd set autoindent foldmethod=indent
