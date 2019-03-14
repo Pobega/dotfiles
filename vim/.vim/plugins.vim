@@ -23,15 +23,10 @@ set runtimepath^=~/.vim/bundle/vim-sleuth
 "" Coding
 " https://github.com/ervandew/supertab
 set runtimepath^=~/.vim/bundle/supertab
-" https://github.com/calviken/vim-gdscript3
-set runtimepath^=~/.vim/bundle/vim-gdscript3
 " https://github.com/davidhalter/jedi-vim
 set runtimepath^=~/.vim/bundle/jedi-vim
 " https://github.com/Rip-Rip/clang_complete
 set runtimepath^=~/.vim/bundle/clang_complete
-
-" enable gdscript syntax highlighting
-autocmd BufRead,BufNewFile *.gd set filetype=gdscript3
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Supertab
