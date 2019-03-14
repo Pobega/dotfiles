@@ -54,4 +54,4 @@ set secure
 :set switchbuf+=usetab,newtab
 
 " enable code folding by default
-au BufNewFile,BufRead *.py,*.lua,*.gd set autoindent foldmethod=indent
+au BufNewFile,BufRead *.py,*.lua set autoindent foldmethod=indent
