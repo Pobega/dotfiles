@@ -3,7 +3,7 @@
 " colorscheme fallback (if submodule not cloned)
 try
   colorscheme gruvbox " https://github.com/morhetz/gruvbox
-catch /^Vim\%((\a\+)\)\=:E185/
+catch
   colorscheme desert  " fallback built-in colorscheme
 endtry
 
