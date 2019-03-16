@@ -18,6 +18,10 @@ set runtimepath^=~/.vim/bundle/vim-fugitive
 set runtimepath^=~/.vim/bundle/vim-gitgutter
 " https://github.com/tpope/vim-sleuth
 set runtimepath^=~/.vim/bundle/vim-sleuth
+" https://github.com/justinmk/vim-syntax-extra
+set runtimepath^=~/.vim/bundle/vim-syntax-extra
+" https://github.com/justinmk/vim-syntax-extra
+set runtimepath^=~/.vim/bundle/python-syntax
 
 " black highlighting
 set cursorcolumn
@@ -78,3 +82,4 @@ cnoreabbrev todo execute 'Grep -Ri todo `find . -maxdepth 4 -type f \( ! -iname 
 au BufNewFile,BufRead *.py set autoindent foldmethod=indent
 au BufNewFile,BufRead *.lua set autoindent foldmethod=indent
 
+let g:python_highlight_all = 1

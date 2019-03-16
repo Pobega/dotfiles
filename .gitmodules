@@ -10,3 +10,9 @@
 [submodule "vim/.vim/bundle/gruvbox"]
 	path = vim/.vim/bundle/gruvbox
 	url = https://github.com/morhetz/gruvbox
+[submodule "vim/.vim/bundle/vim-syntax-extra"]
+	path = vim/.vim/bundle/vim-syntax-extra
+	url = https://github.com/justinmk/vim-syntax-extra.git
+[submodule "vim/.vim/bundle/python-syntax"]
+	path = vim/.vim/bundle/python-syntax
+	url = https://github.com/vim-python/python-syntax.git
