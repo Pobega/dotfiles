@@ -10,23 +10,30 @@ endtry
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" Git
+""" Git
 " https://github.com/tpope/vim-fugitive
 set runtimepath^=~/.vim/bundle/vim-fugitive
 " https://github.com/airblade/vim-gitgutter
 set runtimepath^=~/.vim/bundle/vim-gitgutter
 
-"" Tabstop
+""" Tabstop
 " https://github.com/tpope/vim-sleuth
 set runtimepath^=~/.vim/bundle/vim-sleuth
 
-"" Coding
+""" Coding
+"" Autocomplete
 " https://github.com/ervandew/supertab
 set runtimepath^=~/.vim/bundle/supertab
 " https://github.com/davidhalter/jedi-vim
 set runtimepath^=~/.vim/bundle/jedi-vim
 " https://github.com/Rip-Rip/clang_complete
 set runtimepath^=~/.vim/bundle/clang_complete
+
+"" Syntax highlighting
+" https://github.com/justinmk/vim-syntax-extra
+set runtimepath^=~/.vim/bundle/vim-syntax-extra
+" https://github.com/justinmk/python-syntax
+set runtimepath^=~/.vim/bundle/python-syntax
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Supertab
@@ -50,6 +57,12 @@ let g:SuperTabMappingBackward = '<tab>'
 autocmd FileType python setlocal completeopt-=preview
 " Jedi write call signatures to status line
 let g:jedi#show_call_signatures = 2
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Python-Vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable extended highlighting
+let g:python_highlight_all = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Clang_Complete

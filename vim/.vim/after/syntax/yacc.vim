@@ -1,0 +1,1 @@
+../../bundle/vim-syntax-extra/after/syntax/yacc.vim

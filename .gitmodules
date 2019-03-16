@@ -17,7 +17,13 @@
 	path = vim/.vim/bundle/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
 	ignore = dirty
+[submodule "vim/.vim/bundle/python-syntax"]
+	path = vim/.vim/bundle/python-syntax
+	url = https://github.com/vim-python/python-syntax.git
 [submodule "vim/.vim/bundle/clang_complete"]
 	path = vim/.vim/bundle/clang_complete
 	url = https://github.com/Rip-Rip/clang_complete.git
 	ignore = dirty
+[submodule "vim/.vim/bundle/vim-syntax-extra"]
+	path = vim/.vim/bundle/vim-syntax-extra
+	url = https://github.com/justinmk/vim-syntax-extra.git
