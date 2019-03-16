@@ -48,6 +48,8 @@ let g:SuperTabMappingBackward = '<tab>'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Disable Docstrings by default in jedi-vim
 autocmd FileType python setlocal completeopt-=preview
+" Jedi write call signatures to status line
+let g:jedi#show_call_signatures = 2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Clang_Complete
