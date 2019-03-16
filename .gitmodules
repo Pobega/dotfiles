@@ -10,9 +10,9 @@
 [submodule "vim/.vim/bundle/gruvbox"]
 	path = vim/.vim/bundle/gruvbox
 	url = https://github.com/morhetz/gruvbox
-[submodule "vim/.vim/bundle/supertab"]
-	path = vim/.vim/bundle/supertab
-	url = https://github.com/ervandew/supertab
+[submodule "vim/.vim/bundle/vim-mucomplete"]
+	path = vim/.vim/bundle/vim-mucomplete
+	url = https://github.com/lifepillar/vim-mucomplete.git
 [submodule "vim/.vim/bundle/jedi-vim"]
 	path = vim/.vim/bundle/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git

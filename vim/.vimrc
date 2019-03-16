@@ -55,3 +55,11 @@ set secure
 
 " enable code folding by default
 au BufNewFile,BufRead *.py,*.lua set autoindent foldmethod=indent
+
+" Autocomplete options
+set completeopt+=longest,menuone,noselect,noinsert
+
+" Shut off completion messages
+set shortmess+=c
+" If Vim beeps during completion
+set belloff+=ctrlg

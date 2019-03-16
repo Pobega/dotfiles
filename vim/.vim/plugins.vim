@@ -22,8 +22,8 @@ set runtimepath^=~/.vim/bundle/vim-sleuth
 
 """ Coding
 "" Autocomplete
-" https://github.com/ervandew/supertab
-set runtimepath^=~/.vim/bundle/supertab
+" https://github.com/ervandew/vim-mucomplete
+set runtimepath^=~/.vim/bundle/vim-mucomplete
 " https://github.com/davidhalter/jedi-vim
 set runtimepath^=~/.vim/bundle/jedi-vim
 " https://github.com/Rip-Rip/clang_complete
@@ -36,19 +36,14 @@ set runtimepath^=~/.vim/bundle/vim-syntax-extra
 set runtimepath^=~/.vim/bundle/python-syntax
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Supertab
+" mu-complete
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Default Supertab to omnicompletion, fallback to context completion
-let g:SuperTabDefaultCompletionType = 'context'
-autocmd FileType *
-  \ if &omnifunc != '' |
-  \   call SuperTabChain(&omnifunc, "<c-n>") |
-  \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
-  \ endif
-
-" move from top->bottom rather than bottom->top
-let g:SuperTabMappingForward  = '<s-tab>'
-let g:SuperTabMappingBackward = '<tab>'
+" Automatically complete when typing
+let g:mucomplete#enable_auto_at_startup = 1
+" No autocomplete delay
+let g:mucomplete#completion_delay = 0
+" Paths are relative to the open buffer
+let g:mucomplete#buffer_relative_paths = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Jedi-Vim
@@ -57,6 +52,8 @@ let g:SuperTabMappingBackward = '<tab>'
 autocmd FileType python setlocal completeopt-=preview
 " Jedi write call signatures to status line
 let g:jedi#show_call_signatures = 2
+" Popup autocomplete when typing a dot character
+let g:jedi#popup_on_dot = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Python-Vim
