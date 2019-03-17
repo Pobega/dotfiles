@@ -57,7 +57,7 @@ set secure
 au BufNewFile,BufRead *.py,*.lua set autoindent foldmethod=indent
 
 " Autocomplete options
-set completeopt+=longest,menuone,noselect,noinsert
+set completeopt+=menuone,noselect,noinsert
 
 " Shut off completion messages
 set shortmess+=c
