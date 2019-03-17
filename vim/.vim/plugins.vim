@@ -8,34 +8,6 @@ catch
 endtry
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Git
-" https://github.com/tpope/vim-fugitive
-set runtimepath^=~/.vim/bundle/vim-fugitive
-" https://github.com/airblade/vim-gitgutter
-set runtimepath^=~/.vim/bundle/vim-gitgutter
-
-""" Tabstop
-" https://github.com/tpope/vim-sleuth
-set runtimepath^=~/.vim/bundle/vim-sleuth
-
-""" Coding
-"" Autocomplete
-" https://github.com/ervandew/vim-mucomplete
-set runtimepath^=~/.vim/bundle/vim-mucomplete
-" https://github.com/davidhalter/jedi-vim
-set runtimepath^=~/.vim/bundle/jedi-vim
-" https://github.com/Rip-Rip/clang_complete
-set runtimepath^=~/.vim/bundle/clang_complete
-
-"" Syntax highlighting
-" https://github.com/justinmk/vim-syntax-extra
-set runtimepath^=~/.vim/bundle/vim-syntax-extra
-" https://github.com/justinmk/python-syntax
-set runtimepath^=~/.vim/bundle/python-syntax
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " mu-complete
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Automatically complete when typing

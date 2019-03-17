@@ -1,29 +1,29 @@
 [submodule "vim/.vim/bundle/vim-sleuth"]
-	path = vim/.vim/bundle/vim-sleuth
+	path = vim/.vim/pack/plugins/start/vim-sleuth
 	url = https://github.com/tpope/vim-sleuth
 [submodule "vim/.vim/bundle/vim-fugitive"]
-	path = vim/.vim/bundle/vim-fugitive
+	path = vim/.vim/pack/plugins/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
 [submodule "vim/.vim/bundle/vim-gitgutter"]
-	path = vim/.vim/bundle/vim-gitgutter
+	path = vim/.vim/pack/plugins/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
 [submodule "vim/.vim/bundle/gruvbox"]
-	path = vim/.vim/bundle/gruvbox
+	path = vim/.vim/pack/plugins/start/gruvbox
 	url = https://github.com/morhetz/gruvbox
 [submodule "vim/.vim/bundle/vim-mucomplete"]
-	path = vim/.vim/bundle/vim-mucomplete
+	path = vim/.vim/pack/plugins/start/vim-mucomplete
 	url = https://github.com/lifepillar/vim-mucomplete.git
 [submodule "vim/.vim/bundle/jedi-vim"]
-	path = vim/.vim/bundle/jedi-vim
+	path = vim/.vim/pack/plugins/start/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
 	ignore = dirty
 [submodule "vim/.vim/bundle/python-syntax"]
-	path = vim/.vim/bundle/python-syntax
+	path = vim/.vim/pack/plugins/start/python-syntax
 	url = https://github.com/vim-python/python-syntax.git
 [submodule "vim/.vim/bundle/clang_complete"]
-	path = vim/.vim/bundle/clang_complete
+	path = vim/.vim/pack/plugins/start/clang_complete
 	url = https://github.com/Rip-Rip/clang_complete.git
 	ignore = dirty
 [submodule "vim/.vim/bundle/vim-syntax-extra"]
-	path = vim/.vim/bundle/vim-syntax-extra
+	path = vim/.vim/pack/plugins/start/vim-syntax-extra
 	url = https://github.com/justinmk/vim-syntax-extra.git

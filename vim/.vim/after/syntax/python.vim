@@ -1,1 +1,0 @@
-../../bundle/python-syntax/syntax/python.vim
