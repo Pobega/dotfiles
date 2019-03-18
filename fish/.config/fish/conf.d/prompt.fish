@@ -1,4 +1,5 @@
-set fish_greeting
+set fish_greeting # Quiet!
+set fish_prompt_pwd_dir_length 4 # Longer directory
 
 function fish_prompt
   set last_status $status
