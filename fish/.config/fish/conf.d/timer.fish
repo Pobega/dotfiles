@@ -3,9 +3,9 @@ function get_time --on-event fish_postexec
     if test $CMD_DURATION
         # Show duration of the last command in seconds
         set duration (echo "$CMD_DURATION 1000" | awk '{printf "%.3fs", $1 / $2}')
-        printf (set_color blue)
+        set_color blue
         echo_right [ $duration ]
-        printf (set_color normal)
+        set_color normal
     end
 end
 
