@@ -26,6 +26,10 @@ Lots of workflow changes here. Just read the configuration file if you want more
 ![tmux screenshot](https://raw.githubusercontent.com/pobega/dotfiles/master/tmux.png)
 
 ## vim
-Setup to run a few plugins at start if they exist (vim is smart enough to not complain plugins are missing, so you can ignore them), adds a nice crosshair, and a bunch of other stuff. It's well commented, so again, read the file.
+Does a few neat things like add a nice crosshair, highlights empty spacing and a bunch of other stuff.
+
+Also utilizes git submodules and the Vim 8 plugin system to autoload helpful plugins (and gruvbox colorscheme) at start.
+
+It's well commented, so again, read the file.
 
 ![vim4 screenshot](https://raw.githubusercontent.com/pobega/dotfiles/master/vim.png)
