@@ -14,12 +14,6 @@ An alternative shell choice. Slightly cleaner UI than my bash config with simila
 
 ![fish screenshot](https://raw.githubusercontent.com/pobega/dotfiles/master/fish.png)
 
-## git
-Nothing special, just sets up git-sendmail for sending patches to kernel mailing lists.
-
-## mutt
-Optimized for interfacing with the kernel mailing list. Automatically decrypts an encrypted password file at runtime.
-
 ## tmux
 Lots of workflow changes here. Just read the configuration file if you want more information.
 
@@ -33,3 +27,15 @@ Also utilizes git submodules and the Vim 8 plugin system to autoload helpful plu
 It's well commented, so again, read the file.
 
 ![vim4 screenshot](https://raw.githubusercontent.com/pobega/dotfiles/master/vim.png)
+
+## git
+Nothing special, just sets up git-sendmail for sending patches to kernel mailing lists.
+
+## mutt
+Optimized for interfacing with the kernel mailing list. Automatically decrypts an encrypted password file at runtime.
+
+## ublock
+Shared ublock configuration with medium mode on and a few useful things whitelisted.
+
+## steam-controller
+uinput stuff for using the Steam Controller on Linux. Includes a modprobe file for autoloading the uinput module at boot (required for systemd permissions)
