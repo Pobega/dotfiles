@@ -10,7 +10,7 @@ The bash configuration is similar to ohmyzsh, except more portable. It shows the
 ![bashrc screenshot](https://raw.githubusercontent.com/pobega/dotfiles/master/bash.png)
 
 ## fish
-An alternative shell choice.
+An alternative shell choice. Slightly cleaner UI than my bash config with similar functionality.
 
 ![fish screenshot](https://raw.githubusercontent.com/pobega/dotfiles/master/fish.png)
 
