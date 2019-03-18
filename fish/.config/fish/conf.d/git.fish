@@ -9,31 +9,30 @@ set __fish_git_prompt_char_untrackedfiles "u"
 set __fish_git_prompt_char_conflictedstate "c"
 set __fish_git_prompt_char_cleanstate "C"
 
-set __fish_git_prompt_color_branch green --bold
+function git_is_repo -d "Check if directory is a repository"
+  test -d .git; or command git rev-parse --git-dir >/dev/null 2> /dev/null
+end
 
-function in_git_status
-  if string match -q -- "*$argv[1]*" (__fish_git_prompt_informative_status)
+function in_git_status -d "Check if arg is in informative status"
+  if string match -q -- "*$argv[1]*" $git_status
     return 0
   end
   return 1
 end
 
-function git_is_repo -d "Check if directory is a repository"
-  test -d .git; or command git rev-parse --git-dir >/dev/null 2> /dev/null
-end
-
 function set_git_color --on-event fish_prompt
   if git_is_repo
+    set -g git_status (__fish_git_prompt_informative_status)
     if in_git_status C         # Clean
-      set __fish_git_prompt_color_branch green --bold
+      set -g __fish_git_prompt_color_branch green --bold
     else if in_git_status d    # Dirty
-      set __fish_git_prompt_color_branch red --bold
+      set -g __fish_git_prompt_color_branch red --bold
     else if in_git_status c    # Conflicted
-      set __fish_git_prompt_color_branch yellow --bold
+      set -g __fish_git_prompt_color_branch yellow --bold
     else if in_git_status u    # Untracked
-      set __fish_git_prompt_color_branch red
+      set -g __fish_git_prompt_color_branch red
     else if in_git_status s    # Staged
-      set __fish_git_prompt_color_branch purple
+      set -g __fish_git_prompt_color_branch purple
     end
   end
 end
