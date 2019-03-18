@@ -9,6 +9,11 @@ The bash configuration is similar to ohmyzsh, except more portable. It shows the
 
 ![bashrc screenshot](https://raw.githubusercontent.com/pobega/dotfiles/master/bash.png)
 
+## fish
+An alternative shell choice.
+
+![fish screenshot](https://raw.githubusercontent.com/pobega/dotfiles/master/fish.png)
+
 ## git
 Nothing special, just sets up git-sendmail for sending patches to kernel mailing lists.
 
