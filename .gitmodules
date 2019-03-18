@@ -27,3 +27,6 @@
 [submodule "vim/.vim/bundle/vim-syntax-extra"]
 	path = vim/.vim/pack/plugins/start/vim-syntax-extra
 	url = https://github.com/justinmk/vim-syntax-extra.git
+[submodule "vim/.vim/pack/plugins/start/vim-fish"]
+	path = vim/.vim/pack/plugins/start/vim-fish
+	url = https://github.com/dag/vim-fish
