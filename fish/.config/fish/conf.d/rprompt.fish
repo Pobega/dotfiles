@@ -3,7 +3,5 @@ if not set -q __fish_prompt_hosname
 end
 
 function fish_right_prompt
-  set_color blue
-  echo $__fish_prompt_hostname
-  set_color normal
+  printf '%s' (git_prompt)
 end

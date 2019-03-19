@@ -9,11 +9,6 @@ function fish_prompt
   set last_status $status
 
   set_color green
-  printf '%s' (prompt_pwd)
-  set_color normal
-
-  set_git_color
-  printf '%s ' (__fish_git_prompt)
-
+  printf '%s ' (prompt_pwd)
   set_color normal
 end

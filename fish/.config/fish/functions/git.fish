@@ -15,8 +15,16 @@ set -g __fish_git_prompt_color_untrackedfiles yellow
 set -g __fish_git_prompt_char_dirtystate "?"
 set -g __fish_git_prompt_char_untrackedfiles "!"
 
+function git_prompt -d "Generate and print the customized git font text"
+  set -g git_prompt_text (__fish_git_prompt)
+  set_git_color
+  # Strip parentheses
+  set modified_prompt (string replace -r -a '[\()]' '' $git_prompt_text)
+  printf '%s' $modified_prompt
+end
+
 function in_git_prompt -d "Check if argv[1] is in the git_prompt"
-  if string match -q -- "*$argv[1]*" $git_prompt
+  if string match -q -- "*$argv[1]*" $git_prompt_text
     return 0
   end
   return 1
@@ -34,9 +42,8 @@ function is_git_repo -d "Check if directory is a repository"
   test -d .git; or command git rev-parse --git-dir >/dev/null 2> /dev/null
 end
 
-function set_git_color
+function set_git_color -d "Set git prompt color based on current repo status"
   if is_git_repo
-    set -g git_prompt (__fish_git_prompt)
     # Branch colors ordered by priority
     if in_git_prompt "\?"
       set -g __fish_git_prompt_color_branch $__fish_git_prompt_color_dirtystate
