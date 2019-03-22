@@ -1,7 +1,8 @@
 set fish_greeting # Quiet!
 set fish_prompt_pwd_dir_length 4 # Longer directory
 
-set -g local_color (command echo -n (command hostname) | sha1sum | cut -c1-6)
+set -g hostname (command hostname)
+set -g local_color (command echo -n $hostname | sha1sum | cut -c1-6)
 
 for f in $fish_function_path/git.fish
     test -e $f; and source $f; and break
@@ -12,7 +13,10 @@ function fish_prompt
 
   # At sign color set based on hash of hostname
   set_color $local_color
-  printf '@'
+  printf '%s' $hostname
+
+  set_color normal
+  printf ':'
 
   set_color green
   printf '%s ' (prompt_pwd)
