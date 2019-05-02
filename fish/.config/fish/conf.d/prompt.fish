@@ -1,7 +1,10 @@
 set fish_greeting # Quiet!
 set fish_prompt_pwd_dir_length 4 # Longer directory
 
-set -g hostname (command hostname)
+if not set -q hostname
+  set -g hostname (command hostname)
+end
+
 set -g local_color (command echo -n $hostname | sha1sum | cut -c1-6)
 
 for f in $fish_function_path/git.fish
