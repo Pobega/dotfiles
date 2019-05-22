@@ -9,6 +9,7 @@ no-scripting: behind-the-scene false
 * https://www.gstatic.com/recaptcha/ * noop
 * https://www.recaptcha.net/recaptcha/api.js script noop
 * squarespace.com * noop
+* withgoogle.com * noop
 * youtube.com * noop
 * ytimg.com * noop
 amazon.com aiv-cdn.net * noop
