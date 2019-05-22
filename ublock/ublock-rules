@@ -8,6 +8,7 @@ no-scripting: behind-the-scene false
 * https://www.google.com/recaptcha/ * noop
 * https://www.gstatic.com/recaptcha/ * noop
 * https://www.recaptcha.net/recaptcha/api.js script noop
+* maps.googleapis.com * noop
 * squarespace.com * noop
 * withgoogle.com * noop
 * youtube.com * noop
