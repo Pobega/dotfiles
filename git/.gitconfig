@@ -13,3 +13,5 @@
   smtpserverport = 587
 [includeIf "gitdir:~/Work/"]
 	path = ~/Work/.gitconfig
+[alias]
+  resetr = !git reset @{upstream}
