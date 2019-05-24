@@ -1,17 +1,17 @@
 [user]
-	email = pobega@gmail.com
-	name = Michael Pobega
+  email = pobega@gmail.com
+  name = Michael Pobega
 [color]
-	ui = auto
+  ui = auto
 [core]
-	editor = vim
-	preloadIndex = true
+  editor = vim
+  preloadIndex = true
 [sendemail]
   smtpuser = pobega@gmail.com
   smtpserver = smtp.googlemail.com
   smtpencryption = tls
   smtpserverport = 587
 [includeIf "gitdir:~/Work/"]
-	path = ~/Work/.gitconfig
+  path = ~/Work/.gitconfig
 [alias]
   resetr = !git reset @{upstream}
