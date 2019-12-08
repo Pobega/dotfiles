@@ -2,12 +2,19 @@ no-large-media: behind-the-scene false
 no-scripting: behind-the-scene false
 * * 3p-frame block
 * * 3p-script block
+* ampproject.org * noop
+* bootstrapcdn.com * noop
+* cloudflare.com * noop
 * cloudfront.net * noop
+* discourse-cdn.com * noop
+* disqus.com * noop
+* disquscdn.com * noop
 * googlevideo.com * noop
 * gstatic.com * noop
 * https://www.google.com/recaptcha/ * noop
 * https://www.gstatic.com/recaptcha/ * noop
 * https://www.recaptcha.net/recaptcha/api.js script noop
+* jquery.com * noop
 * maps.googleapis.com * noop
 * squarespace.com * noop
 * withgoogle.com * noop
@@ -33,12 +40,14 @@ discordapp.com discord.gg * noop
 discordapp.com discordapp.com * noop
 facebook.com fbcdn.net * noop
 github.com githubassets.com * noop
+github.com render.githubusercontent.com * noop
 google.com ajax.googleapis.com * noop
 google.com googleusercontent.com * noop
 googleblog.com ajax.googleapis.com * noop
 grubhub.com * 3p-frame noop
 grubhub.com * 3p-script noop
 humblebundle.com akamaihd.net * noop
+id.atlassian.com atl-paas.net * noop
 indiegogo.com iggcdn.com * noop
 itch.io * 3p-frame noop
 itch.io hwcdn.net * noop
@@ -53,9 +62,12 @@ reddit.com reddit.com * noop
 reddit.com redditmedia.com * noop
 reddit.com redditstatic.com * noop
 slack.com slack-edge.com * noop
+steam.tv akamaihd.net * noop
 steamcommunity.com akamaihd.net * noop
 steampowered.com akamaihd.net * noop
 twitch.tv twitchcdn.net * noop
 twitter.com twimg.com * noop
 twitter.com twitter.com * noop
 vanguard.com vgcontent.info * noop
+www.reddit.com gfycat.com * noop
+www.reddit.com twitch.tv * noop
