@@ -4,7 +4,7 @@
 [color]
   ui = auto
 [core]
-  editor = vi
+  editor = vim
   preloadIndex = true
 [sendemail]
   smtpuser = pobega@gmail.com

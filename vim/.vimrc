@@ -43,7 +43,7 @@ set laststatus=2
 
 " Git commit message specific configuration
 autocmd FileType gitcommit setlocal spell
-autocmd FileType gitcommit setlocal textwidth=80
+autocmd FileType gitcommit setlocal textwidth=72
 
 " Allow local .vimrc files
 set exrc
