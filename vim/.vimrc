@@ -26,6 +26,12 @@ map Y :w !xclip -selection clipboard<CR><CR>
 " P to paste from clipboard
 map P :r!xclip -o -selection clipboard<CR>
 
+" tab hotkeys
+" open new tab
+map gc :tabe 
+" close current tab
+map gC :tabclose<CR>
+
 " match extra whitespace as an error
 match ErrorMsg '\s\+$'
 
