@@ -42,3 +42,14 @@ let g:clang_use_library=1
 let g:clang_complete_auto = 0
 " Show clang errors in the quickfix window
 let g:clang_complete_copen = 1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" rust.vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" 4 space indents and textwidth 99
+let g:rust_recommended_style = 1
+""" code folding
+let g:rust_fold = 1
+""" Open :Crun terminal in a new tab rather than a window
+let g:cargo_shell_command_runner = 'tab :terminal'
