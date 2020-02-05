@@ -30,3 +30,6 @@
 [submodule "vim/.vim/pack/plugins/start/vim-fish"]
 	path = vim/.vim/pack/plugins/start/vim-fish
 	url = https://github.com/dag/vim-fish
+[submodule "vim/.vim/pack/plugins/start/rust.vim"]
+	path = vim/.vim/pack/plugins/start/rust.vim
+	url = https://github.com/rust-lang/rust.vim
