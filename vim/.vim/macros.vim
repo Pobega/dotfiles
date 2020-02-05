@@ -1,10 +1,7 @@
 " Usability macros
 
-" :Make will call `make`
-command -nargs=* Make make! <args> | redraw!
-
-" Ctrl-j to run Make
-map <C-j> :Make<CR>
+" Ctrl-j to run make
+map <C-j> :make<CR>
 
 " :Grep will run :grep and open results in small cwindow
 command! -nargs=+ Grep execute 'silent grep! <args>' | cwindow 3 | redraw!
