@@ -1,7 +1,7 @@
 " Usability macros
 
-" :Make will call make and put errors in a small cwindow
-command -nargs=* Make make! <args> | cwindow 3 | redraw!
+" :Make will call `make`
+command -nargs=* Make make! <args> | redraw!
 
 " Ctrl-j to run Make
 map <C-j> :Make<CR>
