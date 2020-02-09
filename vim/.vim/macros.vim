@@ -8,3 +8,6 @@ command! -nargs=+ Grep execute 'silent grep! <args>' | cwindow 3 | redraw!
 " :todo - Use Grep to find all text files containing a TODO
 " (cnoreabbrev allows lowercase named for user-defined commands)
 cnoreabbrev todo execute 'Grep -Ri todo `find . -maxdepth 4 -type f \( ! -iname ".*swp" \)`'
+
+au BufNewFile,BufRead *.rs map <C-k> :Crun<CR>
+au BufNewFile,BufRead *.rs map <C-l> :Ctest<CR>
