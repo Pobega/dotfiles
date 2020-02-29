@@ -19,14 +19,6 @@ function print_256_colors {
    done
 }
 
-export XDG_CONFIG_HOME="$HOME/.config"
-
-export BROWSER=firefox
-export EDITOR=vim
-
-export PATH=~/bin:$HOME/.local/bin:$PATH
-export PATH=$PATH:$HOME/Work/depot_tools
-
 # get and print current branch in git repo
 function print_git_branch() {
   BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
