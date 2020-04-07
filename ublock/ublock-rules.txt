@@ -2,6 +2,8 @@ no-large-media: behind-the-scene false
 no-scripting: behind-the-scene false
 * * 3p-frame block
 * * 3p-script block
+* akamai.net * noop
+* akamaihd.net * noop
 * ampproject.org * noop
 * bootstrapcdn.com * noop
 * cloudflare.com * noop
