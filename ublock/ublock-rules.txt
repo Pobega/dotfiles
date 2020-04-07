@@ -38,6 +38,8 @@ behind-the-scene * inline-script noop
 chase.com chasecdn.com * noop
 discordapp.com discord.gg * noop
 discordapp.com discordapp.com * noop
+discordapp.com twitch.map.fastly.net * noop
+discordapp.com twitch.tv * noop
 facebook.com fbcdn.net * noop
 github.com githubassets.com * noop
 github.com render.githubusercontent.com * noop
