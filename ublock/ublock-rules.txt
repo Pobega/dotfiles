@@ -71,3 +71,4 @@ twitter.com twitter.com * noop
 vanguard.com vgcontent.info * noop
 www.reddit.com gfycat.com * noop
 www.reddit.com twitch.tv * noop
+www.youtube.com google.com * noop
