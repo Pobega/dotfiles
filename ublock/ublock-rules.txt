@@ -11,7 +11,9 @@ no-scripting: behind-the-scene false
 * discourse-cdn.com * noop
 * disqus.com * noop
 * disquscdn.com * noop
+* edgecastcdn.net * noop
 * googlevideo.com * noop
+* gravatar.com * noop
 * gstatic.com * noop
 * https://www.google.com/recaptcha/ * noop
 * https://www.gstatic.com/recaptcha/ * noop
@@ -19,6 +21,7 @@ no-scripting: behind-the-scene false
 * jquery.com * noop
 * maps.googleapis.com * noop
 * squarespace.com * noop
+* twitter.com * noop
 * withgoogle.com * noop
 * youtube.com * noop
 * ytimg.com * noop
@@ -78,5 +81,6 @@ www.reddit.com google.com * noop
 www.reddit.com reddit.map.fastly.net * noop
 www.reddit.com redditmedia.com * noop
 www.reddit.com redditstatic.com * noop
+www.reddit.com twimg.com * noop
 www.reddit.com twitch.tv * noop
 www.youtube.com google.com * noop
