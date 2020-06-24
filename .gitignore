@@ -2,4 +2,6 @@ fish/.config/fish/*
 !fish/.config/fish/conf.d
 !fish/.config/fish/functions
 
+vim/.vim/view
+
 *.netrwhist
