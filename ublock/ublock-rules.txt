@@ -2,6 +2,8 @@ no-large-media: behind-the-scene false
 no-scripting: behind-the-scene false
 * * 3p-frame block
 * * 3p-script block
+* akamai.net * noop
+* akamaihd.net * noop
 * ampproject.org * noop
 * bootstrapcdn.com * noop
 * cloudflare.com * noop
@@ -9,7 +11,9 @@ no-scripting: behind-the-scene false
 * discourse-cdn.com * noop
 * disqus.com * noop
 * disquscdn.com * noop
+* edgecastcdn.net * noop
 * googlevideo.com * noop
+* gravatar.com * noop
 * gstatic.com * noop
 * https://www.google.com/recaptcha/ * noop
 * https://www.gstatic.com/recaptcha/ * noop
@@ -17,6 +21,7 @@ no-scripting: behind-the-scene false
 * jquery.com * noop
 * maps.googleapis.com * noop
 * squarespace.com * noop
+* twitter.com * noop
 * withgoogle.com * noop
 * youtube.com * noop
 * ytimg.com * noop
@@ -38,6 +43,8 @@ behind-the-scene * inline-script noop
 chase.com chasecdn.com * noop
 discordapp.com discord.gg * noop
 discordapp.com discordapp.com * noop
+discordapp.com twitch.map.fastly.net * noop
+discordapp.com twitch.tv * noop
 facebook.com fbcdn.net * noop
 github.com githubassets.com * noop
 github.com render.githubusercontent.com * noop
@@ -70,4 +77,10 @@ twitter.com twimg.com * noop
 twitter.com twitter.com * noop
 vanguard.com vgcontent.info * noop
 www.reddit.com gfycat.com * noop
+www.reddit.com google.com * noop
+www.reddit.com reddit.map.fastly.net * noop
+www.reddit.com redditmedia.com * noop
+www.reddit.com redditstatic.com * noop
+www.reddit.com twimg.com * noop
 www.reddit.com twitch.tv * noop
+www.youtube.com google.com * noop

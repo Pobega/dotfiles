@@ -115,12 +115,18 @@ PROMPT_COMMAND=timer_stop
 ## Different color for different users
 # Home should be blue, work should be purple, other should be orange
 # root should always be red
+USERNAME=$USER
 MAIN_COLOR=202
 if [ "${HOSTNAME}" == "hotbox" ]; then
   MAIN_COLOR=92
 else
   if [ "${HOSTNAME}" == "icebox" ]; then
     MAIN_COLOR=26
+  else
+    if [ "${HOSTNAME}" == "toolbox" ]; then
+      USERNAME=toolbox
+      MAIN_COLOR=136
+    fi
   fi
 fi
 if [ "${USER}" == "root" ]; then
@@ -129,7 +135,7 @@ fi
 
 ## TODO: make a proper/pretty non-256 color version of prompt
 if [[ "$TERM" =~ 256color ]]; then
-  PS1='\[\e[38;5;254;48;5;${MAIN_COLOR}m\] \u \[\e[38;5;${MAIN_COLOR};48;5;236m\]\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]\[\e[38;5;254m\] ${timer_show} \[\e[38;5;238m\]$(print_git_branch)\[\e[0m\] '
+  PS1='\[\e[38;5;254;48;5;${MAIN_COLOR}m\] $USERNAME \[\e[38;5;${MAIN_COLOR};48;5;236m\]\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]\[\e[38;5;254m\] ${timer_show} \[\e[38;5;238m\]$(print_git_branch)\[\e[0m\] '
 else
   PS1='[\u@\h $(get_cwd)][${timer_show}]\\$ ' # Default Fedora PS1
 fi
