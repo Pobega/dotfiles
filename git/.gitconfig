@@ -14,3 +14,5 @@
   path = ~/Work/.gitconfig
 [alias]
   resetr = !git reset @{upstream}
+[http]
+  cookiefile = /home/pbone/.gitcookies
