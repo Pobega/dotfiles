@@ -1,5 +1,12 @@
 # .bash_profile
 
+# Do this first since `command` won't work after 'vim' alias is setup
+export EDITOR=vim
+export GIT_EDITOR=vim
+# If 'vim' doesn't exist, use vi
+command -v vim >/dev/null 2>&1 || { export EDITOR=vi; }
+command -v vim >/dev/null 2>&1 || { export GIT_EDITOR=vi; }
+
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
@@ -14,7 +21,6 @@ fi
 export XDG_CONFIG_HOME="$HOME/.config"
 
 export BROWSER=firefox
-export EDITOR=vim
 
 export PATH=~/bin:$HOME/.local/bin:$PATH
 
