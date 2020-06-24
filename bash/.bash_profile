@@ -7,11 +7,6 @@ export GIT_EDITOR=vim
 command -v vim >/dev/null 2>&1 || { export EDITOR=vi; }
 command -v vim >/dev/null 2>&1 || { export GIT_EDITOR=vi; }
 
-# Get the aliases and functions
-if [ -f ~/.bashrc ]; then
-	. ~/.bashrc
-fi
-
 if [ -f ~/.bash_shell ]; then
 	. ~/.bash_shell
 fi
