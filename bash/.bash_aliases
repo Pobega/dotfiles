@@ -25,5 +25,8 @@ alias runvm='qemu-kvm \
 
 alias protontricks-flat='flatpak run --command=protontricks com.valvesoftware.Steam --no-runtime'
 
+# Show cpu0 temp in Celsius
+alias cpu0_temp='echo -n $(echo "scale=1;$(cat /sys/class/thermal/thermal_zone0/temp)/1000" | bc) && echo "°c"'
+
 # If 'vim' doesn't exist, create an alias to vi
 command -v vim >/dev/null 2>&1 || { alias vim='vi'; }
