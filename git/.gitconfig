@@ -11,7 +11,7 @@
   smtpencryption = tls
   smtpserverport = 587
 [includeIf "gitdir:~/Work/"]
-  path = ~/Work/.gitconfig
+  path = .gitconfig-work
 [alias]
   resetr = !git reset @{upstream}
 [http]
