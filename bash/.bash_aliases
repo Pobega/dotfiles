@@ -30,3 +30,11 @@ alias cpu0_temp='echo -n $(echo "scale=1;$(cat /sys/class/thermal/thermal_zone0/
 
 # If 'vim' doesn't exist, create an alias to vi
 command -v vim >/dev/null 2>&1 || { alias vim='vi'; }
+
+# All in one networking toolkit
+# https://hub.docker.com/r/nicolaka/netshoot
+# Try --network=host or --privileged
+function netshoot()
+{
+  podman run --rm $@ -it nicolaka/netshoot
+}
