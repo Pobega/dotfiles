@@ -1,0 +1,45 @@
+hosts: localhost
+  become: true
+  tasks:
+  - name: Add the flathub flatpak repository
+    flatpak_remote:
+      name: flathub
+      state: present
+      flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+
+  - name: Install system flatpaks
+    flatpak:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - com.discordapp.Discord
+      - com.obsproject.Studio
+      - com.spotify.Client
+      - com.valvesoftware.Steam
+      - de.haeckerfelix.Fragments
+      - org.gimp.GIMP
+      - org.libreoffice.LibreOffice
+      - org.mozilla.firefox
+      - org.remmina.Remmina
+      - org.videolan.VLC
+
+  - name: Copy controller configuration udev rules
+    copy:
+      src: "{{ item }}"
+      dest: /etc/udev/rules.d/
+      owner: root
+      group: root
+      mode: 0644
+    with_fileglob:
+      - silverblue_host/udev/99-*.rules
+
+  - name: Load uinput at boot
+    copy:
+      src: silverblue_host/udev/uinput.conf
+      dest: /etc/modules-load.d/
+      owner: root
+      group: root
+      mode: 0644
+
+  - debug:
+    msg: Don't forget to stow your dotfiles :)
