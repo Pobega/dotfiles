@@ -76,7 +76,9 @@ function get_cwd {
     if [ "${PWD}" == "/" ]; then
       CWD="/"
     else
-      directory="${PWD%/*}"
+      # replace full homedir with ~
+      home_shortened="${PWD/$HOME/\~}"
+      directory="${home_shortened%/*}"
       CWD="${directory##*/}/${PWD##*/}/"
     fi
   fi
@@ -108,10 +110,8 @@ prompt() {
   get_git_branch
 
   PS1="\\[\033[38;5;${MAIN_COLOR}m\\]${HOSTNAME}\\[\033[0m\\]:\\[\033[38;5;28m\\]${CWD}\\[\033[0m\\] "
+
   # right "prompt"
-  # We cannot use $COLUMNS here, since in new shells the first prompt
-  # will get garbled then. Seems like the correct value of COLUMNS is
-  # in the shell init.
   printf "\e[38;5;${GIT_COLOR}m%`tput cols`s`tput cr`\e[0m" "${GIT_STATUS}"
 
   # fix cursor color (otherwise it's the same color as GIT_STATUS)
