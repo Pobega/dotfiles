@@ -5,6 +5,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+TEXT_COLOR='#af5f00'
+CURSOR_COLOR='white'
+
 function print_256_colors {
   for i in {0..255} ; do
     printf "\x1b[38;5;${i}m%3d " "${i}"
@@ -105,24 +108,30 @@ if [ "${USER}" == "root" ]; then
   MAIN_COLOR=88
 fi
 
+function check_for_venv {
+  VENV_PROMPT=""
+  # Check if in venv
+  if [[ "$VIRTUAL_ENV" != "" ]]; then
+    VENV_PROMPT="(venv) "
+  fi
+}
+
 ## https://stackoverflow.com/questions/7697889/how-to-show-git-status-info-on-the-right-side-of-the-terminal/8399653#8399653
 prompt() {
   get_cwd
   get_git_branch
+  check_for_venv
 
-  VENV=""
-  # Check if in venv
-  if [[ "$VIRTUAL_ENV" != "" ]]; then
-    VENV="(venv) "
-  fi
-
-  PS1="${VENV}\\[\033[38;5;${MAIN_COLOR}m\\]${USERNAME}\\[\033[0m\\]:\\[\033[38;5;28m\\]${CWD}\\[\033[0m\\] "
+  PS1="${VENV_PROMPT}\\[\033[38;5;${MAIN_COLOR}m\\]${USERNAME}\\[\033[0m\\]:\\[\033[38;5;28m\\]${CWD}\\[\033[0m\\] "
 
   # right "prompt"
   printf "\e[38;5;${GIT_COLOR}m%`tput cols`s`tput cr`\e[0m" "${GIT_STATUS}"
 
   # fix cursor color (otherwise it's the same color as GIT_STATUS)
-  printf '%b' '\e]12;white\a'
+  printf '%b' "\e]12;${CURSOR_COLOR}\a"
+
+  # change default text color
+  echo -ne "\033]10;${TEXT_COLOR}\007"
 }
 
 PROMPT_COMMAND=prompt
