@@ -15,17 +15,20 @@ function print_256_colors {
 }
 
 # get and print current branch in git repo
-function print_git_branch() {
+function get_git_branch() {
+  GIT_COLOR=231
   BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
   if [ ! "${BRANCH}" == "" ]; then
     STAT=`parse_git_dirty`
     if [ ! "${STAT}" == "" ]; then
-      echo -e "\001\e[48;5;88m\002\001\e[38;5;254m\002 ${BRANCH}${STAT} \001\e[0m\002\001\e[38;5;88m\002"
+      GIT_COLOR=1
+      GIT_STATUS="${BRANCH}${STAT}"
     else
-      echo -e "\001\e[48;5;28m\002\001\e[38;5;254m\002 ${BRANCH} \001\e[0m\002\001\e[38;5;28m\002"
+      GIT_COLOR=46
+      GIT_STATUS="${BRANCH}"
     fi
   else
-    echo -e "\001\e[0m\002\001\e[38;5;238m\002\001\e[0m\002"
+    GIT_STATUS=""
   fi
 }
 
@@ -63,49 +66,21 @@ function parse_git_dirty {
 		echo ""
 	fi
 }
-
-# Unix epoch time in nanoseconds
-function epoch_ms {
-  date +%s%3N
-}
-
-# Record our start time
-function timer_start {
-  start_time=${start_time:-$(epoch_ms)}
-}
-
-function timer_stop {
-  local ms=$(($(epoch_ms) - $start_time))
-  local s=$(((ms / 1000) % 60))
-  local m=$(((ms / 60000) % 60))
-  local h=$((ms / 3600000))
-  if ((h > 0)); then timer_show=${h}h${m}m
-  elif ((m > 0)); then timer_show=${m}m${s}s
-  elif ((s > 9)); then local us=$(((${ms} % 1000)/ 100)); timer_show=${s}.$(printf $us)s
-  elif ((s > 0)); then local us=$((${ms} % 1000)); timer_show=${s}.$(printf %03d $us)s
-  else timer_show=${ms}ms
-  fi
-  unset start_time
-}
-
 # print out a simpler cwd, only going 1 dir higher.
 # Actual dir: /home/pobega/work/project/
 # Output: work/project/
 function get_cwd {
   if [ "${PWD}" == "${HOME}" ]; then
-    echo "~"
+    CWD="~"
   else
     if [ "${PWD}" == "/" ]; then
-      echo "/"
+      CWD="/"
     else
       directory="${PWD%/*}"
-      echo "${directory##*/}/${PWD##*/}/"
+      CWD="${directory##*/}/${PWD##*/}/"
     fi
   fi
 }
-
-trap 'timer_start' DEBUG
-PROMPT_COMMAND=timer_stop
 
 ## Different color for different users
 # Home should be blue, work should be purple, other should be orange
@@ -128,9 +103,19 @@ if [ "${USER}" == "root" ]; then
   MAIN_COLOR=88
 fi
 
-## TODO: make a proper/pretty non-256 color version of prompt
-if [[ "$TERM" =~ 256color ]]; then
-  PS1='\[\e[38;5;254;48;5;${MAIN_COLOR}m\] $USERNAME \[\e[38;5;${MAIN_COLOR};48;5;236m\]\[\e[38;5;254m\] $(get_cwd) \[\e[38;5;236;48;5;238m\]\[\e[38;5;254m\] ${timer_show} \[\e[38;5;238m\]$(print_git_branch)\[\e[0m\] '
-else
-  PS1='[\u@\h $(get_cwd)][${timer_show}]\\$ ' # Default Fedora PS1
-fi
+prompt() {
+  get_cwd
+  get_git_branch
+
+  PS1="\\[\033[38;5;${MAIN_COLOR}m\\]${HOSTNAME}\\[\033[0m\\]:\\[\033[38;5;28m\\]${CWD}\\[\033[0m\\] "
+  # right "prompt"
+  # We cannot use $COLUMNS here, since in new shells the first prompt
+  # will get garbled then. Seems like the correct value of COLUMNS is
+  # in the shell init.
+  printf "\e[38;5;${GIT_COLOR}m%`tput cols`s`tput cr`\e[0m" "${GIT_STATUS}"
+
+  # fix cursor color (otherwise it's the same color as GIT_STATUS)
+  printf '%b' '\e]12;white\a'
+}
+
+PROMPT_COMMAND=prompt
