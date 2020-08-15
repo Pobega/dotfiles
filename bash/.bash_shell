@@ -105,6 +105,7 @@ if [ "${USER}" == "root" ]; then
   MAIN_COLOR=88
 fi
 
+## https://stackoverflow.com/questions/7697889/how-to-show-git-status-info-on-the-right-side-of-the-terminal/8399653#8399653
 prompt() {
   get_cwd
   get_git_branch
