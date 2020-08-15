@@ -110,7 +110,13 @@ prompt() {
   get_cwd
   get_git_branch
 
-  PS1="\\[\033[38;5;${MAIN_COLOR}m\\]${USERNAME}\\[\033[0m\\]:\\[\033[38;5;28m\\]${CWD}\\[\033[0m\\] "
+  VENV=""
+  # Check if in venv
+  if [[ "$VIRTUAL_ENV" != "" ]]; then
+    VENV="(venv) "
+  fi
+
+  PS1="${VENV}\\[\033[38;5;${MAIN_COLOR}m\\]${USERNAME}\\[\033[0m\\]:\\[\033[38;5;28m\\]${CWD}\\[\033[0m\\] "
 
   # right "prompt"
   printf "\e[38;5;${GIT_COLOR}m%`tput cols`s`tput cr`\e[0m" "${GIT_STATUS}"
