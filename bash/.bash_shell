@@ -27,6 +27,9 @@ function get_git_branch() {
       if [ "${STAT}" == "*" ]; then
 	GIT_COLOR=98
 	GIT_STATUS="${BRANCH} ${STAT}"
+      elif [ "${STAT}" == "!" ]; then
+	GIT_COLOR=226
+	GIT_STATUS="${BRANCH} ${STAT}"
       else
 	GIT_COLOR=1
 	GIT_STATUS="${BRANCH} ${STAT}"
