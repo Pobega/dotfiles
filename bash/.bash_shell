@@ -21,10 +21,19 @@ function print_256_colors {
 function get_git_branch() {
   GIT_COLOR=231
   BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-  BRANCH=${BRANCH/HEAD detached at /HEAD@}
+
+  # Detached state
+  BRANCH=${BRANCH/HEAD detached at/@}
+
   if [ ! "${BRANCH}" == "" ]; then
     STAT=`parse_git_dirty`
     if [ ! "${STAT}" == "" ]; then
+
+      # remove 'HEAD detached from' text
+      if [[ $BRANCH = *"HEAD detached from"* ]]; then
+        BRANCH=${BRANCH/HEAD detached from/\~}
+      fi
+
       if [ "${STAT}" == "*" ]; then
 	GIT_COLOR=98
 	GIT_STATUS="${BRANCH} ${STAT}"
@@ -38,6 +47,13 @@ function get_git_branch() {
     else
       GIT_COLOR=46
       GIT_STATUS="${BRANCH}"
+
+      # 'detached from' clean state should be considered ahead
+      if [[ $BRANCH = *"HEAD detached from"* ]]; then
+        BRANCH=${BRANCH/HEAD detached from/\~}
+        GIT_COLOR=98
+        GIT_STATUS="${BRANCH} *"
+      fi
     fi
   else
     GIT_STATUS=""
