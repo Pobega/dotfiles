@@ -21,6 +21,7 @@ function print_256_colors {
 function get_git_branch() {
   GIT_COLOR=231
   BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+  BRANCH=${BRANCH/HEAD detached at /HEAD@}
   if [ ! "${BRANCH}" == "" ]; then
     STAT=`parse_git_dirty`
     if [ ! "${STAT}" == "" ]; then
