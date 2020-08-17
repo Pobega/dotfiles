@@ -5,7 +5,7 @@ Random configuration files I use. Clone this repository and symlink these into y
 Use GNU stow to symlink these files to your own home directory.
 
 ## bash
-The bash configuration is similar to ohmyzsh, except more portable. It shows the runtime of the last command and git status information.
+The bash configuration is similar to ohmyzsh, except more portable. Git status is printed to the right of the prompt and has coloring for the current HEAD state.
 
 ![bashrc screenshot](https://raw.githubusercontent.com/pobega/dotfiles/master/bash.png)
 
@@ -15,7 +15,7 @@ An alternative shell choice. Slightly cleaner UI than my bash config with simila
 ![fish screenshot](https://raw.githubusercontent.com/pobega/dotfiles/master/fish.png)
 
 ## tmux
-Lots of workflow changes here. Just read the configuration file if you want more information.
+Lots of workflow changes here. Backtick used as the meta command for ease of use. Read the configuration file if you want more information.
 
 ![tmux screenshot](https://raw.githubusercontent.com/pobega/dotfiles/master/tmux.png)
 
