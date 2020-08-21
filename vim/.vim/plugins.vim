@@ -7,6 +7,9 @@ catch
   colorscheme desert  " fallback built-in colorscheme
 endtry
 
+" Load language server configurations
+source ~/.vim/langservs.vim
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Python-Vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -72,26 +75,3 @@ let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal 
 let g:lsp_highlight_references_enabled = 1
 """ disable documentation float
 let g:lsp_documentation_float = 0
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Language servers
-" https://github.com/prabirshrestha/asyncomplete.vim#sources
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" rust
-""" rustup install rls
-if executable('rls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'rls',
-        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
-        \ 'whitelist': ['rust'],
-        \ })
-endif
-""" python
-""" pip install python-language-server[all]
-if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
