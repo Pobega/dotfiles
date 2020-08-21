@@ -8,16 +8,6 @@ catch
 endtry
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" mu-complete
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Automatically complete when typing
-let g:mucomplete#enable_auto_at_startup = 1
-" No autocomplete delay
-let g:mucomplete#completion_delay = 0
-" Paths are relative to the open buffer
-let g:mucomplete#buffer_relative_paths = 0
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Jedi-Vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Disable Docstrings by default in jedi-vim
@@ -53,3 +43,39 @@ let g:rust_recommended_style = 1
 let g:rust_fold = 1
 """ Open :Crun terminal in a new tab rather than a window
 let g:cargo_shell_command_runner = 'tab :terminal'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" asyncomplete
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Force refresh completion
+imap <c-space> <Plug>(asyncomplete_force_refresh)
+""" Auto popup
+let g:asyncomplete_auto_popup = 0
+""" Menu options
+let g:asyncomplete_auto_completeopt = 0
+set completeopt=menuone,noinsert,noselect,preview
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+""" Tab to complete
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ asyncomplete#force_refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Language servers
+" https://github.com/prabirshrestha/asyncomplete.vim#sources
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" rust
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif

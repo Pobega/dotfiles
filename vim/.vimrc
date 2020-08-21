@@ -28,7 +28,7 @@ map P :r!xclip -o -selection clipboard<CR>
 
 " tab hotkeys
 " open new tab
-map gC :tabe 
+map gC :tabe
 " close current tab
 map gc :tabclose<CR>
 
@@ -58,12 +58,6 @@ set secure
 
 " Open buffers in tab
 :set switchbuf+=usetab,newtab
-
-" enable code folding by default
-au BufNewFile,BufRead *.py,*.lua,*.rs set autoindent foldmethod=indent
-
-" Autocomplete options
-set completeopt+=menuone,noselect,noinsert
 
 " Shut off completion messages
 set shortmess+=c
