@@ -10,10 +10,6 @@
 [submodule "vim/.vim/bundle/gruvbox"]
 	path = vim/.vim/pack/plugins/start/gruvbox
 	url = https://github.com/morhetz/gruvbox
-[submodule "vim/.vim/bundle/jedi-vim"]
-	path = vim/.vim/pack/plugins/start/jedi-vim
-	url = https://github.com/davidhalter/jedi-vim.git
-	ignore = dirty
 [submodule "vim/.vim/bundle/python-syntax"]
 	path = vim/.vim/pack/plugins/start/python-syntax
 	url = https://github.com/vim-python/python-syntax.git

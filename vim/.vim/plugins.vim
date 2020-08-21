@@ -8,16 +8,6 @@ catch
 endtry
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Jedi-Vim
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Disable Docstrings by default in jedi-vim
-autocmd FileType python setlocal completeopt-=preview
-" Jedi write call signatures to status line
-let g:jedi#show_call_signatures = 2
-" Popup autocomplete when typing a dot character
-let g:jedi#popup_on_dot = 1
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Python-Vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable extended highlighting
@@ -69,6 +59,8 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-lsp
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Omnifunc
+set omnifunc=lsp#complete
 """ folding
 set foldmethod=expr
   \ foldexpr=lsp#ui#vim#folding#foldexpr()
@@ -86,10 +78,20 @@ let g:lsp_documentation_float = 0
 " https://github.com/prabirshrestha/asyncomplete.vim#sources
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ rust
+""" rustup install rls
 if executable('rls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'rls',
         \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
         \ 'whitelist': ['rust'],
+        \ })
+endif
+""" python
+""" pip install python-language-server[all]
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
         \ })
 endif
