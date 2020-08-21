@@ -2,6 +2,8 @@
 
 " Ctrl-j to run make
 map <C-j> :make<CR>
+" K for showing documentation for code under cursor
+setlocal keywordprg=:LspHover
 
 " :Grep will run :grep and open results in small cwindow
 command! -nargs=+ Grep execute 'silent grep! <args>' | cwindow 3 | redraw!

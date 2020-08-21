@@ -33,7 +33,6 @@ let g:clang_complete_auto = 0
 " Show clang errors in the quickfix window
 let g:clang_complete_copen = 1
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " rust.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -66,6 +65,19 @@ inoremap <silent><expr> <TAB>
   \ <SID>check_back_space() ? "\<TAB>" :
   \ asyncomplete#force_refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-lsp
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" folding
+set foldmethod=expr
+  \ foldexpr=lsp#ui#vim#folding#foldexpr()
+  \ foldtext=lsp#ui#vim#folding#foldtext()
+""" signs
+let g:lsp_signs_enabled = 1         " enable signs
+let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+""" highlight references
+let g:lsp_highlight_references_enabled = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Language servers
