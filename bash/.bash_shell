@@ -157,6 +157,9 @@ prompt() {
 
   # change default text color
   echo -ne "\033]10;${TEXT_COLOR}\007"
+
+  # update bash title
+  echo -en "\033]0; ${USERNAME}@${HOSTNAME} \a"
 }
 
 PROMPT_COMMAND=prompt
