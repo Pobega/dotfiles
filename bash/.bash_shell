@@ -137,7 +137,7 @@ function check_for_venv {
   VENV_PROMPT=""
   # Check if in venv
   if [[ "$VIRTUAL_ENV" != "" ]]; then
-    VENV_PROMPT="(venv) "
+    VENV_PROMPT="(${VIRTUAL_ENV##*/}) "
   fi
 }
 
