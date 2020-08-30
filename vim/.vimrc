@@ -13,8 +13,8 @@ source ~/.vim/macros.vim
 " black highlighting
 set cursorcolumn
 set cursorline
-hi CursorColumn cterm=NONE ctermbg=8 ctermfg=NONE
-hi CursorLine cterm=NONE ctermbg=8 ctermfg=NONE
+hi CursorColumn cterm=NONE ctermbg=236 ctermfg=NONE
+hi CursorLine cterm=NONE ctermbg=236 ctermfg=NONE
 
 " code folding hotkeys
 nnoremap <space> za
