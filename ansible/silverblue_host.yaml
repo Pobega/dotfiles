@@ -12,12 +12,25 @@ hosts: localhost
       name: "{{ item }}"
       state: present
     with_items:
+      - com.bitwarden.desktop
       - com.discordapp.Discord
       - com.obsproject.Studio
       - com.spotify.Client
+      - com.uploadedlobster.peek
       - com.valvesoftware.Steam
       - de.haeckerfelix.Fragments
+      - im.riot.Riot
+      - net.lutris.Lutris
+      - org.blender.Blender
+      - org.gnome.Baobab
+      - org.gnome.Boxes
+      - org.gnome.eog
+      - org.gnome.Evince
+      - org.gnome.Glade
+      - org.gnome.gedit
       - org.gimp.GIMP
+      - org.inkscape.Inkscape
+      - org.kde.kdenlive
       - org.libreoffice.LibreOffice
       - org.mozilla.firefox
       - org.remmina.Remmina
