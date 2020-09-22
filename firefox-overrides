@@ -1,0 +1,10 @@
+[Context]
+sockets=wayland;
+filesystems=xdg-documents:ro;xdg-pictures:ro;xdg-videos:ro;
+
+[Session Bus Policy]
+org.mpris.MediaPlayer2.org.mozilla.firefox=none
+org.mpris.MediaPlayer2.firefox.*=own
+
+[Environment]
+GDK_BACKEND=wayland
