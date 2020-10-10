@@ -3,6 +3,9 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
+# Add Flatpak bin exports to PATH
+PATH="$HOME/.local/share/flatpak/exports/bin/:$PATH"
+PATH="/var/lib/flatpak/exports/bin/:$PATH"
 export PATH
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
