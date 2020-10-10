@@ -28,8 +28,8 @@ alias protontricks-flat='flatpak run --command=protontricks com.valvesoftware.St
 # Show cpu0 temp in Celsius
 alias cpu0_temp='echo -n $(echo "scale=1;$(cat /sys/class/thermal/thermal_zone0/temp)/1000" | bc) && echo "°c"'
 
-# If 'vim' doesn't exist, create an alias to vi
-command -v vim >/dev/null 2>&1 || { alias vim='vi'; }
+# If 'vim' doesn't exist, create an alias to toolbox
+command -v vim >/dev/null 2>&1 || { alias vim='toolbox run vim'; }
 
 # All in one networking toolkit
 # https://hub.docker.com/r/nicolaka/netshoot
