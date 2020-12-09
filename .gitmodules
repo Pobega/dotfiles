@@ -13,25 +13,9 @@
 [submodule "vim/.vim/bundle/python-syntax"]
 	path = vim/.vim/pack/plugins/start/python-syntax
 	url = https://github.com/vim-python/python-syntax.git
-[submodule "vim/.vim/bundle/clang_complete"]
-	path = vim/.vim/pack/plugins/start/clang_complete
-	url = https://github.com/Rip-Rip/clang_complete.git
-	ignore = dirty
 [submodule "vim/.vim/bundle/vim-syntax-extra"]
 	path = vim/.vim/pack/plugins/start/vim-syntax-extra
 	url = https://github.com/justinmk/vim-syntax-extra.git
 [submodule "vim/.vim/pack/plugins/start/rust.vim"]
 	path = vim/.vim/pack/plugins/start/rust.vim
 	url = https://github.com/rust-lang/rust.vim
-[submodule "vim/.vim/pack/plugins/start/async.vim"]
-	path = vim/.vim/pack/plugins/start/async.vim
-	url = https://github.com/prabirshrestha/async.vim
-[submodule "vim/.vim/pack/plugins/start/vim-lsp"]
-	path = vim/.vim/pack/plugins/start/vim-lsp
-	url = https://github.com/prabirshrestha/vim-lsp
-[submodule "vim/.vim/pack/plugins/start/asyncomplete.vim"]
-	path = vim/.vim/pack/plugins/start/asyncomplete.vim
-	url = https://github.com/prabirshrestha/asyncomplete.vim
-[submodule "vim/.vim/pack/plugins/start/asyncomplete-lsp.vim"]
-	path = vim/.vim/pack/plugins/start/asyncomplete-lsp.vim
-	url = https://github.com/prabirshrestha/asyncomplete-lsp.vim
