@@ -25,6 +25,6 @@ export BROWSER=firefox
 #export PATH=$HOME/Work/depot_tools:$PATH
 
 # rustup
-source $HOME/.cargo/env
+[[ -f $HOME/.cargo/env ]] && source $HOME/.cargo/env
 
 #export PATH
