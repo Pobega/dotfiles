@@ -19,3 +19,6 @@
 [submodule "vim/.vim/pack/plugins/start/rust.vim"]
 	path = vim/.vim/pack/plugins/start/rust.vim
 	url = https://github.com/rust-lang/rust.vim
+[submodule "vim/.vim/pack/plugins/start/supertab"]
+	path = vim/.vim/pack/plugins/start/supertab
+	url = https://github.com/ervandew/supertab.git
