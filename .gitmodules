@@ -22,3 +22,6 @@
 [submodule "vim/.vim/pack/plugins/start/supertab"]
 	path = vim/.vim/pack/plugins/start/supertab
 	url = https://github.com/ervandew/supertab.git
+[submodule "vim/.vim/pack/plugins/start/starlark.vim"]
+	path = vim/.vim/pack/plugins/start/starlark.vim
+	url = https://github.com/cappyzawa/starlark.vim
