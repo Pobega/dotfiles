@@ -115,6 +115,47 @@ function get_cwd {
   fi
 }
 
+## Command timer
+# record and display the elapsed time of the previous command between
+# each shell prompt
+TIMER_COLOR=26
+
+# Unix epoch time in nanoseconds
+function epoch_ms {
+  date +%s%3N
+}
+
+# DEBUG trap function
+# Record our start time for calculation later
+function timer_start {
+  start_time=${start_time:-$(epoch_ms)}
+}
+
+# PROMPT_COMMAND callback function
+# Calculate the time between timer_start and timer_start and set
+# $CMD_TIMER to a human readable version of the time elapsed.
+function timer_stop {
+  # Exit early on first run (to avoid erroneous 1ms timer on shell spawn.)
+  if [ -z "${first_run}" ]; then
+    first_run='complete'
+    return 0
+  fi
+  local ms=$(($(epoch_ms) - $start_time))
+  local s=$(((ms / 1000) % 60))
+  local m=$(((ms / 60000) % 60))
+  local h=$((ms / 3600000))
+  if ((h > 0)); then CMD_TIMER=${h}h${m}m
+  elif ((m > 0)); then CMD_TIMER=${m}m${s}s
+  elif ((s > 9)); then local us=$(((${ms} % 1000)/ 100)); CMD_TIMER=${s}.$(printf $us)s
+  elif ((s > 0)); then local us=$((${ms} % 1000)); CMD_TIMER=${s}.$(printf %03d $us)s
+  else CMD_TIMER=${ms}ms
+  fi
+  unset start_time
+}
+
+# Set our DEBUG trap function
+trap 'timer_start' DEBUG
+
 ## Different color for different users
 # Home should be blue, work should be purple, other should be orange
 # root should always be red
@@ -146,10 +187,17 @@ function check_for_venv {
 
 ## https://stackoverflow.com/questions/7697889/how-to-show-git-status-info-on-the-right-side-of-the-terminal/8399653#8399653
 prompt() {
+  timer_stop
   get_cwd
   get_git_branch
   check_for_venv
 
+  # Command timer prompt
+  if [[ "$CMD_TIMER" != "" ]]; then
+    printf "\e[38;5;${TIMER_COLOR}m%`tput cols`s`tput cr`\e[0m\n" "[ ${CMD_TIMER} ]"
+  fi
+
+  # Set the actual prompt
   PS1="${VENV_PROMPT}\\[\033[38;5;${MAIN_COLOR}m\\]${USERNAME}\\[\033[0m\\]:\\[\033[38;5;28m\\]${CWD}\\[\033[0m\\] "
 
   # right "prompt"
