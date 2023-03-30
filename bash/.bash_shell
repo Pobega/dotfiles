@@ -35,6 +35,9 @@ function get_git_branch() {
       fi
 
       if [ "${STAT}" == "*" ]; then
+	GIT_COLOR=39
+	GIT_STATUS="${BRANCH} ${STAT}"
+      elif [ "${STAT}" == "+" ]; then
 	GIT_COLOR=98
 	GIT_STATUS="${BRANCH} ${STAT}"
       elif [ "${STAT}" == "!" ]; then
@@ -51,8 +54,8 @@ function get_git_branch() {
       # 'detached from' clean state should be considered ahead
       if [[ $BRANCH = *"HEAD detached from"* ]]; then
         BRANCH=${BRANCH/HEAD detached from/\~}
-        GIT_COLOR=98
-        GIT_STATUS="${BRANCH} *"
+        GIT_COLOR=46
+        GIT_STATUS="${BRANCH} *  "
       fi
     fi
   else
