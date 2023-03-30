@@ -136,8 +136,9 @@ function timer_start {
 # $CMD_TIMER to a human readable version of the time elapsed.
 function timer_stop {
   # Exit early on first run (to avoid erroneous 1ms timer on shell spawn.)
-  if [ -z "${first_run}" ]; then
-    first_run='complete'
+  if [ -z "${first_run_timer}" ]; then
+    first_run_timer='complete'
+    unset start_time
     return 0
   fi
   local ms=$(($(epoch_ms) - $start_time))
