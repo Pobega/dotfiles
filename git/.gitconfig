@@ -5,6 +5,7 @@
   ui = auto
 [core]
   preloadIndex = true
+  editor = vi
 [sendemail]
   smtpuser = pobega@gmail.com
   smtpserver = smtp.googlemail.com
@@ -15,4 +16,4 @@
 [alias]
   resetr = !git reset @{upstream}
 [http]
-  cookiefile = /home/pbone/.gitcookies
+  cookiefile = /home/pobega/.gitcookies
