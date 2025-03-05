@@ -25,3 +25,6 @@
 [submodule "vim/.vim/pack/plugins/start/starlark.vim"]
 	path = vim/.vim/pack/plugins/start/starlark.vim
 	url = https://github.com/cappyzawa/starlark.vim
+[submodule "vim/.vim/pack/plugins/start/aosp-vim"]
+	path = vim/.vim/pack/plugins/start/aosp-vim
+	url = https://github.com/rubberduck203/aosp-vim.git
