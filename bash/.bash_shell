@@ -154,6 +154,15 @@ function timer_stop {
   unset start_time
 }
 
+# Find the currently set $BOARD.
+# Useful for ChromeOS and Android development.
+function get_board {
+  SHOWBOARD=""
+  if test -n "$BOARD"; then
+    SHOWBOARD=" (${BOARD})"
+  fi
+}
+
 # Set our DEBUG trap function
 trap 'timer_start' DEBUG
 
@@ -192,6 +201,7 @@ prompt() {
   get_cwd
   get_git_branch
   check_for_venv
+  get_board
 
   # Command timer prompt
   if [[ "$CMD_TIMER" != "" ]]; then
@@ -199,7 +209,7 @@ prompt() {
   fi
 
   # Set the actual prompt
-  PS1="${VENV_PROMPT}\\[\033[38;5;${MAIN_COLOR}m\\]${USERNAME}\\[\033[0m\\]:\\[\033[38;5;28m\\]${CWD}\\[\033[0m\\] "
+  PS1="${VENV_PROMPT}\\[\033[38;5;${MAIN_COLOR}m\\]${USERNAME}${SHOWBOARD}\\[\033[0m\\]:\\[\033[38;5;28m\\]${CWD}\\[\033[0m\\] "
 
   # right "prompt"
   printf "\e[38;5;${GIT_COLOR}m%`tput cols`s`tput cr`\e[0m" "${GIT_STATUS}"
