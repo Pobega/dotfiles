@@ -28,3 +28,6 @@
 [submodule "vim/.vim/pack/plugins/start/aosp-vim"]
 	path = vim/.vim/pack/plugins/start/aosp-vim
 	url = https://github.com/rubberduck203/aosp-vim.git
+[submodule "tmux/.tmux/tmux-resurrect"]
+	path = tmux/.tmux/tmux-resurrect
+	url = https://github.com/tmux-plugins/tmux-resurrect.git
