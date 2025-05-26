@@ -17,3 +17,8 @@
   resetr = !git reset @{upstream}
 [http]
   cookiefile = /home/pobega/.gitcookies
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
