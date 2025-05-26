@@ -177,8 +177,8 @@ else
   if [ "${HOSTNAME}" == "icebox" ]; then
     MAIN_COLOR=26
   else
-    if [ "${HOSTNAME}" == "toolbox" ]; then
-      USERNAME=toolbox
+    if [ "${container}" == "oci" ]; then
+      USERNAME=toolbx
       MAIN_COLOR=136
     fi
   fi
