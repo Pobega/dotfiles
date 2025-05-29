@@ -5,6 +5,7 @@ hosts: localhost
     flatpak_remote:
       name: flathub
       state: present
+      method: user
       flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
 
   - name: Install system flatpaks
@@ -12,29 +13,28 @@ hosts: localhost
       name: "{{ item }}"
       state: present
     with_items:
+      - app.drey.Warp
       - com.bitwarden.desktop
+      - com.calibre_ebook.calibre
       - com.discordapp.Discord
-      - com.obsproject.Studio
+      - com.fightcade.Fightcade
+      - com.github.marhkb.Pods
+      - com.google.Chrome
+      - com.mattjakeman.ExtensionManager
       - com.spotify.Client
-      - com.uploadedlobster.peek
       - com.valvesoftware.Steam
-      - de.haeckerfelix.Fragments
-      - im.riot.Riot
       - net.lutris.Lutris
-      - org.blender.Blender
-      - org.gnome.Baobab
       - org.gnome.Boxes
       - org.gnome.eog
-      - org.gnome.Evince
-      - org.gnome.Glade
-      - org.gnome.gedit
+      - org.gnome.gitlab.somas.Apostrophe
       - org.gimp.GIMP
-      - org.inkscape.Inkscape
-      - org.kde.kdenlive
-      - org.libreoffice.LibreOffice
+      - org.kde.filelight
       - org.mozilla.firefox
+      - org.qbittorrent.qBittorrent
       - org.remmina.Remmina
+      - org.torproject.torbrowser-launcher
       - org.videolan.VLC
+      - us.zoom.Zoom
 
   - name: Copy controller configuration udev rules
     copy:
