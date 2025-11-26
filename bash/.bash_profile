@@ -19,13 +19,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 export BROWSER=firefox
 
-# local bins
-#export PATH=~/bin:$HOME/.local/bin:$PATH
-
-# chromiumos depot_tools
-#export PATH=$HOME/Work/depot_tools:$PATH
-
 # rustup
 [[ -f $HOME/.cargo/env ]] && source $HOME/.cargo/env
 
-#export PATH
+# For using Podman as Docker inside Toolbx
+export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"

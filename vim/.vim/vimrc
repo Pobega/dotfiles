@@ -63,3 +63,9 @@ set secure
 set shortmess+=c
 " If Vim beeps during completion
 set belloff+=ctrlg
+
+" Always highlight makefile.* as a makefile
+augroup filetype_custom
+  autocmd!
+  autocmd BufNewFile,BufRead makefile* set filetype=make
+augroup END
