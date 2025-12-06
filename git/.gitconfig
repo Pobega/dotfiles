@@ -6,6 +6,7 @@
 [core]
   preloadIndex = true
   editor = vi
+	excludesFile = ~/.gitignore
 [sendemail]
   smtpuser = pobega@gmail.com
   smtpserver = smtp.googlemail.com

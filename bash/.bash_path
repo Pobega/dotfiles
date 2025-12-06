@@ -19,3 +19,6 @@ export NVM_DIR="$HOME/.config/nvm"
 if [ -d "$HOME/platform-tools" ]; then
     export PATH="$HOME/platform-tools:$PATH"
 fi
+
+# Locally installed global NPM packages
+export PATH=$PATH:$HOME/.npm-global/bin
