@@ -28,12 +28,22 @@ alias protontricks-flat='flatpak run --command=protontricks com.valvesoftware.St
 # Show cpu0 temp in Celsius
 alias cpu0_temp='echo -n $(echo "scale=1;$(cat /sys/class/thermal/thermal_zone0/temp)/1000" | bc) && echo "°c"'
 
-# If a command doesn't exist, create an alias to toolbox
-command -v git >/dev/null 2>&1 || { alias vim='toolbox run git'; }
-command -v vim >/dev/null 2>&1 || { alias vim='toolbox run vim'; }
-command -v nvim >/dev/null 2>&1 || { alias nvim='toolbox run nvim'; }
-command -v rg >/dev/null 2>&1 || { alias vim='toolbox run rg'; }
-command -v tmux >/dev/null 2>&1 || { alias tmux='toolbox run tmux'; }
+# Loops through an array of binary names and creates an alias to run with
+# toolbox if the command is missing
+toolbox_commands=(
+    "git"
+    "vim"
+    "nvim"
+    "rg"
+    "stow"
+    "tmux"
+)
+for cmd in "${toolbox_commands[@]}"; do
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+        # Create the alias dynamically
+        alias "$cmd"="toolbox run $cmd"
+    fi
+done
 
 # All in one networking toolkit
 # https://hub.docker.com/r/nicolaka/netshoot
