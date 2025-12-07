@@ -1,9 +1,9 @@
 return {
   require("codecompanion").setup({
     strategies = {
---      inline = {
---        adapter = "copilot",
---      },
+      inline = {
+        adapter = "copilot",
+      },
       inline = {
         adapter = "gemini_cli",
       },
