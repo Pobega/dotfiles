@@ -53,7 +53,7 @@ return {
     },
     strategies = {
       inline = {
-        adapter = "codestral",
+        adapter = "copilot_inline",
         keymaps = {
           accept_change = {
             modes = { n = "ga" },
@@ -73,7 +73,7 @@ return {
         },
       },
       chat = {
-        adapter = 'codestral',
+        adapter = "copilot",
         display = {
           chat = {
             intro_message = "Welcome to CodeCompanion ✨!\n Press ? for options",
@@ -96,13 +96,15 @@ return {
     },
     adapters = {
       http = {
-        opts = { show_defaults = false, },
-        codestral = function()
+        opts = {
+          show_defaults = false,
+          show_model_choices = true,
+        },
+        mistral = function()
           return require("codecompanion.adapters").extend("mistral", {
-            name = "codestral",
             schema = {
               model = {
-                default = 'codestral-latest'
+                default = "codestral-latest"
               },
             },
             env = {
@@ -110,15 +112,23 @@ return {
             },
           })
         end,
-        mistral = function()
-          return require("codecompanion.adapters").extend("mistral", {
-            env = {
-              api_key = "MISTRAL_API_KEY",
-            },
-          })
-        end,
         copilot = function()
-          return require("codecompanion.adapters").extend("copilot", {})
+        return require("codecompanion.adapters").extend("copilot", {
+          schema = {
+            model = {
+              default = "gpt-5-mini"
+            },
+          },
+        })
+        end,
+        copilot_inline = function()
+        return require("codecompanion.adapters").extend("copilot", {
+          schema = {
+            model = {
+              default = "grok-code-fast-1",
+            },
+          },
+        })
         end,
         anthropic = function()
         return require("codecompanion.adapters").extend("anthropic", {
@@ -136,7 +146,10 @@ return {
         end,
       },
       acp = {
-        opts = { show_defaults = false, },
+        opts = {
+          show_defaults = false,
+          show_model_choices = true,
+        },
         opencode = function()
           return require("codecompanion.adapters").extend("opencode", {
             env = {
