@@ -53,8 +53,7 @@ return {
     },
     strategies = {
       inline = {
-        adapter = "mistral",
-        model = 'codestral-latest',
+        adapter = "codestral",
         keymaps = {
           accept_change = {
             modes = { n = "ga" },
@@ -74,8 +73,7 @@ return {
         },
       },
       chat = {
-        adapter = 'mistral',
-        model = 'codestral-latest',
+        adapter = 'codestral',
         display = {
           chat = {
             intro_message = "Welcome to CodeCompanion ✨!\n Press ? for options",
@@ -99,6 +97,19 @@ return {
     adapters = {
       http = {
         opts = { show_defaults = false, },
+        codestral = function()
+          return require("codecompanion.adapters").extend("mistral", {
+            name = "codestral",
+            schema = {
+              model = {
+                default = 'codestral-latest'
+              },
+            },
+            env = {
+              api_key = "MISTRAL_API_KEY",
+            },
+          })
+        end,
         mistral = function()
           return require("codecompanion.adapters").extend("mistral", {
             env = {
@@ -109,6 +120,20 @@ return {
         copilot = function()
           return require("codecompanion.adapters").extend("copilot", {})
         end,
+        anthropic = function()
+        return require("codecompanion.adapters").extend("anthropic", {
+          env = {
+            api_key = "ANTHROPIC_API_KEY",
+          },
+        })
+        end,
+        gemini = function()
+        return require("codecompanion.adapters").extend("gemini", {
+          env = {
+            api_key = "GEMINI_API_KEY",
+          },
+        })
+        end,
       },
       acp = {
         opts = { show_defaults = false, },
@@ -118,7 +143,7 @@ return {
               api_key = "MISTRAL_API_KEY",
             },
           })
-        end
+        end,
       },
     },
   }),
