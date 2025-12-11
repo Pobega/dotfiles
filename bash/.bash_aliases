@@ -28,8 +28,7 @@ alias protontricks-flat='flatpak run --command=protontricks com.valvesoftware.St
 # Show cpu0 temp in Celsius
 alias cpu0_temp='echo -n $(echo "scale=1;$(cat /sys/class/thermal/thermal_zone0/temp)/1000" | bc) && echo "°c"'
 
-# Loops through an array of binary names and creates an alias to run with
-# toolbox if the command is missing
+# Run these commands in the toolbox when on the host
 toolbox_commands=(
     "git"
     "vim"
@@ -38,12 +37,20 @@ toolbox_commands=(
     "stow"
     "tmux"
 )
-for cmd in "${toolbox_commands[@]}"; do
-    if ! command -v "$cmd" >/dev/null 2>&1; then
-        # Create the alias dynamically
+# Run these commands on the host when in a toolbox
+host_commands=(
+    "rpm-ostree"
+    "podman"
+)
+if [ -v TOOLBOX_PATH ]; then
+    for cmd in "${host_commands[@]}"; do
+        alias "$cmd"="flatpak-spawn --host $cmd"
+    done
+else
+    for cmd in "${toolbox_commands[@]}"; do
         alias "$cmd"="toolbox run $cmd"
-    fi
-done
+    done
+fi
 
 # All in one networking toolkit
 # https://hub.docker.com/r/nicolaka/netshoot
@@ -52,3 +59,14 @@ function netshoot()
 {
   podman run --rm $@ -it nicolaka/netshoot
 }
+
+alias ollama_init="podman run --pull newer --detach --security-opt label=type:container_runtime_t --replace --device /dev/kfd --device /dev/dri -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama:rocm"
+alias ollama_webui="podman run --replace --pull newer -d --network=host -v open-webui:/app/backend/data -e OLLAMA_BASE_URL=http://127.0.0.1:11434 --name open-webui --restart always ghcr.io/open-webui/open-webui:main"
+alias ollama="podman exec -it ollama ollama"
+
+# Setup NPM for global package installs if it exists
+mkdir -p ~/.npm-global
+if type "npm" &> /dev/null; then
+    npm config set prefix '~/.npm-global'
+    export PATH="$HOME/.npm-global/bin:$PATH"
+fi
