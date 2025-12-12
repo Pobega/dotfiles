@@ -42,7 +42,6 @@ toolbox_commands=(
 # Run these commands on the host when in a toolbox
 host_commands=(
     "rpm-ostree"
-    "podman"
 )
 if [ -v TOOLBOX_PATH ]; then
     for cmd in "${host_commands[@]}"; do
@@ -52,6 +51,12 @@ else
     for cmd in "${toolbox_commands[@]}"; do
         alias "$cmd"="toolbox run $cmd"
     done
+fi
+
+# If we're in an environment with podman-remote and without podman,
+# alias podman to podman-remote (toolbox use case)
+if command -v podman-remote &> /dev/null && ! command -v podman &> /dev/null; then
+    alias podman='podman-remote'
 fi
 
 # All in one networking toolkit
