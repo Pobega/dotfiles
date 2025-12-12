@@ -100,15 +100,15 @@ return {
           show_defaults = false,
           show_model_choices = true,
         },
-        mistral = function()
-          return require("codecompanion.adapters").extend("mistral", {
+        ollama = function()
+          return require("codecompanion.adapters").extend("ollama", {
+            env = {
+              url = "http://thelio:11434",
+            },
             schema = {
               model = {
-                default = "codestral-latest"
+                default = "gpt-oss-coder:20b",
               },
-            },
-            env = {
-              api_key = "MISTRAL_API_KEY",
             },
           })
         end,
@@ -130,34 +130,8 @@ return {
           },
         })
         end,
-        anthropic = function()
-        return require("codecompanion.adapters").extend("anthropic", {
-          env = {
-            api_key = "ANTHROPIC_API_KEY",
-          },
-        })
-        end,
-        gemini = function()
-        return require("codecompanion.adapters").extend("gemini", {
-          env = {
-            api_key = "GEMINI_API_KEY",
-          },
-        })
-        end,
       },
-      acp = {
-        opts = {
-          show_defaults = false,
-          show_model_choices = true,
-        },
-        opencode = function()
-          return require("codecompanion.adapters").extend("opencode", {
-            env = {
-              api_key = "MISTRAL_API_KEY",
-            },
-          })
-        end,
-      },
+      acp = { opts = { show_defaults = false, }, },
     },
   }),
 }
