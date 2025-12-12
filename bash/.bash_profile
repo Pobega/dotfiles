@@ -24,3 +24,7 @@ export BROWSER=firefox
 
 # For using Podman as Docker inside Toolbx
 export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
+
+# Suppress Podman error messages
+# A migration is apparently coming with Podman 5.8, so we can safely ignore this.
+export SUPPRESS_BOLTDB_WARNING=1
