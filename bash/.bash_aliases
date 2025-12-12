@@ -36,6 +36,8 @@ toolbox_commands=(
     "rg"
     "stow"
     "tmux"
+    "copilot"
+    "opencode"
 )
 # Run these commands on the host when in a toolbox
 host_commands=(
