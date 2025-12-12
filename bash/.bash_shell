@@ -167,24 +167,27 @@ function get_board {
 trap 'timer_start' DEBUG
 
 ## Different color for different users
-# Home should be blue, work should be purple, other should be orange
 # root should always be red
 USERNAME=$USER
-MAIN_COLOR=202
-if [ "${HOSTNAME}" == "hotbox" ]; then
-  MAIN_COLOR=92
+MAIN_COLOR=202 # Orange (default)
+if [ "${container}" == "oci" ]; then
+  USERNAME=toolbx
+  MAIN_COLOR=136 # Yellow
 else
-  if [ "${HOSTNAME}" == "icebox" ]; then
-    MAIN_COLOR=26
+  if [ "${HOSTNAME}" == "thelio" ]; then
+    MAIN_COLOR=92 # Purple
   else
-    if [ "${container}" == "oci" ]; then
-      USERNAME=toolbx
-      MAIN_COLOR=136
+    if [ "${HOSTNAME}" == "framework" ]; then
+      MAIN_COLOR=26 # Blue
+    else
+      if [ "${HOSTNAME}" == "icebox" ]; then
+        MAIN_COLOR=22 # Green
+      fi
     fi
   fi
 fi
 if [ "${USER}" == "root" ]; then
-  MAIN_COLOR=88
+  MAIN_COLOR=88 # Purple
 fi
 
 function check_for_venv {
