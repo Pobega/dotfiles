@@ -1,0 +1,19 @@
+[Unit]
+Description=Ollama
+
+[Container]
+ContainerName=ollama
+Image=ollama/ollama:rocm
+Volume=ollama:/root/.ollama
+Pull=newer
+AddDevice=/dev/kfd
+AddDevice=/dev/dri
+PublishPort=11434:11434
+SecurityLabelType=container_runtime_t
+Environment=OLLAMA_CONTEXT_LENGTH=32000
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target default.target

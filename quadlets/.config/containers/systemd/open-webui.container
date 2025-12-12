@@ -1,0 +1,16 @@
+[Unit]
+Description=Open WebUI
+
+[Container]
+ContainerName=open-webui
+Image=ghcr.io/open-webui/open-webui:main
+Pull=newer
+Volume=open-webui:/app/backend/data
+Environment=OLLAMA_BASE_URL=http://127.0.0.1:11434
+Network=host
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target default.target

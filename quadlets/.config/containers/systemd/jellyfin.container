@@ -1,0 +1,32 @@
+[Unit]
+Description=Jellyfin
+Wants=network-online.target
+After=network-online.target
+
+[Container]
+Image=lscr.io/linuxserver/jellyfin:latest
+AutoUpdate=registry
+ContainerName=jellyfin
+Environment=PUID=1000
+Environment=PGID=1000
+Environment=TZ=America/New_York
+# Data directories
+Volume=/var/home/pobega/Jellyfin/Config:/config
+Volume=/var/home/pobega/Jellyfin/Movies:/movies
+Volume=/var/home/pobega/Jellyfin/Television:/tv
+# HTTP port
+PublishPort=8096:8096
+# Client discovery
+PublishPort=7359:7359/udp
+PublishPort=1900:1900/udp
+# GPU acceleration
+AddDevice=/dev/dri
+# Allow r/w access to volume mounting
+SecurityLabelType=container_runtime_t
+
+[Service]
+Restart=always
+TimeoutStartSec=900
+
+[Install]
+WantedBy=default.target
