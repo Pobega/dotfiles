@@ -10,7 +10,7 @@ AddDevice=/dev/kfd
 AddDevice=/dev/dri
 PublishPort=11434:11434
 SecurityLabelType=container_runtime_t
-Environment=OLLAMA_CONTEXT_LENGTH=32000
+Environment=OLLAMA_CONTEXT_LENGTH=16000
 
 [Service]
 Restart=always
