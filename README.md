@@ -9,10 +9,17 @@ The bash configuration is similar to ohmyzsh, except more portable. Git status i
 
 ![bashrc screenshot](https://raw.githubusercontent.com/pobega/dotfiles/master/bash.png)
 
-## fish
-An alternative shell choice. Slightly cleaner UI than my bash config with similar functionality.
+## git
+Nothing special, just sets up git-sendmail for sending patches to kernel mailing lists. Also includes a basic global gitignore file.
 
-![fish screenshot](https://raw.githubusercontent.com/pobega/dotfiles/master/fish.png)
+## mutt
+Optimized for interfacing with the kernel mailing list. Automatically decrypts an encrypted password file at runtime.
+
+## nvim
+Neovim configuration using AstroNvim with various plugins for enhanced editing experience.
+
+## quadlets
+Podman quadlets for containerless server applications. [Upstream documentation](https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html).
 
 ## tmux
 Lots of workflow changes here. Backtick used as the meta command for ease of use. Read the configuration file if you want more information.
@@ -27,15 +34,3 @@ Also utilizes git submodules and the Vim 8 plugin system to autoload helpful plu
 It's well commented, so again, read the file.
 
 ![vim4 screenshot](https://raw.githubusercontent.com/pobega/dotfiles/master/vim.png)
-
-## git
-Nothing special, just sets up git-sendmail for sending patches to kernel mailing lists.
-
-## mutt
-Optimized for interfacing with the kernel mailing list. Automatically decrypts an encrypted password file at runtime.
-
-## ublock
-Shared ublock configuration with medium mode on and a few useful things whitelisted.
-
-## steam-controller
-uinput stuff for using the Steam Controller on Linux. Includes a modprobe file for autoloading the uinput module at boot (required for systemd permissions)

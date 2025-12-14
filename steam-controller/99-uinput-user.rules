@@ -1,8 +1,0 @@
-# HID controller udev write access
-
-# Use this on systemd systems to allow locally logged in users to
-# have read/write access to uinput peripherals
-KERNEL=="uinput", SUBSYSTEM=="misc", TAG+="uaccess", OPTIONS+="static_node=uinput"
-
-# Use this instead of the above "uaccess" line on non systemd systems
-#KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="pobega"

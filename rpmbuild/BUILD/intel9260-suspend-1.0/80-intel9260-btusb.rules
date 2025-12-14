@@ -1,3 +1,0 @@
-# Disable wakeup on Intel 9260 bluetooth to allow suspend/resume
-SUBSYSTEM=="usb" ATTR{idVendor}=="8087", ATTR{idProduct}=="0025" \
-        ATTR{power/wakeup}="disabled"
