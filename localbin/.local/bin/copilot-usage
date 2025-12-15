@@ -1,0 +1,75 @@
+#!/usr/bin/bash
+
+# Constants
+readonly BAR_WIDTH=20
+readonly SECONDS_PER_DAY=86400
+readonly QUOTA_DAYS_TOTAL=80  # Approximate quota period for scaling
+
+# Helper function to generate progress bars
+generate_bar() {
+    local filled=$1
+    local empty=$2
+    local bar=""
+    
+    if [ $filled -gt 0 ]; then
+        bar=$(printf '█%.0s' $(seq 1 $filled))
+    fi
+    if [ $empty -gt 0 ]; then
+        bar="${bar}$(printf '░%.0s' $(seq 1 $empty))"
+    fi
+    
+    echo "$bar"
+}
+
+# Extract OAuth token
+TOKEN=$(sed -n 's/.*"oauth_token":[[:space:]]*"\{0,1\}\([^"]*\)"\{0,1\}.*/\1/p' ~/.config/github-copilot/apps.json | tail -1 | tr -d '\n')
+
+# Fetch API data and strip newlines once
+JSON=$(curl -s -H "Authorization: Bearer $TOKEN" https://api.github.com/copilot_internal/user | tr -d '\n')
+
+# Parse JSON fields
+entitlement=$(echo "$JSON" | sed -n 's/.*"quota_snapshots".*"premium_interactions".*"entitlement":[[:space:]]*\([0-9]*\).*/\1/p' | head -1)
+remaining=$(echo "$JSON" | sed -n 's/.*"quota_snapshots".*"premium_interactions".*"remaining":[[:space:]]*\([0-9]*\).*/\1/p' | head -1)
+percent=$(echo "$JSON" | sed -n 's/.*"quota_snapshots".*"premium_interactions".*"percent_remaining":[[:space:]]*\([0-9.]*\).*/\1/p' | head -1)
+unlimited=$(echo "$JSON" | sed -n 's/.*"quota_snapshots".*"premium_interactions".*"unlimited":[[:space:]]*\([a-z]*\).*/\1/p' | head -1)
+overage_permitted=$(echo "$JSON" | sed -n 's/.*"quota_snapshots".*"premium_interactions".*"overage_permitted":[[:space:]]*\([a-z]*\).*/\1/p' | head -1)
+reset_date=$(echo "$JSON" | sed -n 's/.*"quota_reset_date":[[:space:]]*"\{0,1\}\([^"]*\)"\{0,1\}.*/\1/p' | head -1)
+
+# Calculate derived values
+used=$(( entitlement - remaining ))
+used_percent=$(awk "BEGIN {print 100 - $percent}")
+status="Limited"
+
+if [ "$overage_permitted" = "true" ]; then
+    overage="Permitted ✓"
+else
+    overage="Not Permitted "
+fi
+
+# Usage bar
+filled=$(awk "BEGIN {print int($used_percent / 100 * $BAR_WIDTH)}")
+empty=$(( BAR_WIDTH - filled ))
+bar_usage=$(generate_bar $filled $empty)
+
+# Days left and time bar
+days_left=$(( ($(date -d "$reset_date" +%s) - $(date +%s)) / SECONDS_PER_DAY + 1 ))
+filled_time=$(( days_left * BAR_WIDTH / QUOTA_DAYS_TOTAL ))
+
+# Clamp filled_time to valid range
+if [ $filled_time -gt $BAR_WIDTH ]; then filled_time=$BAR_WIDTH; fi
+if [ $filled_time -lt 0 ]; then filled_time=0; fi
+
+empty_time=$(( BAR_WIDTH - filled_time ))
+bar_time=$(generate_bar $filled_time $empty_time)
+
+# Output
+echo "Premium Interactions"
+echo "- Used: $used / $entitlement"
+echo "  $bar_usage ($(printf "%.1f" $used_percent)%)"
+echo "- Remaining: $remaining"
+echo "- Percentage: ($(printf "%.1f" $percent)%)"
+echo "- Status: $status"
+echo "- Overage: $overage"
+echo ""
+echo "> Quota resets on: $reset_date"
+echo "> $bar_time ($days_left days left)"
