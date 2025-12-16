@@ -18,6 +18,9 @@ Optimized for interfacing with the kernel mailing list. Automatically decrypts a
 ## nvim
 Neovim configuration using AstroNvim with various plugins for enhanced editing experience.
 
+## aider
+Aider configuration for AI-assisted coding. Includes model settings for various GitHub Copilot models (e.g., Grok, O3-mini, Gemini) with custom headers and token limits, as well as general Aider settings like API base URLs and output theming.
+
 ## quadlets
 Podman quadlets for containerless server applications. [Upstream documentation](https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html).
 

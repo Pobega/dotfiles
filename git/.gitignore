@@ -1,3 +1,14 @@
+# LLMs
 GEMINI.md
 AGENTS.md
+
+# Vim/Nvim
 *.swp
+
+# Aider config and sensitive files
+.env
+.aiderignore
+.aider.tags*
+.aider.chat.history.md
+.aider.input.history
+.aider.llm.history

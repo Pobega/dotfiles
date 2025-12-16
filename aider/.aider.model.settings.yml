@@ -1,0 +1,4 @@
+- name: aider/extra_params
+  extra_params:
+    extra_headers:
+      Editor-Version: vscode/42
