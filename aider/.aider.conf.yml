@@ -14,6 +14,9 @@
 ## show this help message and exit
 #help: xxx
 
+## Which mode to start Aider in (code, ask, architect)
+chat-mode: ask
+
 #############
 # Main model:
 
