@@ -25,3 +25,10 @@ end
 
 require "lazy_setup"
 require "polish"
+
+-- Enable visual line wrapping at the edge of the window
+vim.opt.wrap = true
+-- Break lines at a word boundary rather than in the middle of a word
+vim.opt.linebreak = true
+-- Use indentation for wrapped lines (optional, improves readability)
+vim.opt.breakindent = true
