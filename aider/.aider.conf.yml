@@ -143,7 +143,7 @@ cache-keepalive-pings: 1
 #map-tokens: xxx
 
 ## Control how often the repo map is refreshed. Options: auto, always, files, manual (default: auto)
-#map-refresh: auto
+map-refresh: auto
 
 ## Multiplier for map tokens when no files are specified (default: 2)
 #map-multiplier-no-files: true
@@ -380,7 +380,7 @@ dirty-commits: true
 # Other settings:
 
 ## Never prompt for or attempt to install Playwright for web scraping (default: False).
-#disable-playwright: false
+disable-playwright: true
 
 ## specify a file to edit (can be used multiple times)
 #file: xxx
