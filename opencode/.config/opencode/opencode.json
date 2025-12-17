@@ -1,0 +1,73 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "edit": "ask",
+    "bash": "ask",
+    "webfetch": "allow",
+    "doom_loop": "ask",
+    "external_directory": "ask"
+  },
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (Thelio)",
+      "options": {
+        "baseURL": "http://thelio:9090/v1",
+      },
+      "models": {
+        "qwen2.5-coder-7b-instruct-q8_0-00001-of-00003": { "name": "Qwen2.5 Coder:7b Llama CPP", "tools": true, },
+        "qwen3-coder-30b": { "name": "Qwen3 Coder:30B Llama CPP", "tools": true, },
+        "qwen2.5-coder-14b-instruct-q6_k-00001-of-00002": { "name": "Qwen2.5 Coder:14b Llama CPP", "tools": true, },
+        "llama3.2:3b": { "name": "Llama 3.2:3B", "tools": true },
+        "gpt-oss:20b": { "name": "gpt-oss:20b", "tools": true },
+        "gpt-oss-coder:20b": { "name": "gpt-oss-coder:20b", "tools": true },
+        "qwen2.5-coder:14b-instruct-q5_K_M": { "name": "Qwen 2.5 Coder:14B Instruct", "tools": true },
+        "qwen2.5-coder:7b-instruct-q8_0": { "name": "Qwen 2.5 Coder:7B Instruct", "tools": true }
+      }
+    }
+  },
+  "model": "ollama/gpt-oss:20b-64k",
+  "keybinds": {
+    "leader": "ctrl+x",
+    "app_exit": "ctrl+c,ctrl+d,<leader>q",
+    "editor_open": "<leader>e",
+    "theme_list": "<leader>t",
+    "sidebar_toggle": "<leader>b",
+    "username_toggle": "none",
+    "status_view": "<leader>s",
+    "session_export": "<leader>x",
+    "session_new": "<leader>n",
+    "session_list": "<leader>l",
+    "session_timeline": "<leader>g",
+    "session_share": "none",
+    "session_unshare": "none",
+    "session_interrupt": "escape",
+    "session_compact": "<leader>c",
+    "session_child_cycle": "<leader>+right",
+    "session_child_cycle_reverse": "<leader>+left",
+    "messages_page_up": "pageup",
+    "messages_page_down": "pagedown",
+    "messages_half_page_up": "shift+up",
+    "messages_half_page_down": "shift+down",
+    "messages_first": "ctrl+g,home",
+    "messages_last": "ctrl+alt+g,end",
+    "messages_copy": "<leader>y",
+    "messages_undo": "<leader>u",
+    "messages_redo": "<leader>r",
+    "messages_last_user": "none",
+    "messages_toggle_conceal": "<leader>h",
+    "model_list": "<leader>m",
+    "model_cycle_recent": "f2",
+    "model_cycle_recent_reverse": "shift+f2",
+    "command_list": "ctrl+p",
+    "agent_list": "<leader>a",
+    "agent_cycle": "tab",
+    "agent_cycle_reverse": "shift+tab",
+    "input_clear": "ctrl+c",
+    "input_paste": "ctrl+v",
+    "input_submit": "enter",
+    "input_newline": "shift+enter,ctrl+j",
+    "history_previous": "up",
+    "history_next": "down"
+  }
+}

@@ -16,13 +16,16 @@ Nothing special, just sets up git-sendmail for sending patches to kernel mailing
 Optimized for interfacing with the kernel mailing list. Automatically decrypts an encrypted password file at runtime.
 
 ## nvim
-Neovim configuration using AstroNvim with various plugins for enhanced editing experience.
+[Neovim](https://neovim.io/) configuration using AstroNvim with various plugins for enhanced editing experience.
 
 ## aider
-Aider configuration for AI-assisted coding. Includes model settings for various GitHub Copilot models (e.g., Grok, O3-mini, Gemini) with custom headers and token limits, as well as general Aider settings like API base URLs and output theming.
+[Aider](https://aider.chat/) configuration for AI-assisted coding. Includes model settings for various GitHub Copilot models (e.g., Grok, O3-mini, Gemini) with custom headers and token limits, as well as general Aider settings like API base URLs and output theming.
+
+## Opencode
+[OpenCode](https://opencode.ai/) configuration for AI-assisted coding. Includes settings for connecting to a local Ollama/LlamaCPP instance.
 
 ## quadlets
-Podman quadlets for containerless server applications. [Upstream documentation](https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html).
+[Podman quadlets](https://docs.podman.io/en/latest/markdown/podman-quadlet.1.html) for containerless server applications. [Upstream Systemd documentation](https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html).
 
 ## tmux
 Lots of workflow changes here. Backtick used as the meta command for ease of use. Read the configuration file if you want more information.
