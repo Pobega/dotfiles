@@ -210,7 +210,7 @@ completion-menu-current-bg-color: "#557799"
 code-theme: monokai
 
 ## Show diffs when committing changes (default: False)
-#show-diffs: false
+show-diffs: true
 
 ###############
 # Git settings:
