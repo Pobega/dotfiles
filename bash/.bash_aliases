@@ -42,6 +42,8 @@ toolbox_commands=(
 # Run these commands on the host when in a toolbox
 host_commands=(
     "rpm-ostree"
+    "docker"
+    "cross"
 )
 if [ -v TOOLBOX_PATH ]; then
     for cmd in "${host_commands[@]}"; do
