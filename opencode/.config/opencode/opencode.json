@@ -10,23 +10,19 @@
   "provider": {
     "ollama": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "Ollama (Thelio)",
+      "name": "Llama (Thelio)",
       "options": {
-        "baseURL": "http://thelio:9090/v1",
+        "baseURL": "http://thelio:9292/v1",
       },
       "models": {
-        "qwen2.5-coder-7b-instruct-q8_0-00001-of-00003": { "name": "Qwen2.5 Coder:7b Llama CPP", "tools": true, },
-        "qwen3-coder-30b": { "name": "Qwen3 Coder:30B Llama CPP", "tools": true, },
-        "qwen2.5-coder-14b-instruct-q6_k-00001-of-00002": { "name": "Qwen2.5 Coder:14b Llama CPP", "tools": true, },
-        "llama3.2:3b": { "name": "Llama 3.2:3B", "tools": true },
-        "gpt-oss:20b": { "name": "gpt-oss:20b", "tools": true },
-        "gpt-oss-coder:20b": { "name": "gpt-oss-coder:20b", "tools": true },
-        "qwen2.5-coder:14b-instruct-q5_K_M": { "name": "Qwen 2.5 Coder:14B Instruct", "tools": true },
-        "qwen2.5-coder:7b-instruct-q8_0": { "name": "Qwen 2.5 Coder:7B Instruct", "tools": true }
+        "devstral-small-2": { "name": "Devstral Small 2", "tools": true, },
+        "gpt-oss": { "name": "gpt-oss", "tools": true },
+        "gpt-oss-coder": { "name": "gpt-oss-coder", "tools": true },
+        "qwen3": { "name": "Qwen3", "tools": true, },
+        "qwen3-coder": { "name": "Qwen3 Coder", "tools": true, },
       }
     }
   },
-  "model": "ollama/gpt-oss:20b-64k",
   "keybinds": {
     "leader": "ctrl+x",
     "app_exit": "ctrl+c,ctrl+d,<leader>q",
