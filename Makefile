@@ -1,3 +1,7 @@
-.PHONE: stow
+.PHONY: stow
 stow:
-	stow bash git mutt nvim tmux vim quadlets
+	stow aider bash git mutt nvim opencode tmux vim
+
+.PHONY: quadlets
+quadlets:
+	stow quadlets
