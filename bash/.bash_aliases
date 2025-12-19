@@ -1,32 +1,11 @@
 alias grep='grep --color'
 alias ls='ls --color=auto'
-
-alias vagrant='podman run --rm -it \
-        --volume /run/libvirt:/run/libvirt \
-        --volume "${HOME}:${HOME}:rslave" \
-        --env "HOME=${HOME}" \
-        --workdir "$(pwd)" \
-        --net host \
-        --privileged \
-        --security-opt label=disable \
-        --entrypoint /usr/bin/vagrant \
-        localhost/vagrant-container:latest'
-
-alias runvm='qemu-kvm \
--m 8G \
--smp 8 \
--cpu host \
--vga virtio -display sdl,gl=on \
--usb -device usb-tablet,bus=usb-bus.0 \
--show-cursor \
--net nic,model=virtio,macaddr=52:54:00:12:34:56 \
--net user,hostfwd=tcp::9222-:22 \
--hda'
-
-alias protontricks-flat='flatpak run --command=protontricks com.valvesoftware.Steam --no-runtime'
+alias userctl='systemctl --user'
 
 # Show cpu0 temp in Celsius
 alias cpu0_temp='echo -n $(echo "scale=1;$(cat /sys/class/thermal/thermal_zone0/temp)/1000" | bc) && echo "°c"'
+
+###### Toolbox ######
 
 # Run these commands in the toolbox when on the host
 toolbox_commands=(
@@ -55,6 +34,8 @@ else
     done
 fi
 
+###### Podman ######
+
 # If we're in an environment with podman-remote and without podman,
 # alias podman to podman-remote (toolbox use case)
 if command -v podman-remote &> /dev/null && ! command -v podman &> /dev/null; then
@@ -69,6 +50,7 @@ function netshoot()
   podman run --rm $@ -it nicolaka/netshoot
 }
 
+# Benchmark LLaMA models using llama-bench in a Podman container
 llama-bench() {
   # The first argument is the path to your GGUF
   local MODEL_SOURCE="$1"
@@ -91,12 +73,3 @@ llama-bench() {
     ghcr.io/ggml-org/llama.cpp:full-vulkan \
     -m /model.gguf -ngl 99 "$@"
 }
-
-# Setup NPM for global package installs if it exists
-mkdir -p ~/.npm-global
-if type "npm" &> /dev/null; then
-    npm config set prefix '~/.npm-global'
-    export PATH="$HOME/.npm-global/bin:$PATH"
-fi
-
-alias userctl='systemctl --user'
