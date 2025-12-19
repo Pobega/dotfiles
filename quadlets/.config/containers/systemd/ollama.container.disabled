@@ -3,14 +3,17 @@ Description=Ollama
 
 [Container]
 ContainerName=ollama
-Image=ollama/ollama:rocm
+Image=ollama/ollama
 Volume=ollama:/root/.ollama
 Pull=newer
 AddDevice=/dev/kfd
 AddDevice=/dev/dri
 PublishPort=11434:11434
 SecurityLabelType=container_runtime_t
-Environment=OLLAMA_CONTEXT_LENGTH=16000
+Environment=OLLAMA_VULKAN=1
+Environment=OLLAMA_FLASH_ATTENTION=true
+Environment=OLLAMA_CONTEXT_LENGTH=32768
+Environment=OLLAMA_KEEP_ALIVE=15m
 
 [Service]
 Restart=always

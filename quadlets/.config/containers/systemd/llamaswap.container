@@ -1,0 +1,20 @@
+[Unit]
+Description=Llama Swap
+
+[Container]
+ContainerName=llamaswap
+Image=ghcr.io/mostlygeek/llama-swap:vulkan
+Pull=newer
+Volume=/var/home/pobega/models:/models
+Volume=/var/home/pobega/models/llamaswap-config.yml:/app/config.yaml
+AddDevice=/dev/kfd
+AddDevice=/dev/dri
+PublishPort=9292:8080
+PublishPort=9999:9999
+SecurityLabelType=container_runtime_t
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target default.target
