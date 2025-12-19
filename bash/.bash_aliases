@@ -69,10 +69,28 @@ function netshoot()
   podman run --rm $@ -it nicolaka/netshoot
 }
 
-alias ollama_init="podman run --pull newer --detach --security-opt label=type:container_runtime_t --replace --device /dev/kfd --device /dev/dri -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama:rocm"
-alias ollama_webui="podman run --replace --pull newer -d --network=host -v open-webui:/app/backend/data -e OLLAMA_BASE_URL=http://127.0.0.1:11434 --name open-webui --restart always ghcr.io/open-webui/open-webui:main"
-alias ollama="podman exec -it ollama ollama"
-alias llama-run="podman run --device=/dev/kfd --device=/dev/dri -v /var/home/pobega/models:/models -p 9090:9090 ghcr.io/ggml-org/llama.cpp:server-vulkan --port 9090 --host 0.0.0.0 -n 512 --ctx-size 64000"
+llama-bench() {
+  # The first argument is the path to your GGUF
+  local MODEL_SOURCE="$1"
+
+  # Remove the first argument from the list so "$@" only contains the rest
+  shift
+
+  # Check if the file actually exists before starting Podman
+  if [[ ! -f "$MODEL_SOURCE" ]]; then
+    echo "Error: File '$MODEL_SOURCE' not found."
+    return 1
+  fi
+
+  podman run -it --rm \
+    --name llama-bench \
+    --device=/dev/kfd \
+    --device=/dev/dri \
+    -v "$(realpath "$MODEL_SOURCE"):/model.gguf:z" \
+    --entrypoint /app/llama-bench \
+    ghcr.io/ggml-org/llama.cpp:full-vulkan \
+    -m /model.gguf -ngl 99 "$@"
+}
 
 # Setup NPM for global package installs if it exists
 mkdir -p ~/.npm-global
