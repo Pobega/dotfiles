@@ -10,7 +10,7 @@ command -v vim >/dev/null 2>&1 || { export GIT_EDITOR=vi; }
 [[ -f ~/.bash_shell ]] && . ~/.bash_shell
 [[ -f ~/.bash_path ]] && . ~/.bash_path
 [[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
-[[ -f ~/.bashrc_local ]] && . ~/.bashrc_local
+[[ -f ~/.bash_local ]] && . ~/.bash_local
 [[ -f ~/.bash_work ]] && . ~/.bash_work
 
 # User specific environment and startup programs
