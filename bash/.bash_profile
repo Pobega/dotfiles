@@ -31,7 +31,8 @@ export SUPPRESS_BOLTDB_WARNING=1
 
 # Setup NPM for global package installs if it exists
 mkdir -p ~/.npm-global
-if type "npm" &> /dev/null; then
+# Use 'type -P' to ensure a real binary exists and skip aliases
+if type -P npm &> /dev/null; then
     npm config set prefix '~/.npm-global'
     export PATH="$HOME/.npm-global/bin:$PATH"
 fi
