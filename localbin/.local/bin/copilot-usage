@@ -27,6 +27,9 @@ TOKEN=$(sed -n 's/.*"oauth_token":[[:space:]]*"\{0,1\}\([^"]*\)"\{0,1\}.*/\1/p' 
 # Fetch API data and strip newlines once
 JSON=$(curl -s -H "Authorization: Bearer $TOKEN" https://api.github.com/copilot_internal/user | tr -d '\n')
 
+# Debug print out the raw Github API info
+echo "$JSON" | jq
+
 # Parse JSON fields
 entitlement=$(echo "$JSON" | sed -n 's/.*"quota_snapshots".*"premium_interactions".*"entitlement":[[:space:]]*\([0-9]*\).*/\1/p' | head -1)
 remaining=$(echo "$JSON" | sed -n 's/.*"quota_snapshots".*"premium_interactions".*"remaining":[[:space:]]*\([0-9]*\).*/\1/p' | head -1)
