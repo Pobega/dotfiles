@@ -14,6 +14,7 @@ return {
         ["<leader>sf"] = { function() require("sidekick.cli").send({ msg = "{file}" }) end, desc = "Send File", },
         ["<leader>sp"] = { function() require("sidekick.cli").prompt() end, desc = "Sidekick Select Prompt", },
         ["<leader>sc"] = { function() require("sidekick.cli").toggle({ name = "copilot", focus = true }) end, desc = "Sidekick Toggle Copilot", },
+        ["<leader>sg"] = { function() require("sidekick.cli").toggle({ name = "gemini", focus = true }) end, desc = "Sidekick Toggle Gemini", },
       },
       v = {
         ["<Leader>s"] = { desc = " Sidekick" },

@@ -1,14 +1,23 @@
 return {
   "folke/sidekick.nvim",
-  opts = {
-    -- add any options here
-    cli = {
-      mux = {
-        backend = "tmux",
-        enabled = true,
+  opts = function()
+    local gemini_path = "/google/bin/releases/gemini-cli/tools/gemini"
+    local gemini_cmd = vim.fn.executable(gemini_path) == 1 and gemini_path or "gemini"
+
+    return {
+      cli = {
+        mux = {
+          backend = "tmux",
+          enabled = true,
+        },
+        tools = {
+          gemini = {
+            cmd = { gemini_cmd },
+          },
+        },
       },
-    },
-  },
+    }
+  end,
   keys = {
     {
       "<tab>",
