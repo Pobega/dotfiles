@@ -28,7 +28,7 @@ if [ -v TOOLBOX_PATH ]; then
     for cmd in "${host_commands[@]}"; do
         alias "$cmd"="flatpak-spawn --host $cmd"
     done
-else
+elif command -v toolbox &> /dev/null; then
     for cmd in "${toolbox_commands[@]}"; do
         alias "$cmd"="toolbox run $cmd"
     done
