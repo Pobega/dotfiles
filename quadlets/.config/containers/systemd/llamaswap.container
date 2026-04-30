@@ -9,8 +9,7 @@ Volume=/var/home/pobega/models:/models
 Volume=/var/home/pobega/models/llamaswap-config.yml:/app/config.yaml
 AddDevice=/dev/kfd
 AddDevice=/dev/dri
-PublishPort=9292:8080
-PublishPort=9999:9999
+PublishPort=9999:8080
 SecurityLabelType=container_runtime_t
 
 [Service]
