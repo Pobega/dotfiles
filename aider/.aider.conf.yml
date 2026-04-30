@@ -23,22 +23,25 @@ chat-mode: ask
 ## Specify the model to use for the main chat
 #
 # Copilot model
-model: github_copilot/grok-code-fast-1
+#model: github_copilot/grok-code-fast-1
 
-# Local Ollama model
-#model: ollama_chat/gpt-oss-coder:20b
+# Local llamaswap model
+model: openai/qwen3
+set-env:
+  - OPENAI_API_BASE=http://thelio:9999
+  - OPENAI_API_KEY=NONE
 
 ########################
 # API Keys and settings:
 
 ## Specify the OpenAI API key
-#openai-api-key: xxx
+#openai-api-key: NONE
 
 ## Specify the Anthropic API key
 #anthropic-api-key: xxx
 
 ## Specify the api base url
-#openai-api-base: http://192.168.86.38:11434
+#openai-api-base: http://192.168.86.168:9999
 
 ## (deprecated, use --set-env OPENAI_API_TYPE=<value>)
 #openai-api-type: xxx
@@ -53,7 +56,7 @@ model: github_copilot/grok-code-fast-1
 #openai-organization-id: xxx
 
 ## Set an environment variable (to control API settings, can be used multiple times)
-set-env: OLLAMA_API_BASE=http://192.168.86.38:11434
+#set-env: OPENAI_API_KEY=sk-dummy
 ## Specify multiple values like this:
 #set-env:
 #  - xxx
@@ -75,7 +78,7 @@ set-env: OLLAMA_API_BASE=http://192.168.86.38:11434
 #list-models: xxx
 
 ## Specify a file with aider model settings for unknown models
-model-settings-file: .aider.model.settings.yml
+#model-settings-file: .aider.model.settings.yml
 
 ## Specify a file with context window and costs for unknown models
 #model-metadata-file: .aider.model.metadata.json
@@ -110,19 +113,19 @@ model-settings-file: .aider.model.settings.yml
 #auto-accept-architect: true
 
 ## Specify the model to use for commit messages and chat history summarization (default depends on --model)
-weak-model: github_copilot/gpt-5-mini
+#weak-model: github_copilot/gpt-5-mini
 
 ## Specify the model to use for editor tasks (default depends on --model)
-editor-model: github_copilot/grok-code-fast-1
+#editor-model: github_copilot/grok-code-fast-1
 
 ## Specify the edit format for the editor model (default: depends on editor model)
 #editor-edit-format: xxx
 
 ## Only work with models that have meta-data available (default: True)
-show-model-warnings: false
+#show-model-warnings: false
 
 ## Check if model accepts settings like reasoning_effort/thinking_tokens (default: True)
-check-model-accepts-settings: true
+#check-model-accepts-settings: true
 
 ## Soft limit on tokens for chat history, after which summarization begins. If unspecified, defaults to the model's max_chat_history_tokens.
 #max-chat-history-tokens: xxx
@@ -131,10 +134,10 @@ check-model-accepts-settings: true
 # Cache settings:
 
 ## Enable caching of prompts (default: False)
-cache-prompts: true
+#cache-prompts: true
 
 ## Number of times to ping at 5min intervals to keep prompt cache warm (default: 0)
-cache-keepalive-pings: 1
+#cache-keepalive-pings: 1
 
 ###################
 # Repomap settings:
@@ -143,7 +146,7 @@ cache-keepalive-pings: 1
 #map-tokens: xxx
 
 ## Control how often the repo map is refreshed. Options: auto, always, files, manual (default: auto)
-map-refresh: auto
+#map-refresh: auto
 
 ## Multiplier for map tokens when no files are specified (default: 2)
 #map-multiplier-no-files: true

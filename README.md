@@ -21,8 +21,8 @@ Optimized for interfacing with the kernel mailing list. Automatically decrypts a
 ## aider
 [Aider](https://aider.chat/) configuration for AI-assisted coding. Includes model settings for various GitHub Copilot models (e.g., Grok, O3-mini, Gemini) with custom headers and token limits, as well as general Aider settings like API base URLs and output theming.
 
-## Opencode
-[OpenCode](https://opencode.ai/) configuration for AI-assisted coding. Includes settings for connecting to a local Ollama/LlamaCPP instance.
+## Nanocoder
+[NanoCoder](https://github.com/Nano-Collective/nanocoder) configuration for AI-assisted coding. Includes settings for connecting to a local Ollama/LlamaCPP instance.
 
 ## quadlets
 [Podman quadlets](https://docs.podman.io/en/latest/markdown/podman-quadlet.1.html) for containerless server applications. [Upstream Systemd documentation](https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html).

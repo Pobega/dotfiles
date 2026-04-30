@@ -14,8 +14,11 @@ return {
           gemini = {
             cmd = { gemini_cmd },
           },
+          nanocoder = {
+            cmd = { "nanocoder" },
         },
-      },
+        }
+      }
     }
   end,
   keys = {

@@ -16,7 +16,7 @@ toolbox_commands=(
     "stow"
     "tmux"
     "copilot"
-    "opencode"
+    "nanocoder"
 )
 # Run these commands on the host when in a toolbox
 host_commands=(

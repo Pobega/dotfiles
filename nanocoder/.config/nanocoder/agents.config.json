@@ -1,0 +1,14 @@
+{
+  "nanocoder": {
+    "providers": [
+      {
+        "name": "llama-cpp",
+        "models": [
+          "qwen3",
+          "gpt-oss"
+        ],
+        "baseUrl": "http://thelio:9999/v1"
+      }
+    ]
+  }
+}

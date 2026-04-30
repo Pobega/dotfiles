@@ -1,6 +1,6 @@
 .PHONY: stow
 stow:
-	stow aider bash git mutt nvim opencode tmux vim
+	stow aider bash git mutt nvim nanocoder tmux vim
 
 .PHONY: quadlets
 quadlets:

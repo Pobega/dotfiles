@@ -5,3 +5,5 @@ fish/.config/fish/*
 vim/.vim/view
 
 *.netrwhist
+
+nanocoder/.config/nanocoder/nanocoder-preferences.json
