@@ -18,6 +18,19 @@ Optimized for interfacing with the kernel mailing list. Automatically decrypts a
 ## nvim
 [Neovim](https://neovim.io/) configuration using AstroNvim with various plugins for enhanced editing experience.
 
+## Claude Code
+[Claude Code](https://claude.ai/code) statusline script. Settings are local to your machine.
+
+Minimal `~/.claude/settings.json` to enable the statusline:
+```json
+{
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  }
+}
+```
+
 ## aider
 [Aider](https://aider.chat/) configuration for AI-assisted coding. Includes model settings for various GitHub Copilot models (e.g., Grok, O3-mini, Gemini) with custom headers and token limits, as well as general Aider settings like API base URLs and output theming.
 
