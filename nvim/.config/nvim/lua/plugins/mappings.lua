@@ -7,7 +7,8 @@ return {
         -- Buffer hotkeys
         ["<leader>bn"] = { "<cmd>bnext<cr>", desc = "Next buffer" },
         ["<C-t>"] = { "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle terminal" },
-        ["<C-a>"] = { function() require("utils.agents").toggle() end, desc = "Toggle AI Agent" },
+        ["<C-a>"] = { function() require("sidekick.cli").toggle() end, desc = "Toggle AI Agent" },
+        ["<C-s>"] = { function() require("sidekick.cli").select() end, desc = "Select AI Agent" },
         ["<Leader>s"] = { desc = " Sidekick" },
         ["<leader>sa"] = { function() require("sidekick.cli").toggle() end, desc = "Sidekick Toggle CLI", },
         ["<leader>ss"] = { function() require("sidekick.cli").select() end, desc = "Select CLI", },
@@ -20,7 +21,7 @@ return {
       },
       t = {
         ["<C-t>"] = { "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle terminal" },
-        ["<C-a>"] = { function() require("utils.agents").toggle() end, desc = "Toggle AI Agent" },
+        ["<C-a>"] = { function() require("utils.agents").hide_current() end, desc = "Hide current AI Agent" },
       },
       v = {
         ["<Leader>s"] = { desc = " Sidekick" },
