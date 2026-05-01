@@ -5,8 +5,41 @@ input=$(cat)
 cwd=$(echo "$input" | jq -r '.cwd // .workspace.current_dir // ""')
 model=$(echo "$input" | jq -r '.model.display_name // ""')
 used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
-five_hour_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
-seven_day_pct=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
+
+# --- Rate limits: cache to disk, invalidate based on resets_at ---
+RATE_CACHE="$HOME/.claude/cache/rate-limits.json"
+mkdir -p "$(dirname "$RATE_CACHE")"
+
+live_5h_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
+live_5h_resets=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty')
+live_7d_pct=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
+live_7d_resets=$(echo "$input" | jq -r '.rate_limits.seven_day.resets_at // empty')
+
+if [ -n "$live_5h_pct" ] && [ -n "$live_7d_pct" ]; then
+  jq -n \
+    --argjson five_pct "$live_5h_pct" \
+    --argjson five_resets "$live_5h_resets" \
+    --argjson seven_pct "$live_7d_pct" \
+    --argjson seven_resets "$live_7d_resets" \
+    '{five_hour: {used_percentage: $five_pct, resets_at: $five_resets}, seven_day: {used_percentage: $seven_pct, resets_at: $seven_resets}}' \
+    > "$RATE_CACHE"
+fi
+
+now=$(date +%s)
+five_hour_pct=0
+seven_day_pct=0
+
+if [ -f "$RATE_CACHE" ]; then
+  cached_5h_resets=$(jq -r '.five_hour.resets_at // 0' "$RATE_CACHE")
+  cached_7d_resets=$(jq -r '.seven_day.resets_at // 0' "$RATE_CACHE")
+
+  if [ "$now" -lt "$cached_5h_resets" ]; then
+    five_hour_pct=$(jq -r '.five_hour.used_percentage' "$RATE_CACHE")
+  fi
+  if [ "$now" -lt "$cached_7d_resets" ]; then
+    seven_day_pct=$(jq -r '.seven_day.used_percentage' "$RATE_CACHE")
+  fi
+fi
 
 # --- Username / host-based color (mirrors MAIN_COLOR logic) ---
 USERNAME=$(whoami)
@@ -91,14 +124,4 @@ if [ -n "$model" ]; then
 fi
 
 # --- Rate limits segment ---
-RATE_PART=""
-if [ -n "$five_hour_pct" ]; then
-  RATE_PART="5h:$(printf '%.0f' "$five_hour_pct")%"
-fi
-if [ -n "$seven_day_pct" ]; then
-  [ -n "$RATE_PART" ] && RATE_PART="$RATE_PART "
-  RATE_PART="${RATE_PART}7d:$(printf '%.0f' "$seven_day_pct")%"
-fi
-if [ -n "$RATE_PART" ]; then
-  printf " \e[38;5;244m| %s\e[0m" "$RATE_PART"
-fi
+printf " \e[38;5;244m| 5h:$(printf '%.0f' "$five_hour_pct")%% 7d:$(printf '%.0f' "$seven_day_pct")%%\e[0m"
