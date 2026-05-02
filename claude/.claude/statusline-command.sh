@@ -5,6 +5,16 @@ input=$(cat)
 cwd=$(echo "$input" | jq -r '.cwd // .workspace.current_dir // ""')
 model=$(echo "$input" | jq -r '.model.display_name // ""')
 used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
+effort_raw=$(echo "$input" | jq -r '.effort.level // empty')
+
+case "$effort_raw" in
+  low)    effort_label="◔" ;;
+  medium) effort_label="◐" ;;
+  high)   effort_label="◕" ;;
+  xhigh)  effort_label="●" ;;
+  max)    effort_label="●" ;;
+  *)      effort_label="" ;;
+esac
 
 # --- Rate limits: cache to disk, invalidate based on resets_at ---
 RATE_CACHE="$HOME/.claude/cache/rate-limits.json"
@@ -108,7 +118,8 @@ fi
 # --- Context usage ---
 CTX_PART=""
 if [ -n "$used_pct" ]; then
-  CTX_PART=" $(printf '%.0f' "$used_pct")%"
+  ctx_int=$(printf '%.0f' "$used_pct")
+  CTX_PART=" (${ctx_int}%)"
 fi
 
 # --- Assemble the status line ---
@@ -120,8 +131,14 @@ if [ -n "$GIT_STATUS" ]; then
 fi
 
 if [ -n "$model" ]; then
-  printf " \e[38;5;244m| %s%s\e[0m" "$model" "$CTX_PART"
+  if [ -n "$effort_label" ]; then
+    printf " \e[38;5;244m| %s %s%s\e[0m" "$effort_label" "$model" "$CTX_PART"
+  else
+    printf " \e[38;5;244m| %s%s\e[0m" "$model" "$CTX_PART"
+  fi
 fi
 
 # --- Rate limits segment ---
-printf " \e[38;5;244m| 5h:$(printf '%.0f' "$five_hour_pct")%% 7d:$(printf '%.0f' "$seven_day_pct")%%\e[0m"
+five_int=$(printf '%.0f' "$five_hour_pct")
+seven_int=$(printf '%.0f' "$seven_day_pct")
+printf "\e[38;5;244m|  %s%%  %s%%\e[0m" "$five_int" "$seven_int"
