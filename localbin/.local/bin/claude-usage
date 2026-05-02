@@ -1,0 +1,97 @@
+#!/usr/bin/bash
+
+readonly BAR_WIDTH=20
+readonly RATE_CACHE="$HOME/.claude/cache/rate-limits.json"
+readonly FIVE_HOUR_SECS=18000
+readonly SEVEN_DAY_SECS=604800
+
+generate_bar() {
+    local filled=$1
+    local empty=$2
+    local bar=""
+
+    if [ $filled -gt 0 ]; then
+        bar=$(printf '█%.0s' $(seq 1 $filled))
+    fi
+    if [ $empty -gt 0 ]; then
+        bar="${bar}$(printf '░%.0s' $(seq 1 $empty))"
+    fi
+
+    echo "$bar"
+}
+
+fmt_eta() {
+    local secs=$1
+    if [ "$secs" -le 0 ]; then
+        echo "now"
+        return
+    fi
+    local d=$((secs / 86400))
+    local h=$(( (secs % 86400) / 3600 ))
+    local m=$(( (secs % 3600) / 60 ))
+    if   [ "$d" -gt 0 ]; then echo "${d}d${h}h"
+    elif [ "$h" -gt 0 ]; then echo "${h}h${m}m"
+    else                      echo "${m}m"
+    fi
+}
+
+if [ ! -f "$RATE_CACHE" ]; then
+    echo "No rate limit cache found at $RATE_CACHE"
+    echo "Run Claude Code at least once to populate it."
+    exit 1
+fi
+
+now=$(date +%s)
+
+print_window() {
+    local label=$1
+    local key=$2
+    local total_secs=$3
+
+    local used_pct resets_at
+    used_pct=$(jq -r ".${key}.used_percentage // 0" "$RATE_CACHE")
+    resets_at=$(jq -r ".${key}.resets_at // 0" "$RATE_CACHE")
+
+    local remaining_pct
+    remaining_pct=$(awk "BEGIN {print 100 - $used_pct}")
+
+    local filled empty
+    filled=$(awk "BEGIN {print int($used_pct / 100 * $BAR_WIDTH)}")
+    empty=$(( BAR_WIDTH - filled ))
+    local bar_usage
+    bar_usage=$(generate_bar $filled $empty)
+
+    local secs_left=$(( resets_at - now ))
+    [ $secs_left -lt 0 ] && secs_left=0
+    local secs_elapsed=$(( total_secs - secs_left ))
+    [ $secs_elapsed -lt 0 ] && secs_elapsed=0
+    local time_filled time_empty
+    time_filled=$(( secs_elapsed * BAR_WIDTH / total_secs ))
+    [ $time_filled -gt $BAR_WIDTH ] && time_filled=$BAR_WIDTH
+    [ $time_filled -lt 0 ] && time_filled=0
+    time_empty=$(( BAR_WIDTH - time_filled ))
+    local bar_time
+    bar_time=$(generate_bar $time_filled $time_empty)
+
+    local reset_date
+    reset_date=$(date -d "@$resets_at" '+%Y-%m-%d %H:%M:%S %Z')
+
+    local status="OK"
+    if [ "$(awk "BEGIN {print ($used_pct >= 90)}")" = "1" ]; then
+        status="Critical"
+    elif [ "$(awk "BEGIN {print ($used_pct >= 75)}")" = "1" ]; then
+        status="Warning"
+    fi
+
+    echo "$label"
+    echo "- Used: $(printf "%.1f" $used_pct)%"
+    echo "  $bar_usage"
+    echo "- Remaining: $(printf "%.1f" $remaining_pct)%"
+    echo "- Status: $status"
+    echo "> Quota resets on: $reset_date"
+    echo "> $bar_time ($(fmt_eta $secs_left) left)"
+}
+
+print_window "5-Hour Window" "five_hour" "$FIVE_HOUR_SECS"
+echo ""
+print_window "7-Day Window" "seven_day" "$SEVEN_DAY_SECS"
