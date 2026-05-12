@@ -2,6 +2,12 @@
 # Claude Code status line - mirrors ~/.bash_shell prompt style
 
 input=$(cat)
+
+if ! command -v jq >/dev/null 2>&1; then
+  printf "\e[38;5;196m[statusline: jq not found — install jq to enable statusline]\e[0m"
+  exit 0
+fi
+
 cwd=$(echo "$input" | jq -r '.cwd // .workspace.current_dir // ""')
 model=$(echo "$input" | jq -r '.model.display_name // ""')
 used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
@@ -38,6 +44,19 @@ fi
 now=$(date +%s)
 five_hour_pct=0
 seven_day_pct=0
+cached_5h_resets=0
+cached_7d_resets=0
+
+fmt_eta() {
+  local secs=$1
+  [ "$secs" -le 0 ] && return
+  local h=$((secs / 3600))
+  local m=$(( (secs % 3600) / 60 ))
+  if   [ "$h" -ge 24 ]; then echo "$((h/24))d$((h%24))h"
+  elif [ "$h" -gt 0 ];  then echo "${h}h${m}m"
+  else                       echo "${m}m"
+  fi
+}
 
 if [ -f "$RATE_CACHE" ]; then
   cached_5h_resets=$(jq -r '.five_hour.resets_at // 0' "$RATE_CACHE")
@@ -141,4 +160,6 @@ fi
 # --- Rate limits segment ---
 five_int=$(printf '%.0f' "$five_hour_pct")
 seven_int=$(printf '%.0f' "$seven_day_pct")
-printf "\e[38;5;244m|  %s%%  %s%%\e[0m" "$five_int" "$seven_int"
+five_eta=$(fmt_eta $((cached_5h_resets - now)))
+[ -n "$five_eta" ] && five_eta=" ($five_eta)"
+printf " \e[38;5;244m|  %s%%  %s%%%s\e[0m" "$five_int" "$seven_int" "$five_eta"
