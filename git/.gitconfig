@@ -16,6 +16,7 @@
   path = .gitconfig-work
 [alias]
   resetr = !git reset @{upstream}
+	gone = !git fetch -p && git branch -vv | awk \"/: gone]/{print \\$1}\" | xargs -r git branch -D
 [http]
   cookiefile = /home/pobega/.gitcookies
 [filter "lfs"]
@@ -25,3 +26,9 @@
 	required = true
 [init]
 	defaultBranch = main
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
