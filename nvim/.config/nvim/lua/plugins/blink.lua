@@ -1,43 +1,9 @@
 return {
   "saghen/blink.cmp",
-  dependencies = {
-    {
-      "giuxtaposition/blink-cmp-copilot",
-      event = "InsertEnter",
-      config = function () require("copilot_cmp").setup() end,
-      dependencies = {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        config = function()
-          require("copilot").setup({
-            suggestion = { enabled = false },
-            panel = { enabled = false },
-          })
-        end,
-      },
-    },
-  },
+  dependencies = { },
   opts = {
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "copilot" },
-      providers = {
-        copilot = {
-          name = "copilot",
-          module = "blink-cmp-copilot",
-          score_offset = 100,
-          async = true,
-          transform_items = function(_, items)
-            local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-            local kind_idx = #CompletionItemKind + 1
-            CompletionItemKind[kind_idx] = "Copilot"
-            for _, item in ipairs(items) do
-              item.kind = kind_idx
-              item.icon = ""
-            end
-            return items
-          end,
-        },
-      },
+      default = { "lsp", "path", "snippets", "buffer" },
     },
   },
   appearance = {
