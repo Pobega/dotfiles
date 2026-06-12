@@ -125,24 +125,43 @@ function epoch_ms {
   date +%s%3N
 }
 
+# True if $1 is one of the commands run as part of drawing the prompt.
+#
+# On modern distros PROMPT_COMMAND is an *array* and the system appends its own
+# hooks to it (e.g. __vte_precmd, __vte_osc7, __systemd_osc_context_precmdline).
+# Each array element runs as a separate top-level command, so the DEBUG trap
+# fires before each one -- including hooks that run *after* prompt(). We must
+# not let those arm the timer, or idle time gets billed to the next command.
+function _timer_is_prompt_cmd {
+  local entry
+  for entry in "${PROMPT_COMMAND[@]}"; do
+    [[ "$1" == "${entry}" ]] && return 0
+  done
+  case "$1" in
+    prompt|timer_start|timer_stop) return 0 ;;
+  esac
+  return 1
+}
+
 # DEBUG trap function
-# Record our start time for calculation later
+# Record our start time for calculation later.
+#
+# Only the first *real* (non-prompt) command after the prompt is drawn should
+# arm the timer. The $at_prompt guard limits arming to once per prompt cycle
+# (so pipelines/compound commands don't re-arm mid-line).
 function timer_start {
-  start_time=${start_time:-$(epoch_ms)}
+  [ -n "${at_prompt}" ] || return 0
+  _timer_is_prompt_cmd "${BASH_COMMAND}" && return 0
+  unset at_prompt
+  start_time=$(epoch_ms)
 }
 
 # PROMPT_COMMAND callback function
-# Calculate the time between timer_start and timer_start and set
+# Calculate the time between timer_start and now and set
 # $CMD_TIMER to a human readable version of the time elapsed.
 function timer_stop {
-  # Exit early on first run (to avoid erroneous 1ms timer on shell spawn.)
-  if [ -z "${first_run_timer}" ]; then
-    first_run_timer='complete'
-    unset start_time
-    return 0
-  fi
-
   if [ -z "${start_time}" ]; then
+    CMD_TIMER=""
     return 0
   fi
 
@@ -230,6 +249,10 @@ prompt() {
 
   # update bash title
   echo -en "\033]0; ${USERNAME}@${HOSTNAME} \a"
+
+  # Arm the timer: the next command (the user's) starts the clock. Must be the
+  # last thing prompt() does so its own DEBUG-trapped commands don't re-arm it.
+  at_prompt=1
 }
 
 PROMPT_COMMAND=prompt
