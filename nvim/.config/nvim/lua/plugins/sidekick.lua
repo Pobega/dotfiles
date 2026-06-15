@@ -1,8 +1,8 @@
 return {
   "folke/sidekick.nvim",
   opts = function()
-    local gemini_path = "/google/bin/releases/gemini-cli/tools/gemini"
-    local gemini_cmd = vim.fn.executable(gemini_path) == 1 and gemini_path or "gemini"
+    local jetski_path = "/google/bin/releases/jetski-devs/tools/cli"
+    local jetski_cmd = vim.fn.executable(jetski_path) == 1 and jetski_path or "jetski"
 
     return {
       cli = {
@@ -11,12 +11,12 @@ return {
           enabled = true,
         },
         tools = {
-          gemini = {
-            cmd = { gemini_cmd },
-          },
           nanocoder = {
             cmd = { "nanocoder" },
-        },
+          },
+          jetski = {
+            cmd = { jetski_cmd },
+          },
         }
       }
     }

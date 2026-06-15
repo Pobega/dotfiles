@@ -5,10 +5,10 @@ return {
     mappings = {
       n = {
         -- Window navigation (using smart-splits)
-        ["<C-h>"] = { function() require("smart-splits").move_cursor_left() end, desc = "Move to left window" },
-        ["<C-j>"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to lower window" },
-        ["<C-k>"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to upper window" },
-        ["<C-l>"] = { function() require("smart-splits").move_cursor_right() end, desc = "Move to right window" },
+        ["<A-h>"] = { function() require("smart-splits").move_cursor_left() end, desc = "Move to left window" },
+        ["<A-j>"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to lower window" },
+        ["<A-k>"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to upper window" },
+        ["<A-l>"] = { function() require("smart-splits").move_cursor_right() end, desc = "Move to right window" },
         -- Buffer hotkeys
         ["<leader>bn"] = { "<cmd>bnext<cr>", desc = "Next buffer" },
         ["<C-t>"] = { "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle terminal" },
@@ -22,14 +22,14 @@ return {
         ["<leader>sf"] = { function() require("sidekick.cli").send({ msg = "{file}" }) end, desc = "Send File", },
         ["<leader>sp"] = { function() require("sidekick.cli").prompt() end, desc = "Sidekick Select Prompt", },
         ["<leader>sc"] = { function() require("sidekick.cli").toggle({ name = "copilot", focus = true }) end, desc = "Sidekick Toggle Copilot", },
-        ["<leader>sg"] = { function() require("sidekick.cli").toggle({ name = "gemini", focus = true }) end, desc = "Sidekick Toggle Gemini", },
+        ["<leader>sj"] = { function() require("sidekick.cli").toggle({ name = "jetski", focus = true }) end, desc = "Sidekick Toggle Jetski", },
       },
       t = {
         -- Window navigation (using smart-splits)
-        ["<C-h>"] = { function() require("smart-splits").move_cursor_left() end, desc = "Move to left window" },
-        ["<C-j>"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to lower window" },
-        ["<C-k>"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to upper window" },
-        ["<C-l>"] = { function() require("smart-splits").move_cursor_right() end, desc = "Move to right window" },
+        ["<A-h>"] = { function() require("smart-splits").move_cursor_left() end, desc = "Move to left window" },
+        ["<A-j>"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to lower window" },
+        ["<A-k>"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to upper window" },
+        ["<A-l>"] = { function() require("smart-splits").move_cursor_right() end, desc = "Move to right window" },
         ["<C-t>"] = { "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle terminal" },
         ["<C-a>"] = { function() require("utils.agents").hide_current() end, desc = "Hide current AI Agent" },
       },
