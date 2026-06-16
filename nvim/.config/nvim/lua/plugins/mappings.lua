@@ -9,6 +9,11 @@ return {
         ["<A-j>"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to lower window" },
         ["<A-k>"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to upper window" },
         ["<A-l>"] = { function() require("smart-splits").move_cursor_right() end, desc = "Move to right window" },
+        -- Window resizing (using smart-splits)
+        ["<A-H>"] = { function() require("smart-splits").resize_left() end, desc = "Resize window left" },
+        ["<A-J>"] = { function() require("smart-splits").resize_down() end, desc = "Resize window down" },
+        ["<A-K>"] = { function() require("smart-splits").resize_up() end, desc = "Resize window up" },
+        ["<A-L>"] = { function() require("smart-splits").resize_right() end, desc = "Resize window right" },
         -- Buffer hotkeys
         ["<leader>bn"] = { "<cmd>bnext<cr>", desc = "Next buffer" },
         ["<C-t>"] = { "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle terminal" },
@@ -30,6 +35,11 @@ return {
         ["<A-j>"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to lower window" },
         ["<A-k>"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to upper window" },
         ["<A-l>"] = { function() require("smart-splits").move_cursor_right() end, desc = "Move to right window" },
+        -- Window resizing (using smart-splits)
+        ["<A-H>"] = { function() require("smart-splits").resize_left() end, desc = "Resize window left" },
+        ["<A-J>"] = { function() require("smart-splits").resize_down() end, desc = "Resize window down" },
+        ["<A-K>"] = { function() require("smart-splits").resize_up() end, desc = "Resize window up" },
+        ["<A-L>"] = { function() require("smart-splits").resize_right() end, desc = "Resize window right" },
         ["<C-t>"] = { "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Toggle terminal" },
         ["<C-a>"] = { function() require("utils.agents").hide_current() end, desc = "Hide current AI Agent" },
       },
