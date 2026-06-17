@@ -2,10 +2,22 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
--- Highlight trailing whitespace as an error (old `match ErrorMsg '\s\+$'`)
-autocmd({ "BufWinEnter", "InsertLeave" }, {
+-- Highlight trailing whitespace as an error, but only in normal editable files.
+-- Uses window-local state to prevent highlights from leaking into terminals/special buffers.
+autocmd({ "BufWinEnter", "InsertLeave", "TermOpen" }, {
   group = augroup("trailing_whitespace", { clear = true }),
-  callback = function() vim.fn.matchadd("ErrorMsg", [[\s\+$]]) end,
+  callback = function()
+    -- Clear any existing whitespace match in this window to prevent leaks
+    if vim.w.whitespace_match then
+      pcall(vim.fn.matchdelete, vim.w.whitespace_match)
+      vim.w.whitespace_match = nil
+    end
+
+    -- Only add the highlight if it's a normal file buffer and it is modifiable
+    if vim.bo.modifiable and vim.bo.buftype == "" then
+      vim.w.whitespace_match = vim.fn.matchadd("DiffDelete", [[\s\+$]])
+    end
+  end,
 })
 
 -- Git commit messages: spell check + 72 col textwidth
