@@ -7,9 +7,9 @@ local opt = vim.opt
 opt.number = true
 opt.relativenumber = true
 
--- Cursor highlight (was CursorColumn/CursorLine in the vimrc)
-opt.cursorline = true
-opt.cursorcolumn = true
+-- Cursor highlight (intentionally disabled for a cleaner look)
+opt.cursorline = false
+opt.cursorcolumn = false
 
 -- Line wrapping at word boundaries with hanging indent (carried over from the
 -- AstroNvim init.lua tweaks)
