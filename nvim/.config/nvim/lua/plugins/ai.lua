@@ -5,7 +5,27 @@
 return {
   "folke/sidekick.nvim",
   event = "VeryLazy",
-  opts = {},
+  opts = function()
+    local jetski_path = "/google/bin/releases/jetski-devs/tools/cli"
+    local jetski_cmd = vim.fn.executable(jetski_path) == 1 and jetski_path or "jetski"
+
+    return {
+      cli = {
+        mux = {
+          backend = "tmux",
+          enabled = true,
+        },
+        tools = {
+          nanocoder = {
+            cmd = { "nanocoder" },
+          },
+          jetski = {
+            cmd = { jetski_cmd },
+          },
+        },
+      },
+    }
+  end,
   keys = {
     { "<C-a>", function() require("sidekick.cli").toggle() end, desc = "Toggle AI Agent" },
     { "<C-s>", function() require("sidekick.cli").select() end, desc = "Select AI Agent" },
