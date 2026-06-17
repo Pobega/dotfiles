@@ -16,7 +16,7 @@ Nothing special, just sets up git-sendmail for sending patches to kernel mailing
 Optimized for interfacing with the kernel mailing list. Automatically decrypts an encrypted password file at runtime.
 
 ## nvim
-[Neovim](https://neovim.io/) configuration using AstroNvim with various plugins for enhanced editing experience.
+[Neovim](https://neovim.io/) configuration: a hand-rolled [lazy.nvim](https://github.com/folke/lazy.nvim) setup (the spiritual successor to the `vim/.vim` submodule config) with LSP, Treesitter, completion, formatting/linting, git integration, and a swappable colorscheme (gruvbox by default, with tokyonight/catppuccin/kanagawa installed). See [`nvim/.config/nvim/README.md`](nvim/.config/nvim/README.md) for the layout and hotkeys.
 
 ## Claude Code
 [Claude Code](https://claude.ai/code) statusline script. Settings are local to your machine.
