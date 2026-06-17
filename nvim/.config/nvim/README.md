@@ -1,34 +1,42 @@
-# AstroNvim Template
+# Neovim config
 
-**NOTE:** This is for AstroNvim v5+
+A hand-rolled [lazy.nvim](https://github.com/folke/lazy.nvim) configuration —
+the Neovim counterpart to the plugin-as-submodule `vim/.vim` setup, but using a
+plugin manager because Neovim's LSP/Treesitter/completion stack needs the glue.
 
-A template for getting started with [AstroNvim](https://github.com/AstroNvim/AstroNvim)
+## Layout
 
-## 🛠️ Installation
-
-#### Make a backup of your current nvim and shared folder
-
-```shell
-mv ~/.config/nvim ~/.config/nvim.bak
-mv ~/.local/share/nvim ~/.local/share/nvim.bak
-mv ~/.local/state/nvim ~/.local/state/nvim.bak
-mv ~/.cache/nvim ~/.cache/nvim.bak
+```
+init.lua                 -- leader + requires
+lua/config/
+  options.lua            -- vim.opt settings (ported from the old vimrc)
+  keymaps.lua            -- global, non-plugin keymaps
+  autocmds.lua           -- autocommands (ported from the old vimrc)
+  lazy.lua               -- bootstraps lazy.nvim, imports lua/plugins/
+lua/plugins/
+  colorscheme.lua        -- gruvbox (transparent, hard contrast)
+  treesitter.lua         -- syntax/indent/fold for lua, rust, python, starlark, ...
+  lsp.lua                -- mason + nvim-lspconfig (rust_analyzer, pyright, ruff, lua_ls)
+  completion.lua         -- nvim-cmp (replaces supertab)
+  formatting.lua         -- conform.nvim (rustfmt, ruff, buildifier, stylua)
+  git.lua                -- gitsigns, vim-fugitive, jjsigns
+  editor.lua             -- telescope, which-key, smart-splits, toggleterm, vim-sleuth
+  ui.lua                 -- lualine statusline
+  ai.lua                 -- sidekick.nvim (jetski/copilot CLI workflow)
 ```
 
-#### Create a new user repository from this template
+## Plugin versions
 
-Press the "Use this template" button above to create a new repository to store your user configuration.
+Versions are pinned in `lazy-lock.json` (committed). To update:
 
-You can also just clone this repository directly if you do not want to track your user configuration in GitHub.
-
-#### Clone the repository
-
-```shell
-git clone https://github.com/<your_user>/<your_repository> ~/.config/nvim
+```
+:Lazy update      # then commit the updated lazy-lock.json
 ```
 
-#### Start Neovim
+To reproduce the locked versions on a fresh machine: `:Lazy restore`.
 
-```shell
-nvim
-```
+## Install
+
+This dir is stowed (`make stow` from the dotfiles root) to `~/.config/nvim`.
+First launch bootstraps lazy.nvim and installs everything; `:Mason` installs the
+language servers/formatters.
