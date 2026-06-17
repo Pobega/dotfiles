@@ -1,3 +1,0 @@
-return {
-  "jesseduffield/lazygit"
-}
