@@ -10,6 +10,7 @@ return {
       render = "compact",
       stages = "fade",
       max_width = 60,
+      background_colour = "#000000",
     },
     config = function(_, opts)
       local notify = require "notify"
