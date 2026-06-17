@@ -66,17 +66,6 @@ return {
 
       local servers = {
         rust_analyzer = {},
-        pyright = {},
-        ruff = {},
-        eslint = {
-          -- run `eslint --fix` on save for JS/TS buffers
-          on_attach = function(_, buf)
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              buffer = buf,
-              command = "EslintFixAll",
-            })
-          end,
-        },
         lua_ls = {
           settings = {
             Lua = {
@@ -86,6 +75,28 @@ return {
           },
         },
       }
+
+      -- Dynamically enable Node-based servers if NPM is available
+      if vim.fn.executable("npm") == 1 then
+        servers.pyright = {}
+        servers.eslint = {
+          -- run `eslint --fix` on save for JS/TS buffers
+          on_attach = function(_, buf)
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              buffer = buf,
+              command = "EslintFixAll",
+            })
+          end,
+        }
+      end
+
+      -- Dynamically enable Ruff if Python3 and venv are working (Mason requires venv)
+      if vim.fn.executable("python3") == 1 then
+        vim.fn.system("python3 -c 'import venv'")
+        if vim.v.shell_error == 0 then
+          servers.ruff = {}
+        end
+      end
 
       require("mason-lspconfig").setup {
         ensure_installed = vim.tbl_keys(servers),
