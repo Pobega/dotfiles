@@ -30,7 +30,7 @@ if [ -v TOOLBOX_PATH ]; then
     done
 elif command -v toolbox &> /dev/null; then
     for cmd in "${toolbox_commands[@]}"; do
-        alias "$cmd"="toolbox run $cmd"
+        command -v "$cmd" &> /dev/null || alias "$cmd"="toolbox run $cmd"
     done
 fi
 
