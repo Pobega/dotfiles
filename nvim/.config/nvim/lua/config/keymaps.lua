@@ -14,6 +14,10 @@ map("n", "gc", "<cmd>tabclose<cr>", { desc = "Close tab" })
 -- Run :make (old <C-j>)
 map("n", "<C-j>", "<cmd>make<cr>", { desc = "Run make" })
 
+-- Restore original Vim page-up/page-down
+map("n", "<C-b>", "<C-b>", { desc = "Page up" })
+map("n", "<C-f>", "<C-f>", { desc = "Page down" })
+
 -- Clear search highlight
 map("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
 
