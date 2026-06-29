@@ -26,6 +26,14 @@ return {
       },
     }
   end,
+  config = function(_, opts)
+    require("sidekick").setup(opts)
+    -- Remove codex from the resolved config to prevent it from being suggested
+    -- if an unrelated binary named "codex" exists in the system PATH.
+    pcall(function()
+      require("sidekick.config").cli.tools.codex = nil
+    end)
+  end,
   keys = {
     { "<C-a>", function() require("sidekick.cli").toggle() end, desc = "Toggle AI Agent" },
     { "<C-s>", function() require("sidekick.cli").select() end, desc = "Select AI Agent" },
