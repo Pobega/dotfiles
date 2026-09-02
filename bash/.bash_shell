@@ -178,12 +178,14 @@ function timer_stop {
   unset start_time
 }
 
-# Find the currently set $BOARD.
+# Find the currently set $BOARD or $TARGET_PRODUCT.
 # Useful for ChromeOS and Android development.
 function get_board {
-  SHOWBOARD=""
-  if test -n "$BOARD"; then
-    SHOWBOARD=" (${BOARD})"
+  SHOWBOARD="${USERNAME}"
+  if test -n "$TARGET_PRODUCT"; then
+    SHOWBOARD=" ${TARGET_PRODUCT}"
+  elif test -n "$BOARD"; then
+    SHOWBOARD=" ${BOARD}"
   fi
 }
 
@@ -236,7 +238,7 @@ prompt() {
   fi
 
   # Set the actual prompt
-  PS1="${VENV_PROMPT}\\[\033[38;5;${MAIN_COLOR}m\\]${USERNAME}${SHOWBOARD}\\[\033[0m\\]:\\[\033[38;5;28m\\]${CWD}\\[\033[0m\\] "
+  PS1="${VENV_PROMPT}\\[\033[38;5;${MAIN_COLOR}m\\]${SHOWBOARD}\\[\033[0m\\]:\\[\033[38;5;28m\\]${CWD}\\[\033[0m\\] "
 
   # right "prompt"
   printf "\e[38;5;${GIT_COLOR}m%`tput cols`s`tput cr`\e[0m" "${GIT_STATUS}"
