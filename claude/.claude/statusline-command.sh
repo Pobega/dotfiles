@@ -134,6 +134,16 @@ if git -C "$cwd" rev-parse --git-dir >/dev/null 2>&1; then
   fi
 fi
 
+# --- Sandbox posture (shared probe, cached) ---
+SBX_PART=""
+SBX_STATE=$("$HOME/.claude/sandbox-probe.sh" 2>/dev/null)
+case "$SBX_STATE" in
+  ok)          SBX_PART=$(printf "\e[38;5;46m\xe2\x9b\xa8\e[0m") ;;
+  noprompt)    SBX_PART=$(printf "\e[38;5;226m\xe2\x9b\xa8!\e[0m") ;;
+  unsandboxed) SBX_PART=$(printf "\e[1;48;5;196;38;5;231m \xe2\x9a\xa0 UNSANDBOXED \e[0m") ;;
+  broken:*)    SBX_PART=$(printf "\e[1;48;5;196;38;5;231m \xe2\x9a\xa0 SANDBOX BROKEN \e[0m") ;;
+esac
+
 # --- Context usage ---
 CTX_PART=""
 if [ -n "$used_pct" ]; then
@@ -144,6 +154,10 @@ fi
 # --- Assemble the status line ---
 # user:dir [branch status] | Model  ctx%
 printf "\e[38;5;${MAIN_COLOR}m%s\e[0m:\e[38;5;28m%s\e[0m" "$USERNAME" "$CWD"
+
+if [ -n "$SBX_PART" ]; then
+  printf " %s" "$SBX_PART"
+fi
 
 if [ -n "$GIT_STATUS" ]; then
   printf " \e[38;5;${GIT_COLOR}m[%s]\e[0m" "$GIT_STATUS"
