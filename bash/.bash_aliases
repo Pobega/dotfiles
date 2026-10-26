@@ -73,3 +73,6 @@ llama-bench() {
     ghcr.io/ggml-org/llama.cpp:full-vulkan \
     -m /model.gguf -ngl 99 "$@"
 }
+
+alias protontricks='flatpak run com.github.Matoking.protontricks'
+alias protontricks-launch='flatpak run --command=protontricks-launch com.github.Matoking.protontricks'
