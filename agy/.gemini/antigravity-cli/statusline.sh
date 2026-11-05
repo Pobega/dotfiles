@@ -17,8 +17,9 @@ term_width=$(echo "$input" | jq -r '.terminal_width // empty')
 # --- Quota / Rate limits (auto-selects Gemini vs 3P quota buckets based on active model) ---
 RATE_CACHE="/tmp/agy-rate-limits-${USER:-$(id -u)}.json"
 
-read -r live_5h_pct live_5h_eta live_7d_pct <<< "$(echo "$input" | jq -r '
-  def is_3p: ((.model.id // .model.display_name // "") | ascii_downcase | contains("gemini") | not);
+IFS='|' read -r bucket live_5h_pct live_5h_eta live_7d_pct live_7d_eta <<< "$(echo "$input" | jq -r '
+  def model_str: ((.model.id // .model.display_name // "") | ascii_downcase);
+  def is_3p: (model_str != "" and (model_str | contains("gemini") | not));
   def q_5h: (
     if is_3p then (.quota["3p-5h"] // .quota["gemini-5h"])
     else (.quota["gemini-5h"] // .quota["3p-5h"])
@@ -30,28 +31,46 @@ read -r live_5h_pct live_5h_eta live_7d_pct <<< "$(echo "$input" | jq -r '
     end // .quota["d7"] // .quota["7d"] // .rate_limits.seven_day
   );
   [
+    (if is_3p then "3p" else "gemini" end),
     (if (q_5h.remaining_fraction != null) then ((1 - q_5h.remaining_fraction) * 100)
      elif (q_5h.used_percentage != null) then q_5h.used_percentage
      else "" end),
-    (if (q_5h.reset_in_seconds != null) then q_5h.reset_in_seconds
+    (if (q_5h.reset_in_seconds != null) then (q_5h.reset_in_seconds | floor)
      elif (q_5h.resets_at != null) then (q_5h.resets_at - now | floor)
      else "" end),
     (if (q_d7.remaining_fraction != null) then ((1 - q_d7.remaining_fraction) * 100)
      elif (q_d7.used_percentage != null) then q_d7.used_percentage
+     else "" end),
+    (if (q_d7.reset_in_seconds != null) then (q_d7.reset_in_seconds | floor)
+     elif (q_d7.resets_at != null) then (q_d7.resets_at - now | floor)
      else "" end)
-  ] | @tsv
+  ] | map(tostring) | join("|")
 ')"
 
+bucket="${bucket:-gemini}"
 now=$(date +%s)
 
-if [ -n "$live_5h_pct" ]; then
-  resets_5h=$(( now + ${live_5h_eta:-0} ))
-  jq -n \
-    --argjson five_pct "${live_5h_pct:-0}" \
-    --argjson five_resets "$resets_5h" \
-    --argjson seven_pct "${live_7d_pct:-0}" \
-    '{five_hour: {used_percentage: $five_pct, resets_at: $five_resets}, seven_day: {used_percentage: $seven_pct}}' \
-    > "$RATE_CACHE" 2>/dev/null
+if [ -n "$live_5h_pct" ] || [ -n "$live_7d_pct" ]; then
+  resets_5h=0
+  [ -n "$live_5h_eta" ] && resets_5h=$(( now + live_5h_eta ))
+  resets_7d=0
+  [ -n "$live_7d_eta" ] && resets_7d=$(( now + live_7d_eta ))
+  existing_cache="{}"
+  if [ -f "$RATE_CACHE" ]; then
+    existing_cache=$(jq -c 'if type == "object" and (has("gemini") or has("3p")) then . else {} end' "$RATE_CACHE" 2>/dev/null || echo "{}")
+  fi
+  (
+    umask 077
+    jq -n \
+      --argjson prev "$existing_cache" \
+      --arg b "$bucket" \
+      --argjson five_pct "${live_5h_pct:-0}" \
+      --argjson five_resets "$resets_5h" \
+      --argjson seven_pct "${live_7d_pct:-0}" \
+      --argjson seven_resets "$resets_7d" \
+      '$prev + {($b): {five_hour: {used_percentage: $five_pct, resets_at: $five_resets}, seven_day: {used_percentage: $seven_pct, resets_at: $seven_resets}}}' \
+      > "${RATE_CACHE}.tmp" 2>/dev/null && mv -f "${RATE_CACHE}.tmp" "$RATE_CACHE" 2>/dev/null
+  )
 fi
 
 five_hour_pct=0
@@ -70,11 +89,20 @@ fmt_eta() {
 }
 
 if [ -f "$RATE_CACHE" ]; then
-  cached_5h_resets=$(jq -r '.five_hour.resets_at // 0' "$RATE_CACHE")
-  if [ "$now" -lt "$cached_5h_resets" ] || [ "$cached_5h_resets" -eq 0 ]; then
-    five_hour_pct=$(jq -r '.five_hour.used_percentage // 0' "$RATE_CACHE")
+  IFS='|' read -r cached_5h_pct cached_5h_resets cached_7d_pct cached_7d_resets <<< "$(
+    jq -r --arg b "$bucket" '[
+      (.[$b].five_hour.used_percentage // 0),
+      (.[$b].five_hour.resets_at // 0),
+      (.[$b].seven_day.used_percentage // 0),
+      (.[$b].seven_day.resets_at // 0)
+    ] | map(tostring) | join("|")' "$RATE_CACHE" 2>/dev/null
+  )"
+  if [ "${cached_5h_resets:-0}" -eq 0 ] || [ "$now" -lt "${cached_5h_resets:-0}" ]; then
+    five_hour_pct="${cached_5h_pct:-0}"
   fi
-  seven_day_pct=$(jq -r '.seven_day.used_percentage // 0' "$RATE_CACHE")
+  if [ "${cached_7d_resets:-0}" -eq 0 ] || [ "$now" -lt "${cached_7d_resets:-0}" ]; then
+    seven_day_pct="${cached_7d_pct:-0}"
+  fi
 fi
 
 # --- Username / host-based color (mirrors MAIN_COLOR logic) ---
@@ -117,13 +145,13 @@ fi
 # --- Git branch + status (no locks, read-only) ---
 GIT_STATUS=""
 GIT_COLOR=46
-if git -C "$cwd" rev-parse --git-dir >/dev/null 2>&1; then
-  BRANCH=$(git -C "$cwd" symbolic-ref --short HEAD 2>/dev/null || git -C "$cwd" describe --tags --exact-match 2>/dev/null || git -C "$cwd" rev-parse --short HEAD 2>/dev/null)
+if git -C "$cwd" --no-optional-locks rev-parse --git-dir >/dev/null 2>&1; then
+  BRANCH=$(git -C "$cwd" --no-optional-locks symbolic-ref --short HEAD 2>/dev/null || git -C "$cwd" --no-optional-locks describe --tags --exact-match 2>/dev/null || git -C "$cwd" --no-optional-locks rev-parse --short HEAD 2>/dev/null)
   if [ -n "$BRANCH" ]; then
-    STATUS_OUT=$(git -C "$cwd" status --porcelain 2>/dev/null)
+    STATUS_OUT=$(git -C "$cwd" --no-optional-locks status --porcelain=v1 -b 2>/dev/null)
     bits=""
     echo "$STATUS_OUT" | grep -q "^R" && bits=">${bits}"
-    git -C "$cwd" status 2>/dev/null | grep -q "Your branch is ahead" && bits="*${bits}"
+    echo "$STATUS_OUT" | head -n1 | grep -q "\[ahead " && bits="*${bits}"
     echo "$STATUS_OUT" | grep -q "^A" && bits="+${bits}"
     echo "$STATUS_OUT" | grep -q "^??" && bits="?${bits}"
     echo "$STATUS_OUT" | grep -q "^D" && bits="x${bits}"

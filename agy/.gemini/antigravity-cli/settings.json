@@ -3,17 +3,10 @@
   "model": "Gemini 4 Argon (Medium)",
   "permissions": {
     "deny": [
-      "command(ssh *)",
-      "command(scp *)",
-      "command(sftp *)",
-      "command(cat ~/.ssh/*)",
-      "command(cat ~/.aws/*)",
-      "command(cat ~/.config/gh/*)",
-      "command(cat ~/.gnupg/*)",
-      "command(cat ~/.kube/*)",
-      "command(cat ~/.docker/*)",
-      "command(cat ~/.netrc)",
-      "command(cat ~/.npmrc)"
+      "command(ssh)",
+      "command(scp)",
+      "command(sftp)",
+      "command(gh auth token)"
     ]
   },
   "statusLine": {

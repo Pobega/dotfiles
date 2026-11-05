@@ -1,4 +1,6 @@
 # Global Token-Saving Subagent Policy
 
-- Whenever a task involves codebase exploration, multi-file reading, writing boilerplate, unit tests, or scoped code implementation, activate the `flash-offload` skill.
+- Whenever a task involves multi-file codebase exploration, writing boilerplate, unit tests, or multi-step code implementation, activate the `flash-offload` skill (reusing the static `flash-coder` subagent via `send_message` across sequential subtasks).
+- **Direct Fast-Path Exception**: Run single-step, low-output commands (`<50` lines, e.g. `git status`, `git diff --stat`) and localized 1-file fixes requiring `<=2` tool calls directly in the primary agent rather than paying 2-turn subagent dispatch/wakeup overhead.
 - The user explicitly authorizes and prefers `Model: "flash"` (and `Model: "flash_lite"` for simple read-only lookups) in `invoke_subagent` calls instead of `Model: "inherit"` to conserve primary model tokens.
+- At natural milestone boundaries in longer sessions (e.g., after completing a feature/commit or after ~25+ conversation steps), proactively append a `/compact` or `session-handoff` suggestion as a single compact HTML pill one-liner (`<span style="background: rgba(<r>, <g>, <b>, 0.15); color: <hex>; padding: 2px 6px; border-radius: 4px; font-family: monospace;">Context: <steps> steps (~<tokens>k tok) — <short recommendation></span>`, using green `#2ecc71` / `46, 204, 113`, yellow `#f1c40f` / `241, 196, 15`, or red `#e74c3c` / `231, 76, 60`) without extra vertical spacing or headings before starting the next task.
