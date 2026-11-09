@@ -4,9 +4,10 @@ description: >-
   Offloads multi-step coding, refactoring, test generation, and broad codebase
   exploration to lightweight Flash (`flash` or `flash_lite`) subagents to
   conserve primary model tokens and context window. Use when implementing
-  multi-file changes, writing tests, or doing broad codebase research. Don't use
-  for single-step low-output commands or trivial 1-file edits requiring <=2 tool
-  calls.
+  larger multi-file changes (`4+` files or `>80` lines), running iterative
+  test/build loops, or doing broad read-only codebase research. Don't use for
+  single-step low-output commands or scoped edits across `<=3` known files
+  requiring `<=4` tool calls.
 ---
 
 # Flash Subagent Offloading Workflow
@@ -19,17 +20,18 @@ Override the default `Model: "inherit"` behavior when calling `invoke_subagent`:
 
 | Task Type | Subagent `TypeName` | `Model` Argument | `Workspace` | When to Use |
 | :--- | :--- | :--- | :--- | :--- |
-| **Single-Step / Localized Fast-Path** | *(Primary Agent)* | *(Primary Model)* | *(Primary)* | Single low-output commands (`<50` lines, e.g. `git status`, `git diff --stat`), reading 1 small file, or a localized 1-file fix (`<=2` tool calls). Avoids the 2-turn subagent dispatch/wakeup overhead. |
-| **Quick Lookups / Broad Search** | `research` | `flash_lite` or `flash` | `inherit` | Scanning multiple files, grepping logs, or summarizing unfamiliar modules without cluttering primary context. |
-| **Boilerplate / Scoped Code Edits** | `flash-coder` | `flash` | `inherit` | Writing unit tests, data models, CRUD endpoints, migrations, docstrings, or multi-step features/fixes. |
+| **Single-Step / Localized Fast-Path** | *(Primary Agent)* | *(Primary Model)* | *(Primary)* | Single low-output commands (`<50` lines, e.g. `git status`, `git diff --stat`), reading a few small files, or scoped edits across `<=3` known files (`<=4` tool calls, `<80` lines changed, no noisy test runs). Avoids the 2-turn subagent dispatch/wakeup overhead. |
+| **Read-Only Lookups / Broad Search** | `research` | `flash_lite` or `flash` | `inherit` | Scanning multiple unfamiliar files, grepping logs, or summarizing modules when **no code edits are planned**. |
+| **Boilerplate / Scoped Code Edits** | `flash-coder` | `flash` | `inherit` | Implementing `4+` file changes, `>80`-line boilerplate, unit tests, migrations, or tasks requiring build/test verification loops. |
 | **Parallel / Isolated Features** | `flash-coder` | `flash` | `share` or `branch` | Implementing independent modules in parallel where file conflicts might occur. |
 | **Complex Architecture / Review** | *(Primary Agent)* | *(Primary Model)* | *(Primary)* | High-level system design, requirement clarification, and final diff verification. |
 
 ## 2. Offloading Workflow
 
-### Step 1: Keep Primary Context Lean
-- Avoid reading large files or sweeping directories directly in the primary agent.
-- Spawn a `research` subagent with `Model: "flash"` (or `"flash_lite"`) to inspect target files and return only a concise summary (file paths, line numbers, function signatures, and key constraints).
+### Step 1: Avoid Double Subagent Hops (`research` vs. `flash-coder`)
+- Avoid sweeping directories or reading large files directly in the primary agent.
+- **Read-only questions**: Spawn `research` with `Model: "flash_lite"` (or `"flash"`) to inspect target files and return a concise summary (file paths, line numbers, function signatures, and key constraints).
+- **Tasks that will modify code**: Skip `research` and dispatch `flash-coder` (`Model: "flash"`) directly so a single subagent performs both the file lookup and the edits without paying a second cold-start hop or reading the same files twice.
 
 ### Step 2: Reuse the Static `flash-coder` Subagent
 `flash-coder` is statically registered in `~/.gemini/config/agents/flash-coder.md` (`model: flash`, write tools enabled, subagent recursion and MCP disabled, inheriting `<user_rules>` automatically—do **not** call `define_subagent` at runtime):
