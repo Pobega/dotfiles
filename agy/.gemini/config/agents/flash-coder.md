@@ -11,6 +11,9 @@ hidden: true
 model: flash
 inheritMcp: false
 tools:
+  - read_file
+  - edit_file
+  - write_file
   - view_file
   - list_dir
   - grep_search
