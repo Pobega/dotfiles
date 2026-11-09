@@ -3,15 +3,23 @@ name: adversarial-review
 description: >-
   Spawns an independent, read-only `research` subagent (`pro`) to critically
   review uncommitted diffs and modified files for logic bugs, edge cases,
-  security flaws, and missing test coverage before finalizing work. Use when
-  asked for a code review or after completing a non-trivial multi-file change.
-  Don't use for trivial formatting/typo edits or drafting commit messages (use
-  git-ship).
+  security flaws, and missing test coverage. Use ONLY when explicitly asked for
+  a code review/audit, before a release, or after a major high-risk refactor
+  (5+ files or security/concurrency-critical logic). Don't run automatically
+  after routine multi-file edits, bugfixes with passing tests, or normal commits
+  (use git-ship).
 ---
 
 # Adversarial Code Review Workflow
 
-Author agents naturally carry confirmation bias. An independent, skeptical reviewer subagent uncovers edge cases, regressions, and security flaws before user review.
+Author agents naturally carry confirmation bias. An independent, skeptical reviewer subagent uncovers edge cases, regressions, and security flaws when high-stakes changes warrant a deep audit.
+
+## Gating Rules (When to Run)
+
+- **Run ONLY when**:
+  1. Explicitly requested by the user (e.g., *"review this"*, *"run an adversarial review"*, *"audit before releasing"*).
+  2. Completing a major architectural refactor (`5+` files or `200+` lines of logic) or security/concurrency-critical changes (auth, crypto, sandboxing, race-sensitive state).
+- **Skip for**: Routine 1–4 file features, bugfixes already covered by passing tests, configuration/dotfiles tweaks, or normal commits.
 
 ## Workflow
 
