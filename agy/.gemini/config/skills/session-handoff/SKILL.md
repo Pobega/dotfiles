@@ -1,11 +1,12 @@
 ---
 name: session-handoff
 description: >-
-  Measures live conversation context usage after the latest compaction
-  checkpoint, advises when to run `/compact`, and generates a structured
-  `HANDOFF.md` artifact for clean session transitions. Use when checking context
-  window usage, evaluating whether to `/compact`, or preparing a session handoff
-  summary. Don't use for routine code reviews or git commit summaries.
+  Generates a structured `HANDOFF.md` artifact for clean session transitions and
+  audits live conversation context usage after the latest compaction checkpoint.
+  Use ONLY when explicitly asked to check context usage, evaluate `/compact`, or
+  prepare a `HANDOFF.md` summary (or when a session exceeds `>50` steps / `~95k`
+  tokens). Don't read this skill for routine milestone pills (use the inline
+  `awk` formula in `GEMINI.md`).
 ---
 
 # Session Handoff & Context Compaction Workflow

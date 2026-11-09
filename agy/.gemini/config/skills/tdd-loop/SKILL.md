@@ -2,14 +2,23 @@
 name: tdd-loop
 description: >-
   Enforces a strict Red-Green-Refactor test-driven development cycle inside a
-  reused `flash-coder` subagent session. Use when implementing new testable
-  logic, fixing reproducible bugs, or when the user asks for TDD. Don't use for
-  static configuration edits, documentation, or pure log triage.
+  reused `flash-coder` subagent session. Use ONLY when the user explicitly asks
+  for TDD or when isolating a non-obvious regression bug that must be reproduced
+  before patching. Don't use automatically for routine features with clear specs
+  (write implementation + tests together and run tests once), static config
+  edits, or documentation.
 ---
 
 # Red-Green-Refactor TDD Workflow
 
-Test-Driven Development (TDD) ensures verifiable correctness and tight change scopes while keeping execution inside a single warm `flash-coder` subagent session (avoiding 3 separate cold subagent spawns).
+Test-Driven Development (TDD) ensures verifiable correctness when isolating tricky regressions or when explicitly requested, keeping execution inside a single warm `flash-coder` subagent session (avoiding 3 separate cold subagent spawns).
+
+## Gating Rule (3x vs. 1x Test Execution)
+
+- **Use 3-Pass Red-Green-Refactor ONLY when**:
+  1. Explicitly requested by the user (e.g., *"use TDD"*, *"write a failing test first"*).
+  2. Isolating an ambiguous or subtle bug where proving the reproduction case first prevents a blind fix.
+- **Skip for**: Straightforward features or obvious fixes where `flash-coder` can author the implementation and unit test together and run the test suite **once** at the end.
 
 ## Subagent Session Reuse
 
