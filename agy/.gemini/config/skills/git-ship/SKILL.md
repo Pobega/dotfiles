@@ -23,6 +23,7 @@ Keep large diffs and git logs out of primary context while avoiding subagent dis
 3. **Safety Guards**:
    - Never stage untracked files blindly (`git add .` and `git add -A` are forbidden; stage explicit paths).
    - Check for secrets, credentials, `.env` files, or stray temporary files before committing.
+   - **Local Commits Only**: Never run `git push` (or `gh pr create`) automatically after committing. Leave commits local and ask the user if they want to push to the remote.
 4. **Return Format**:
    Report concisely:
    - Commit hash and commit subject

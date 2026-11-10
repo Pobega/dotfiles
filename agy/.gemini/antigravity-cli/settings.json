@@ -2,6 +2,10 @@
   "enableTerminalSandbox": true,
   "model": "Gemini 4 Argon (Medium)",
   "permissions": {
+    "ask": [
+      "command(git push)",
+      "command(gh pr create)"
+    ],
     "deny": [
       "command(ssh)",
       "command(scp)",

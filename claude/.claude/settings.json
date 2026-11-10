@@ -11,6 +11,12 @@
   "effortLevel": "medium",
   "tui": "fullscreen",
   "theme": "dark",
+  "permissions": {
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(gh pr create:*)"
+    ]
+  },
   "sandbox": {
     "enabled": true,
     "failIfUnavailable": true,
