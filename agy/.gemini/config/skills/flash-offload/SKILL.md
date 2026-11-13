@@ -21,7 +21,7 @@ Override the default `Model: "inherit"` behavior when calling `invoke_subagent`:
 | Task Type | Subagent `TypeName` | `Model` Argument | `Workspace` | When to Use |
 | :--- | :--- | :--- | :--- | :--- |
 | **Single-Step / Localized Fast-Path** | *(Primary Agent)* | *(Primary Model)* | *(Primary)* | Single low-output commands (`<50` lines, e.g. `git status`, `git diff --stat`), reading a few small files, or scoped edits across `<=3` known files (`<=4` tool calls, `<80` lines changed, no noisy test runs). Avoids the 2-turn subagent dispatch/wakeup overhead. |
-| **Read-Only Lookups / Broad Search** | `research` | `flash_lite` or `flash` | `inherit` | Scanning multiple unfamiliar files, grepping logs, or summarizing modules when **no code edits are planned**. |
+| **Read-Only Lookups / Broad Search** | `research` | `flash_lite` | `inherit` | Scanning multiple unfamiliar files, grepping logs, or summarizing modules when **no code edits are planned** (escalate to `flash` only for complex cross-module synthesis). |
 | **Boilerplate / Scoped Code Edits** | `flash-coder` | `flash` | `inherit` | Implementing `4+` file changes, `>80`-line boilerplate, unit tests, migrations, or tasks requiring build/test verification loops. |
 | **Parallel / Isolated Features** | `flash-coder` | `flash` | `share` or `branch` | Implementing independent modules in parallel where file conflicts might occur. |
 | **Complex Architecture / Review** | *(Primary Agent)* | *(Primary Model)* | *(Primary)* | High-level system design, requirement clarification, and final diff verification. |
@@ -30,7 +30,7 @@ Override the default `Model: "inherit"` behavior when calling `invoke_subagent`:
 
 ### Step 1: Avoid Double Subagent Hops (`research` vs. `flash-coder`)
 - Avoid sweeping directories or reading large files directly in the primary agent.
-- **Read-only questions**: Spawn `research` with `Model: "flash_lite"` (or `"flash"`) to inspect target files and return a concise summary (file paths, line numbers, function signatures, and key constraints).
+- **Read-only questions**: Spawn `research` with `Model: "flash_lite"` (escalating to `"flash"` only for complex multi-module synthesis) to inspect target files and return a concise summary (file paths, line numbers, function signatures, and key constraints).
 - **Tasks that will modify code**: Skip `research` and dispatch `flash-coder` (`Model: "flash"`) directly so a single subagent performs both the file lookup and the edits without paying a second cold-start hop or reading the same files twice.
 
 ### Step 2: Reuse the Static `flash-coder` Subagent

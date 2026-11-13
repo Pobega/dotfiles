@@ -16,7 +16,7 @@ Verbose build systems and test suites generate massive stdout/stderr logs that q
 
 1. **Keep Primary Context Lean**: Never execute verbose test runners or dump large log files directly in the primary orchestrator (only quick `<50`-line checks stay on the direct fast-path).
 2. **Subagent Delegation**:
-   - For read-only log analysis (e.g., inspecting existing log files or build artifact logs): invoke `research` with `Model: "flash_lite"` (or `Model: "flash"`).
+   - For read-only log analysis (e.g., inspecting existing log files or build artifact logs): invoke `research` with `Model: "flash_lite"` (escalate to `Model: "flash"` only if deep cross-file synthesis is needed).
    - For executing noisy test/build commands (e.g., `pytest -v`, `cargo test`, `npm test`, `journalctl`, `podman logs`): invoke `flash-coder` with `Model: "flash"` (or message an existing `flash-coder` instance via `send_message`).
 3. **Mandatory Return Contract**:
    Instruct the subagent to filter noise and return strictly:
