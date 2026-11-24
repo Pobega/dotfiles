@@ -20,9 +20,10 @@ Keep large diffs and git logs out of primary context while avoiding subagent dis
    - Inspect existing git history to match repo style.
    - For `dotfiles`: default to `<package>: <imperative summary>` in lowercase (e.g., `agy: add flash-offload skill`, `nvim: update lsp keymaps`).
    - For application repos: adhere to Conventional Commits (e.g., `feat(api): ...`, `fix(auth): ...`) if present.
+   - **Atomic Splits**: When uncommitted work spans multiple independent subsystems, split staging into separate logical commits rather than bundling everything into a single giant commit.
 3. **Safety Guards**:
    - Never stage untracked files blindly (`git add .` and `git add -A` are forbidden; stage explicit paths).
-   - Check for secrets, credentials, `.env` files, or stray temporary files before committing.
+   - Check for secrets, credentials, `.env` files, stray temporary files, and proprietary/copyrighted user data or generated caches (e.g., `gamedata/`, ROMs, `.exe`/`.bin` dumps) before committing; ensure data directories are covered by `.gitignore` before populating them.
    - **Local Commits Only**: Never run `git push` (or `gh pr create`) automatically after committing. Leave commits local and ask the user if they want to push to the remote.
 4. **Return Format**:
    Report concisely:

@@ -44,6 +44,8 @@ Flash models perform best with explicit specifications. Every `invoke_subagent` 
 2. **Concrete spec**: Function signatures, data structures, edge cases, and expected behavior.
 3. **Verification**: Exact command to run (e.g., `pytest`, `npm test`, `cargo check`).
 4. **Concise return format**: Ask for a short summary (`<150` words) of changes and test output rather than full code dumps.
+5. **Commit-sized scope & no auto-commit**: Keep each dispatch scoped to a single subsystem/commit boundary (avoid dumping an entire multi-subsystem phase into one 30+ minute prompt) and instruct `flash-coder` to leave changes unstaged so the primary agent can review and commit cleanly.
+6. **Timeout guardrails on live/blocking tests**: Wrap any live runtime, GUI, emulator, or QEMU smoke test with `timeout --kill-after=5 <seconds>` (and set `NotificationTimeoutSeconds` on `run_command`) so stalled runs fail fast instead of hanging silently.
 
 ### Step 4: Parallelize & Escalate Only When Needed
 - Launch multiple `flash-coder` subagents in a single turn (`Workspace: "share"` or `"branch"` if editing overlapping areas) when tasks touch independent modules, then end your turn and wait for reactive wakeup.
