@@ -21,15 +21,18 @@ Keep large diffs and git logs out of primary context while avoiding subagent dis
    - Inspect existing git history to match repo style.
    - For `dotfiles`: default to `<package>: <imperative summary>` in lowercase (e.g., `agy: add flash-offload skill`, `nvim: update lsp keymaps`).
    - For application repos: adhere to Conventional Commits (e.g., `feat(api): ...`, `fix(auth): ...`) if present.
+   - **Human-Readable PR Messages**: Keep commit/PR descriptions short and written for humans—explain the visible problem and high-level fix in 1–2 plain sentences without dense internal symbol or low-level API trivia unless specifically requested.
    - **Atomic Splits**: When uncommitted work spans multiple independent subsystems, split staging into separate logical commits rather than bundling everything into a single giant commit.
 3. **Safety Guards**:
+   - **Verify Target Branch First**: Before committing, cherry-picking, or building release artifacts in a multi-branch repo, check `git branch --show-current` and confirm the checked-out branch includes the required base/feature stack.
    - Never stage untracked files blindly (`git add .` and `git add -A` are forbidden; stage explicit paths).
    - Check for secrets, credentials, `.env` files, stray temporary files, and proprietary/copyrighted user data or generated caches (e.g., `gamedata/`, ROMs, `.exe`/`.bin` dumps) before committing; ensure data directories are covered by `.gitignore` before populating them.
    - **Local Commits Only**: Never run `git push` (or `gh pr create`) automatically after committing. Leave commits local and ask the user if they want to push to the remote.
-4. **GitHub Actions & Release Hygiene**:
+4. **GitHub Actions, Releases & Gist Hygiene**:
    - When a workflow uses `docker/build-push-action` alongside `actions/download-artifact`, always pass a `pattern:` filter (e.g. `*-bundle`) so internal `.dockerbuild` summary artifacts aren't downloaded or attached to releases.
    - On GitHub-hosted Ubuntu runners where both `podman` and `docker` may exist, pin `CONTAINER_ENGINE=docker` when reusing Docker Buildx-loaded images.
    - Before editing or uploading assets to a tagged release, run `gh release list` (or `gh api repos/<owner>/<repo>/releases`) to check for separate CI-created drafts vs. published releases on the same tag so assets and notes don't split across duplicates.
+   - **Single-File Gists with Pinned Images**: When updating a Markdown Gist with embedded PNG charts, commit the new PNGs first to capture their commit SHA, then `git rm` the PNGs in a second commit alongside the Markdown referencing `/raw/<png-commit-sha>/<file>.png` so the Gist UI shows only one clean Markdown file and GitHub Camo never serves cached stale images.
 5. **Return Format**:
    Report concisely:
    - Commit hash and commit subject
