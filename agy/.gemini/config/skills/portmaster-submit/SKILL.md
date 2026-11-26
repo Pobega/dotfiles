@@ -26,7 +26,7 @@ When adding or updating `ports/<portname>/`:
   git sparse-checkout add ports/<portname>
   ```
 - Never stage generated repo artifacts (`images.zip`, `manifest.json`, `ports.json`, `ports_status.json`, `port_stats_raw.json`).
-- Never open a PR without explicit user review.
+- Never run `gh pr create` or open a PR directly. After pushing the branch to your fork (when approved), provide the direct GitHub compare/open-PR URL (`https://github.com/PortsMaster/PortMaster-New/compare/main...<user>:PortMaster-New:<branch>?expand=1`) so the user can open the PR themselves.
 
 ## 2. `PortMaster-New` Layout & `AGENTS.md` Rules
 

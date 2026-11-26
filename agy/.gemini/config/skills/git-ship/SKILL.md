@@ -27,7 +27,7 @@ Keep large diffs and git logs out of primary context while avoiding subagent dis
    - **Verify Target Branch First**: Before committing, cherry-picking, or building release artifacts in a multi-branch repo, check `git branch --show-current` and confirm the checked-out branch includes the required base/feature stack.
    - Never stage untracked files blindly (`git add .` and `git add -A` are forbidden; stage explicit paths).
    - Check for secrets, credentials, `.env` files, stray temporary files, and proprietary/copyrighted user data or generated caches (e.g., `gamedata/`, ROMs, `.exe`/`.bin` dumps) before committing; ensure data directories are covered by `.gitignore` before populating them.
-   - **Local Commits Only**: Never run `git push` (or `gh pr create`) automatically after committing. Leave commits local and ask the user if they want to push to the remote.
+   - **Local Commits Only & Never Open PRs**: Never run `git push` automatically after committing; leave commits local and ask the user before pushing. Never run `gh pr create` — after an approved push, provide the direct GitHub compare/open-PR URL (e.g. `https://github.com/<owner>/<repo>/compare/<base>...<head>?expand=1`) so the user can open the PR themselves.
 4. **GitHub Actions, Releases & Gist Hygiene**:
    - When a workflow uses `docker/build-push-action` alongside `actions/download-artifact`, always pass a `pattern:` filter (e.g. `*-bundle`) so internal `.dockerbuild` summary artifacts aren't downloaded or attached to releases.
    - On GitHub-hosted Ubuntu runners where both `podman` and `docker` may exist, pin `CONTAINER_ENGINE=docker` when reusing Docker Buildx-loaded images.
