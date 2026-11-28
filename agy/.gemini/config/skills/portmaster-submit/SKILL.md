@@ -45,6 +45,8 @@ ports/<portname>/
 ```
 
 - **No `.gitkeep` files** and no empty placeholder directories like `libs.aarch64/` unless actual `.so` files are bundled (never bundle `libSDL2`, `libc`/`libstdc++`, or Mesa/GL drivers).
+- **Stick strictly to official PortMaster templates**: Match the official templates (`https://portmaster.games/packaging.html` for launch scripts, `port-json.html` for `port.json`, `port-markdown.html` for `README.md`) as closely as possible without unnecessary deviation or custom boilerplate.
+- **Never reimplement upstream PortMaster logic**: Before writing custom bash helpers, fallbacks, or defensive guards in `<Port Name>.sh` or `patchscript`, check PortMaster's built-in helpers (`control.txt`, `funcs.txt`, `utils/patcher.txt`, and `PortMaster-GUI`) to confirm an upstream function or variable doesn't already handle it.
 - **Validate locally** before committing:
   ```bash
   python3 tools/build_release.py --do-check
